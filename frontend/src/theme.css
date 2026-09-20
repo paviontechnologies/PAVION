@@ -1,0 +1,10 @@
+/* src/theme.css */
+:root {
+  --color-dark-background: #050508;
+  --color-dark-card: #0A0D1A;
+  --color-dark-card-border: rgba(255, 255, 255, 0.08);
+  --color-logo-deep-navy: #1E3A8A;
+  --color-logo-magenta-pink: #DB2777;
+  --color-logo-bright-orange: #F59E0B;
+  --color-logo-soft-blue: #60A5FA;
+}
