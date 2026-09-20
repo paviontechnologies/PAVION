@@ -29,18 +29,80 @@ const SectionLoader = () => (
   </div>
 );
 
+// Graceful Error Boundary
+import React from 'react';
+
+class ErrorBoundary extends React.Component<{ children: React.ReactNode }, { hasError: boolean }> {
+  constructor(props: { children: React.ReactNode }) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error: Error, info: React.ErrorInfo) {
+    console.error('App Error caught by boundary:', error, info);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="min-h-screen bg-[#050508] text-white flex flex-col items-center justify-center p-6 text-center">
+          <h2 className="text-2xl font-bold mb-3 text-red-400">Something went wrong</h2>
+          <p className="text-gray-400 max-w-md mb-6 text-sm">We apologize for the inconvenience. Please refresh or return to the homepage.</p>
+          <button 
+            onClick={() => window.location.href = '/'}
+            className="px-6 py-2.5 bg-gradient-to-r from-[#DB2777] to-[#60A5FA] rounded-xl text-sm font-semibold hover:opacity-90 transition-opacity"
+          >
+            Reload Homepage
+          </button>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
+
 // Inner App component that has access to location
 function AppContent() {
   const location = useLocation();
   const isHomePage = location.pathname === '/';
-  const [isLoading, setIsLoading] = useState(isHomePage);
+  
+  const [isLoading, setIsLoading] = useState(() => {
+    if (!isHomePage) return false;
+    try {
+      return !sessionStorage.getItem('pavion_preloader_seen');
+    } catch {
+      return true;
+    }
+  });
+
+  const handleComplete = React.useCallback(() => {
+    setIsLoading(false);
+    try {
+      sessionStorage.setItem('pavion_preloader_seen', 'true');
+    } catch {
+      // ignore
+    }
+  }, []);
 
   useEffect(() => {
     // Add lenis class to html
     document.documentElement.classList.add('lenis');
   }, []);
 
-  // Only show preloader on initial homepage load
+  // Hard safety timeout: guaranteed to unlock the screen within 2.2s maximum
+  useEffect(() => {
+    if (!isLoading) return;
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2200);
+    return () => clearTimeout(timer);
+  }, [isLoading]);
+
+  // If navigated away from homepage, immediately hide preloader
   useEffect(() => {
     if (!isHomePage) {
       setIsLoading(false);
@@ -48,9 +110,9 @@ function AppContent() {
   }, [isHomePage]);
 
   return (
-    <>
-      {/* Preloader - only on homepage */}
-      {isLoading && isHomePage && <Preloader onComplete={() => setIsLoading(false)} />}
+    <ErrorBoundary>
+      {/* Preloader - only on initial homepage visit */}
+      {isLoading && isHomePage && <Preloader onComplete={handleComplete} />}
       
       {/* Scroll to top on route change */}
       <ScrollToTop />
@@ -114,7 +176,7 @@ function AppContent() {
 
       {/* Interactive Global AI Chat Assistant */}
       <AIChatBot />
-    </>
+    </ErrorBoundary>
   );
 }
 

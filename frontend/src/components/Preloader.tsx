@@ -14,74 +14,95 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
   const progressRef = useRef<HTMLDivElement>(null);
   const overlayTopRef = useRef<HTMLDivElement>(null);
   const overlayBottomRef = useRef<HTMLDivElement>(null);
+  const hasCompletedRef = useRef(false);
+  const onCompleteRef = useRef(onComplete);
 
   useEffect(() => {
+    onCompleteRef.current = onComplete;
+  }, [onComplete]);
+
+  const finish = () => {
+    if (hasCompletedRef.current) return;
+    hasCompletedRef.current = true;
+    try {
+      sessionStorage.setItem('pavion_preloader_seen', 'true');
+    } catch {
+      // ignore
+    }
+    onCompleteRef.current();
+  };
+
+  useEffect(() => {
+    // Hard safety timeout: under no circumstances should the preloader stay active > 2.0s
+    const safetyTimeout = setTimeout(() => {
+      finish();
+    }, 2000);
+
     const ctx = gsap.context(() => {
-      // Animate counter
+      // Animate counter from 0 to 100 in 1.1s
       const counterAnimation = { value: 0 };
       gsap.to(counterAnimation, {
         value: 100,
-        duration: 2.5,
-        ease: "power2.inOut",
+        duration: 1.1,
+        ease: "power2.out",
         onUpdate: () => {
           setCounter(Math.round(counterAnimation.value));
         },
       });
 
-      // Progress bar
+      // Progress bar fills in 1.1s
       gsap.to(progressRef.current, {
         scaleX: 1,
-        duration: 2.5,
-        ease: "power2.inOut",
+        duration: 1.1,
+        ease: "power2.out",
       });
 
       // Text reveal
       gsap.fromTo(textRef.current, 
-        { y: 100, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1, delay: 0.3, ease: "power4.out" }
+        { y: 40, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" }
       );
 
-      // Exit animation after counter completes
+      // Fast exit animation immediately after counter reaches 100
       const exitTimeline = gsap.timeline({
-        delay: 3,
+        delay: 1.15,
         onComplete: () => {
-          onComplete();
+          finish();
         }
       });
 
       exitTimeline
-        .to(counterRef.current, {
-          y: -100,
+        .to([counterRef.current, textRef.current, progressRef.current], {
           opacity: 0,
-          duration: 0.6,
-          ease: "power3.in",
+          y: -20,
+          duration: 0.3,
+          ease: "power2.in",
         })
-        .to(textRef.current, {
-          y: -50,
-          opacity: 0,
-          duration: 0.5,
-          ease: "power3.in",
-        }, "-=0.4")
         .to(overlayTopRef.current, {
           yPercent: -100,
-          duration: 1,
-          ease: "power4.inOut",
-        }, "-=0.2")
+          duration: 0.5,
+          ease: "power3.inOut",
+        }, "-=0.1")
         .to(overlayBottomRef.current, {
           yPercent: 100,
-          duration: 1,
-          ease: "power4.inOut",
-        }, "-=1");
+          duration: 0.5,
+          ease: "power3.inOut",
+        }, "-=0.5");
 
     }, preloaderRef);
 
-    return () => ctx.revert();
-  }, [onComplete]);
+    return () => {
+      clearTimeout(safetyTimeout);
+      ctx.revert();
+    };
+  }, []); // Run only ONCE on mount!
 
   return (
     <div 
       ref={preloaderRef}
-      className="fixed inset-0 z-[9999] pointer-events-none"
+      onClick={finish}
+      className="fixed inset-0 z-[9999] cursor-pointer"
+      title="Click anywhere to skip"
     >
       {/* Top overlay */}
       <div 

@@ -222,6 +222,17 @@
   <style>
     @keyframes spin { to { transform: rotate(360deg); } }
   </style>
+  <script>
+    setTimeout(function() {
+      var loader = document.getElementById('initial-loader');
+      if (loader && loader.parentElement) {
+        var sub = loader.querySelector('span');
+        if (sub) {
+          sub.innerHTML = 'Taking longer than usual... <a href="javascript:location.reload()" style="color:#60A5FA;text-decoration:underline;display:block;margin-top:8px;">Tap here to refresh</a>';
+        }
+      }
+    }, 4500);
+  </script>
   <script type="module" src="/src/main.tsx"></script>
 </body>
 
