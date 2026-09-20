@@ -1,11 +1,2 @@
-# Netlify Redirects for SPA (Single Page Application)
-
-# Force HTTPS
-http://paviontechnologies.com/*  https://paviontechnologies.com/:splat  301!
-http://www.paviontechnologies.com/*  https://paviontechnologies.com/:splat  301!
-
-# Redirect www to non-www
-https://www.paviontechnologies.com/*  https://paviontechnologies.com/:splat  301!
-
-# Handle React Router routes - this must be at the end
+# Single Page Application fallback for Cloudflare Pages & Netlify
 /*    /index.html   200
