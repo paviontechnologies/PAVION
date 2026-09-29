@@ -70,22 +70,10 @@ function AppContent() {
   const location = useLocation();
   const isHomePage = location.pathname === '/';
   
-  const [isLoading, setIsLoading] = useState(() => {
-    if (!isHomePage) return false;
-    try {
-      return !sessionStorage.getItem('pavion_preloader_seen');
-    } catch {
-      return true;
-    }
-  });
+  const [isLoading, setIsLoading] = useState(isHomePage);
 
   const handleComplete = React.useCallback(() => {
     setIsLoading(false);
-    try {
-      sessionStorage.setItem('pavion_preloader_seen', 'true');
-    } catch {
-      // ignore
-    }
   }, []);
 
   useEffect(() => {
@@ -93,12 +81,12 @@ function AppContent() {
     document.documentElement.classList.add('lenis');
   }, []);
 
-  // Hard safety timeout: guaranteed to unlock the screen within 2.2s maximum
+  // Hard safety timeout: guaranteed to unlock the screen within 2.8s maximum
   useEffect(() => {
     if (!isLoading) return;
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 2200);
+    }, 2800);
     return () => clearTimeout(timer);
   }, [isLoading]);
 
@@ -111,7 +99,7 @@ function AppContent() {
 
   return (
     <ErrorBoundary>
-      {/* Preloader - only on initial homepage visit */}
+      {/* Preloader - 1 to 100 counter on homepage */}
       {isLoading && isHomePage && <Preloader onComplete={handleComplete} />}
       
       {/* Scroll to top on route change */}

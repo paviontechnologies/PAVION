@@ -24,48 +24,43 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
   const finish = () => {
     if (hasCompletedRef.current) return;
     hasCompletedRef.current = true;
-    try {
-      sessionStorage.setItem('pavion_preloader_seen', 'true');
-    } catch {
-      // ignore
-    }
     onCompleteRef.current();
   };
 
   useEffect(() => {
-    // Hard safety timeout: under no circumstances should the preloader stay active > 2.0s
+    // Safety timeout: unlock screen within 2.6s
     const safetyTimeout = setTimeout(() => {
       finish();
-    }, 2000);
+    }, 2600);
 
     const ctx = gsap.context(() => {
-      // Animate counter from 0 to 100 in 1.1s
+      // Smooth counting from 0 to 100%
       const counterAnimation = { value: 0 };
       gsap.to(counterAnimation, {
         value: 100,
-        duration: 1.1,
-        ease: "power2.out",
+        duration: 1.6,
+        ease: "power2.inOut",
         onUpdate: () => {
           setCounter(Math.round(counterAnimation.value));
         },
       });
 
-      // Progress bar fills in 1.1s
+      // Progress bar fills in 1.6s
       gsap.to(progressRef.current, {
         scaleX: 1,
-        duration: 1.1,
-        ease: "power2.out",
+        duration: 1.6,
+        ease: "power2.inOut",
       });
 
       // Text reveal
       gsap.fromTo(textRef.current, 
-        { y: 40, opacity: 0 },
+        { y: 30, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" }
       );
 
-      // Fast exit animation immediately after counter reaches 100
+      // Exit animation smoothly after counter reaches 100%
       const exitTimeline = gsap.timeline({
-        delay: 1.15,
+        delay: 1.7,
         onComplete: () => {
           finish();
         }
@@ -74,20 +69,20 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
       exitTimeline
         .to([counterRef.current, textRef.current, progressRef.current], {
           opacity: 0,
-          y: -20,
-          duration: 0.3,
+          y: -25,
+          duration: 0.35,
           ease: "power2.in",
         })
         .to(overlayTopRef.current, {
           yPercent: -100,
-          duration: 0.5,
+          duration: 0.55,
           ease: "power3.inOut",
         }, "-=0.1")
         .to(overlayBottomRef.current, {
           yPercent: 100,
-          duration: 0.5,
+          duration: 0.55,
           ease: "power3.inOut",
-        }, "-=0.5");
+        }, "-=0.55");
 
     }, preloaderRef);
 
