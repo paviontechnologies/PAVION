@@ -15,6 +15,7 @@ import {
   AtSign
 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const ContactNew: React.FC = () => {
   const [selectedNeeds, setSelectedNeeds] = useState<string[]>([]);
@@ -24,6 +25,10 @@ const ContactNew: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [copiedEmail, setCopiedEmail] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  // Spam & Bot Protection
+  const [honeypot, setHoneypot] = useState('');
+  const [formLoadedAt] = useState<number>(() => Date.now());
 
   const toggleNeed = (need: string) => {
     if (selectedNeeds.includes(need)) {
@@ -35,12 +40,27 @@ const ContactNew: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (selectedNeeds.length === 0) {
-      alert('Please select at least one requirement.');
+    setErrorMessage('');
+
+    // Anti-Bot Honeypot check
+    if (honeypot.trim() !== '') {
+      console.warn('Bot detected via honeypot');
+      setSubmitted(true);
       return;
     }
-    if (!contactMethod.trim()) {
-      alert('Please provide your Email or WhatsApp contact.');
+
+    // Anti-Bot Time-Gate check (under 1.5 seconds)
+    if (Date.now() - formLoadedAt < 1500) {
+      setErrorMessage('Submission was too fast. Please take a moment to review and submit.');
+      return;
+    }
+
+    if (selectedNeeds.length === 0) {
+      setErrorMessage('Please select at least one requirement.');
+      return;
+    }
+    if (!contactMethod.trim() || contactMethod.trim().length < 5) {
+      setErrorMessage('Please provide a valid Email or WhatsApp number.');
       return;
     }
 
@@ -185,7 +205,27 @@ const ContactNew: React.FC = () => {
               ) : (
                 /* Main Simplified Form */
                 <form onSubmit={handleSubmit} className="space-y-6">
-                  
+                  {/* Anti-Bot Honeypot */}
+                  <div style={{ position: 'absolute', left: '-9999px', opacity: 0, height: 0, overflow: 'hidden' }} aria-hidden="true">
+                    <label htmlFor="hp_company_contact">Company Verification</label>
+                    <input
+                      type="text"
+                      id="hp_company_contact"
+                      name="hp_company_contact"
+                      tabIndex={-1}
+                      autoComplete="off"
+                      value={honeypot}
+                      onChange={(e) => setHoneypot(e.target.value)}
+                    />
+                  </div>
+
+                  {/* Validation Error Banner */}
+                  {errorMessage && (
+                    <div className="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs sm:text-sm font-semibold flex items-center gap-2">
+                      <span>⚠️ {errorMessage}</span>
+                    </div>
+                  )}
+
                   {/* What do you need? (Buttons grid selector) */}
                   <div>
                     <label className="block text-xs sm:text-sm font-extrabold uppercase tracking-wider text-zinc-300 mb-3">
@@ -308,6 +348,21 @@ const ContactNew: React.FC = () => {
                     </span>
                     <span>Zero Spam Guarantee</span>
                     <span>Response within 24h</span>
+                  </div>
+
+                  {/* Privacy & Terms Note */}
+                  <div className="text-center pt-2">
+                    <p className="text-xs text-zinc-400 font-medium">
+                      By submitting, you agree to our{' '}
+                      <Link to="/terms" className="text-[#60A5FA] underline hover:text-white transition-colors">
+                        Terms of Service
+                      </Link>{' '}
+                      and{' '}
+                      <Link to="/privacy" className="text-[#60A5FA] underline hover:text-white transition-colors">
+                        Privacy Policy
+                      </Link>
+                      . We never share or sell your contact data.
+                    </p>
                   </div>
 
                 </form>

@@ -13,8 +13,10 @@ import {
   MapPin,
   FileText,
   MessageSquare,
+  ShieldCheck,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 type SubmitStatus = 'loading' | 'success' | 'error' | null;
 
@@ -28,7 +30,8 @@ interface CareerFormData {
   resume: File | null;
 }
 
-const FRONTEND_API_KEY = 'my-secret-key-123';
+// Get secrets off the front end (Environment variable driven)
+const FRONTEND_API_KEY = (import.meta.env.VITE_CONTACT_API_KEY as string) || '';
 const API_BASE_URL = 'https://pavilon-technologies-tqaq.onrender.com';
 
 const Careers: React.FC = () => {
@@ -43,30 +46,75 @@ const Careers: React.FC = () => {
   });
 
   const [submitStatus, setSubmitStatus] = useState<SubmitStatus>(null);
+  const [validationError, setValidationError] = useState<string>('');
   const [resumeFileName, setResumeFileName] = useState<string>('');
+  // Spam & Bot Protection: Invisible Honeypot & Time-Gate
+  const [honeypot, setHoneypot] = useState<string>('');
+  const [formLoadedAt] = useState<number>(() => Date.now());
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setValidationError('');
+
+    // 1. Anti-Bot Honeypot Check (If a bot filled the hidden input)
+    if (honeypot.trim() !== '') {
+      console.warn('Bot submission blocked via honeypot');
+      // Simulate success to silently misdirect spam bots
+      setSubmitStatus('success');
+      return;
+    }
+
+    // 2. Anti-Bot Time-Gate Check (Reject submissions under 1.5 seconds)
+    if (Date.now() - formLoadedAt < 1500) {
+      setValidationError('Submission was too fast. Please take your time to review your details.');
+      return;
+    }
+
+    // 3. Form Validation
+    if (formData.fullName.trim().length < 2) {
+      setValidationError('Please enter your full name (minimum 2 characters).');
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email.trim())) {
+      setValidationError('Please enter a valid email address.');
+      return;
+    }
+
+    if (formData.phone.trim().replace(/\D/g, '').length < 7) {
+      setValidationError('Please enter a valid phone number with country code.');
+      return;
+    }
+
+    if (!formData.resume) {
+      setValidationError('Please upload your resume or CV (PDF, DOC, DOCX).');
+      return;
+    }
+
     setSubmitStatus('loading');
 
     try {
       const formDataToSend = new FormData();
-      formDataToSend.append('fullName', formData.fullName);
-      formDataToSend.append('email', formData.email);
-      formDataToSend.append('phone', formData.phone);
-      formDataToSend.append('location', formData.location);
-      formDataToSend.append('linkedinUrl', formData.linkedinUrl);
-      formDataToSend.append('coverLetter', formData.coverLetter);
+      formDataToSend.append('fullName', formData.fullName.trim());
+      formDataToSend.append('email', formData.email.trim());
+      formDataToSend.append('phone', formData.phone.trim());
+      formDataToSend.append('location', formData.location.trim());
+      formDataToSend.append('linkedinUrl', formData.linkedinUrl.trim());
+      formDataToSend.append('coverLetter', formData.coverLetter.trim());
 
       if (formData.resume) {
         formDataToSend.append('resume', formData.resume);
       }
 
+      const headers: Record<string, string> = {};
+      if (FRONTEND_API_KEY) {
+        headers['x-api-key'] = FRONTEND_API_KEY;
+      }
+
       const response = await fetch(`${API_BASE_URL}/api/careers`, {
         method: 'POST',
-        headers: {
-          'x-api-key': FRONTEND_API_KEY,
-        },
+        headers,
         body: formDataToSend,
       });
 
@@ -93,7 +141,7 @@ const Careers: React.FC = () => {
       setSubmitStatus('error');
     }
 
-    setTimeout(() => setSubmitStatus(null), 5000);
+    setTimeout(() => setSubmitStatus(null), 6000);
   };
 
   const handleChange = (
@@ -177,6 +225,28 @@ const Careers: React.FC = () => {
           </div>
 
           <form onSubmit={handleSubmit} className="relative z-10">
+            {/* Anti-Bot Honeypot: Hidden from real users and screen readers */}
+            <div style={{ position: 'absolute', left: '-9999px', opacity: 0, height: 0, overflow: 'hidden' }} aria-hidden="true">
+              <label htmlFor="hp_applicant_field">Leave this empty</label>
+              <input
+                type="text"
+                id="hp_applicant_field"
+                name="hp_applicant_field"
+                tabIndex={-1}
+                autoComplete="off"
+                value={honeypot}
+                onChange={(e) => setHoneypot(e.target.value)}
+              />
+            </div>
+
+            {/* Validation Error Banner */}
+            {validationError && (
+              <div className="mb-6 p-4 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-sm font-semibold flex items-center gap-2">
+                <XCircle size={18} className="flex-shrink-0 text-amber-400" />
+                <span>{validationError}</span>
+              </div>
+            )}
+
             <div className="grid md:grid-cols-2 gap-6 md:gap-8 mb-6 md:mb-8">
               <div>
                 <label htmlFor="fullName" className="flex items-center gap-2 text-zinc-300 font-extrabold mb-3 text-xs sm:text-sm uppercase">
@@ -324,6 +394,25 @@ const Careers: React.FC = () => {
               )}
               {submitStatus === 'loading' ? 'Submitting...' : 'Submit Application'}
             </button>
+
+            {/* Privacy & Terms Transparency */}
+            <div className="mt-6 pt-5 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-zinc-400">
+              <span className="flex items-center gap-1.5 text-emerald-400 font-bold">
+                <ShieldCheck size={16} />
+                <span>Strictly Confidential & GDPR Compliant</span>
+              </span>
+              <p className="text-center sm:text-right">
+                By submitting, you agree to our{' '}
+                <Link to="/terms" className="text-[#60A5FA] underline hover:text-white transition-colors">
+                  Terms of Service
+                </Link>{' '}
+                and{' '}
+                <Link to="/privacy" className="text-[#60A5FA] underline hover:text-white transition-colors">
+                  Privacy Policy
+                </Link>
+                .
+              </p>
+            </div>
           </form>
         </motion.div>
 

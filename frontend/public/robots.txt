@@ -1,25 +1,31 @@
 # Pavion Technologies - Robots.txt
-# Allow all crawlers to access all content
+# Allow search crawlers to index all public content
 
 User-agent: *
 Allow: /
+Disallow: /private/
+Disallow: /tmp/
 
-# Disallow admin or private areas (if any)
-# Disallow: /admin/
-# Disallow: /private/
-
-# Sitemap location
-Sitemap: https://paviontechnologies.com/sitemap.xml
-
-# Crawl-delay (optional, helps manage server load)
-Crawl-delay: 1
-
-# Specific rules for common bots
+# Google Crawlers
 User-agent: Googlebot
 Allow: /
 
+User-agent: Googlebot-Image
+Allow: /
+
+# Bing Crawler
 User-agent: Bingbot
+Allow: /
+
+# Other Major Search Engines
+User-agent: Applebot
+Allow: /
+
+User-agent: DuckDuckBot
 Allow: /
 
 User-agent: Slurp
 Allow: /
+
+# Canonical Sitemap URL
+Sitemap: https://paviontechnologies.com/sitemap.xml

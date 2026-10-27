@@ -21,6 +21,14 @@ const Careers = lazy(() => import('./components/Careers'));
 const ProcessView = lazy(() => import('./components/ProcessView'));
 const TeamMemberDetail = lazy(() => import('./components/TeamMemberDetail'));
 const FooterNew = lazy(() => import('./components/FooterNew'));
+const PrivacyPolicyPage = lazy(() => import('./pages/PrivacyPolicyPage'));
+const TermsPage = lazy(() => import('./pages/TermsPage'));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
+const ITStaffingPage = lazy(() => import('./pages/ITStaffingPage'));
+const BlogAdminPage = lazy(() => import('./pages/BlogAdminPage'));
+
+import CookieConsent from './components/CookieConsent';
+import { initAnalytics, trackPageView } from './utils/analytics';
 
 // Minimal loading fallback
 const SectionLoader = () => (
@@ -90,6 +98,15 @@ function AppContent() {
     return () => clearTimeout(timer);
   }, [isLoading]);
 
+  // Initialize analytics & track page navigation
+  useEffect(() => {
+    initAnalytics();
+  }, []);
+
+  useEffect(() => {
+    trackPageView(location.pathname);
+  }, [location.pathname]);
+
   // If navigated away from homepage, immediately hide preloader
   useEffect(() => {
     if (!isHomePage) {
@@ -149,8 +166,26 @@ function AppContent() {
               {/* Careers Page Route */}
               <Route path="/careers" element={<Careers />} />
 
-              {/* Fallback redirect to Home */}
-              <Route path="*" element={<HomePage />} />
+              {/* Enterprise IT Staffing & Dedicated Squads */}
+              <Route path="/it-staffing" element={<ITStaffingPage />} />
+              <Route path="/staffing" element={<ITStaffingPage />} />
+
+              {/* Legal: Privacy Policy */}
+              <Route path="/privacy" element={<PrivacyPolicyPage />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+
+              {/* Legal: Terms & Conditions */}
+              <Route path="/terms" element={<TermsPage />} />
+              <Route path="/terms-and-conditions" element={<TermsPage />} />
+
+              {/* Admin Blog Publisher & CMS */}
+              <Route path="/admin/blog" element={<BlogAdminPage />} />
+              <Route path="/admin/blogs" element={<BlogAdminPage />} />
+              <Route path="/publish-blog" element={<BlogAdminPage />} />
+
+              {/* Custom 404 Not Found Page */}
+              <Route path="/404" element={<NotFoundPage />} />
+              <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </Suspense>
 
@@ -161,6 +196,9 @@ function AppContent() {
           
         </div>
       </SmoothScroll>
+
+      {/* Cookie Consent Banner */}
+      <CookieConsent />
 
       {/* Interactive Global AI Chat Assistant */}
       <AIChatBot />

@@ -91,7 +91,9 @@ const PortfolioNew: React.FC = () => {
                 <div className="relative aspect-[16/10] overflow-hidden bg-black/40 border-b border-white/10">
                   <img 
                     src={project.image} 
-                    alt={project.title}
+                    alt={`${project.title} - ${project.category} case study by Pavion Technologies`}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700"
                   />
                   

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="pavion-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3B82F6" />
+      <stop offset="50%" stop-color="#8B5CF6" />
+      <stop offset="100%" stop-color="#DB2777" />
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="#090C15"/>
+  <rect x="2" y="2" width="60" height="60" rx="14" stroke="url(#pavion-grad)" stroke-width="2" fill="none" opacity="0.6"/>
+  <path d="M22 16 H36 C42.627 16 48 21.373 48 28 C48 34.627 42.627 40 36 40 H30 V48 H22 V16 Z" fill="url(#pavion-grad)" />
+  <path d="M30 24 H35 C37.209 24 39 25.791 39 28 C39 30.209 37.209 32 35 32 H30 V24 Z" fill="#090C15" />
+</svg>

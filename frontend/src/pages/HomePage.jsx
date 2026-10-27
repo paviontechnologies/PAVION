@@ -204,14 +204,6 @@ const HomePage = () => {
   const [businessProblem, setBusinessProblem] = useState('');
   const [problemSolution, setProblemSolution] = useState(null);
 
-  // Automation Calculator states
-  const [employees, setEmployees] = useState(5);
-  const [hoursSpent, setHoursSpent] = useState(4);
-  const [workingDays, setWorkingDays] = useState(26);
-
-  // Dedicated Engineers States
-  const [selectedTeamSize, setSelectedTeamSize] = useState('1 Engineer');
-
   // Industry Solutions Tabs
   const [activeIndustry, setActiveIndustry] = useState('Enterprises');
 
@@ -525,203 +517,7 @@ const HomePage = () => {
       </section>
 
       {/* ================================================================= */}
-      {/* 5. INTERACTIVE AUTOMATION SAVINGS CALCULATOR                      */}
-      {/* ================================================================= */}
-      <section className="relative py-12 sm:py-20 md:py-28 bg-[#080B14] border-t border-white/10 overflow-hidden text-white">
-        <div className="max-w-5xl mx-auto px-4 sm:px-8 relative z-10">
-          
-          <div className="text-center mb-8 sm:mb-16 space-y-2 sm:space-y-4">
-            <span className="text-xs sm:text-sm tracking-[0.25em] uppercase text-[#DB2777] font-extrabold block">
-              ROI Calculator
-            </span>
-            <h2 className="text-2xl sm:text-4xl md:text-5xl font-black text-white uppercase tracking-tight leading-tight">
-              How Much Can You Save?
-            </h2>
-            <p className="text-zinc-300 text-xs sm:text-base font-normal">
-              Recover precious hours wasted on repetitive manual business tasks.
-            </p>
-          </div>
-
-          <div className="p-5 sm:p-8 md:p-12 rounded-2xl sm:rounded-3xl bg-[#0D1222] border border-white/10 shadow-2xl grid md:grid-cols-12 gap-6 md:gap-8 items-center">
-            
-            {/* Input Controls */}
-            <div className="md:col-span-7 space-y-4 sm:space-y-8">
-              
-              {/* Employee Count */}
-              <div>
-                <div className="flex justify-between text-xs sm:text-sm font-mono uppercase text-zinc-400 mb-1.5 sm:mb-2.5">
-                  <span>Employees doing repetitive work</span>
-                  <span className="text-[#60A5FA] font-extrabold">{employees} staff</span>
-                </div>
-                <input
-                  type="range"
-                  min="1"
-                  max="100"
-                  value={employees}
-                  onChange={(e) => setEmployees(parseInt(e.target.value))}
-                  className="w-full h-1.5 bg-white/10 rounded-lg appearance-none cursor-pointer accent-[#60A5FA]"
-                />
-              </div>
-
-              {/* Hours Wasted per day */}
-              <div>
-                <div className="flex justify-between text-xs sm:text-sm font-mono uppercase text-zinc-400 mb-1.5 sm:mb-2.5">
-                  <span>Hours wasted per day</span>
-                  <span className="text-[#60A5FA] font-extrabold">{hoursSpent} hours</span>
-                </div>
-                <input
-                  type="range"
-                  min="1"
-                  max="8"
-                  value={hoursSpent}
-                  onChange={(e) => setHoursSpent(parseInt(e.target.value))}
-                  className="w-full h-1.5 bg-white/10 rounded-lg appearance-none cursor-pointer accent-[#60A5FA]"
-                />
-              </div>
-
-              {/* Working days / month */}
-              <div>
-                <div className="flex justify-between text-xs sm:text-sm font-mono uppercase text-zinc-400 mb-1.5 sm:mb-2.5">
-                  <span>Working days / month</span>
-                  <span className="text-[#60A5FA] font-extrabold">{workingDays} days</span>
-                </div>
-                <input
-                  type="range"
-                  min="15"
-                  max="31"
-                  value={workingDays}
-                  onChange={(e) => setWorkingDays(parseInt(e.target.value))}
-                  className="w-full h-1.5 bg-white/10 rounded-lg appearance-none cursor-pointer accent-[#60A5FA]"
-                />
-              </div>
-
-            </div>
-
-            {/* Math Output Panel */}
-            <div className="md:col-span-5 p-5 sm:p-8 rounded-xl sm:rounded-2xl bg-white/5 border border-white/10 text-center space-y-4 sm:space-y-6">
-              <div>
-                <span className="text-xs font-mono uppercase text-zinc-400 block mb-1">Estimated Time Saved</span>
-                <span className="text-3xl sm:text-4xl font-black text-[#60A5FA] block">
-                  {employees * hoursSpent * workingDays} hrs/mo
-                </span>
-              </div>
-
-              <div>
-                <span className="text-xs font-mono uppercase text-zinc-400 block mb-1">Potential Productivity Gain</span>
-                <span className="text-sm sm:text-lg font-bold text-white block leading-tight">
-                  Significant (Equivalent to ~{Math.round((employees * hoursSpent * workingDays) / 160)} Full-time Staff!)
-                </span>
-              </div>
-
-              <button
-                onClick={() => openEnquiryModal('Automation Audit')}
-                className="w-full py-3 sm:py-4 rounded-xl bg-[#DB2777] hover:bg-[#DB2777]/90 text-white font-black text-xs sm:text-sm hover:scale-105 transition-all flex items-center justify-center gap-1.5 shadow-lg shadow-pink-600/20"
-              >
-                <span>Talk to an Automation Expert</span>
-                <ArrowRight size={16} />
-              </button>
-            </div>
-
-          </div>
-
-        </div>
-      </section>
-
-      {/* ================================================================= */}
-      {/* 6. DEDICATED ENGINEERS ON-DEMAND SERVICE (DESKTOP ONLY)           */}
-      {/* ================================================================= */}
-      <section className="hidden md:block relative py-28 bg-[#050508] border-t border-white/10 overflow-hidden text-white">
-        <div className="max-w-6xl mx-auto px-6 sm:px-8 relative z-10">
-          
-          <div className="text-center max-w-3xl mx-auto mb-20 space-y-4">
-            <span className="text-sm tracking-[0.25em] uppercase text-[#DB2777] font-extrabold block">
-              Dedicated Engineers
-            </span>
-            <h2 className="text-3xl sm:text-5xl font-black text-white uppercase tracking-tight leading-tight">
-              Need Developers Without <br />
-              <span className="text-[#60A5FA]">
-                Long-Term Hiring?
-              </span>
-            </h2>
-            <p className="text-zinc-300 text-sm sm:text-lg font-normal">
-              Frontend • Backend • Full Stack • AI/ML • DevOps • QA • Mobile engineers allocated within 48 hours.
-            </p>
-          </div>
-
-          <div className="p-8 rounded-3xl bg-[#0D1222] border border-white/10 shadow-2xl grid md:grid-cols-12 gap-8 items-stretch">
-            
-            {/* Left: Options board */}
-            <div className="md:col-span-7 space-y-8 flex flex-col justify-between">
-              
-              <div className="space-y-4">
-                <h3 className="text-lg font-bold text-white">Select Your Allocation size:</h3>
-                
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4.5">
-                  {[
-                    { size: '1 Engineer', desc: 'Single developer' },
-                    { size: 'Small Team', desc: '2-4 engineers' },
-                    { size: 'Dedicated Team', desc: 'Full custom squad' }
-                  ].map((opt) => (
-                    <button
-                      key={opt.size}
-                      onClick={() => setSelectedTeamSize(opt.size)}
-                      className={`p-4 sm:p-5 rounded-2xl border text-center transition-all ${
-                        selectedTeamSize === opt.size 
-                          ? 'bg-[#DB2777]/20 border-[#DB2777] text-white font-black' 
-                          : 'bg-white/5 border-white/10 text-zinc-400 hover:border-white/20 hover:text-white'
-                      }`}
-                    >
-                      <div className="text-sm sm:text-base font-bold">{opt.size}</div>
-                      <div className="text-[10px] sm:text-xs opacity-80 mt-1">{opt.desc}</div>
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Stack Chips */}
-              <div className="space-y-3.5">
-                <h4 className="text-xs font-mono uppercase text-zinc-400">Available Tech Stacks:</h4>
-                <div className="flex flex-wrap gap-2.5">
-                  {['React / Next.js', 'Node.js / Express', 'Python / Django', 'AI/ML Langchain', 'Kubernetes / AWS', 'iOS Swift / Android Kotlin', 'QA Automation'].map((chip) => (
-                    <span key={chip} className="text-xs sm:text-sm px-4 py-2 rounded-full bg-white/5 border border-white/10 font-mono text-zinc-300">
-                      {chip}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-            </div>
-
-            {/* Right: Pitch card */}
-            <div className="md:col-span-5 p-8 rounded-2xl bg-gradient-to-br from-blue-950/40 via-purple-950/20 to-transparent border border-white/10 flex flex-col justify-between text-center">
-              <div>
-                <span className="w-12 h-12 rounded-full bg-[#60A5FA]/10 border border-[#60A5FA]/20 flex items-center justify-center text-[#60A5FA] mx-auto mb-4">
-                  <UserCheck size={24} />
-                </span>
-                <h4 className="text-xl font-bold text-white mb-3">Dedicated Engineers On Demand</h4>
-                <p className="text-sm text-zinc-300 leading-relaxed font-normal">
-                  Skip the recruitment hurdles. Extend your repository scope instantly with zero setup delays.
-                </p>
-              </div>
-
-              <button
-                onClick={() => openEnquiryModal(`Dedicated Engineers: ${selectedTeamSize}`)}
-                className="w-full mt-8 py-4 rounded-xl bg-[#DB2777] text-white font-black text-sm hover:scale-105 transition-all shadow-lg shadow-pink-600/20"
-              >
-                ⚡ Get Engineers for My Project
-              </button>
-            </div>
-
-          </div>
-
-        </div>
-      </section>
-
-      {/* ================================================================= */}
-      {/* 7. "WE BUILD FOR YOUR INDUSTRY" SECTION                          */}
-      {/* ================================================================= */}
-      {/* ================================================================= */}
-      {/* 7. "WE BUILD FOR YOUR INDUSTRY" SECTION                          */}
+      {/* 5. "WE BUILD FOR YOUR INDUSTRY" SECTION                          */}
       {/* ================================================================= */}
       <section className="relative py-12 sm:py-20 md:py-28 bg-[#080B14] border-t border-white/10 overflow-hidden text-white">
         {/* Background glow accents */}
@@ -1226,7 +1022,9 @@ const HomePage = () => {
                     <div className="relative rounded-2xl overflow-hidden aspect-[16/10] border border-white/10 shadow-md bg-black/40">
                       <img 
                         src={showroomCategories[selectedProjectType].image} 
-                        alt={selectedProjectType} 
+                        alt={`${showroomCategories[selectedProjectType].title} - Interactive Prototype Architecture`} 
+                        loading="lazy"
+                        decoding="async"
                         className="w-full h-full object-cover"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />

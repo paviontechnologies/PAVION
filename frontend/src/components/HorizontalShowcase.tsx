@@ -13,7 +13,7 @@ const services = [
     icon: Code2,
     color: 'from-blue-500 to-indigo-600',
     number: '01',
-    image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+    image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=75',
   },
   {
     title: 'Web Applications',
@@ -21,7 +21,7 @@ const services = [
     icon: Globe,
     color: 'from-cyan-500 to-blue-500',
     number: '02',
-    image: 'https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&auto=format&fit=crop&w=2064&q=80',
+    image: 'https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&w=800&q=75',
   },
   {
     title: 'UI/UX Design',
@@ -29,7 +29,7 @@ const services = [
     icon: Palette,
     color: 'from-pink-500 to-purple-600',
     number: '03',
-    image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2064&q=80',
+    image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=800&q=75',
   },
   {
     title: 'Mobile Apps',
@@ -37,7 +37,7 @@ const services = [
     icon: Smartphone,
     color: 'from-blue-500 to-cyan-500',
     number: '04',
-    image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+    image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=800&q=75',
   },
   {
     title: 'Cloud Solutions',
@@ -45,7 +45,7 @@ const services = [
     icon: Cloud,
     color: 'from-emerald-500 to-teal-500',
     number: '05',
-    image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=2072&q=80',
+    image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=75',
   },
   {
     title: 'AI & Machine Learning',
@@ -53,7 +53,7 @@ const services = [
     icon: Brain,
     color: 'from-purple-500 to-pink-500',
     number: '06',
-    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=800&q=75',
   },
 ];
 
@@ -89,7 +89,7 @@ const HorizontalShowcase: React.FC = () => {
       // Calculate scroll distance
       const scrollDistance = section.scrollWidth - window.innerWidth;
 
-      // Create horizontal scroll animation
+      // Create horizontal scroll animation with snappy scrub & fastScrollEnd
       const scrollTween = gsap.to(section, {
         x: -scrollDistance,
         ease: "none",
@@ -97,38 +97,37 @@ const HorizontalShowcase: React.FC = () => {
           trigger: trigger,
           start: "top top",
           end: () => `+=${scrollDistance}`,
-          scrub: 1,
+          scrub: 0.35,
           pin: true,
           anticipatePin: 1,
+          fastScrollEnd: true,
           invalidateOnRefresh: true,
           onUpdate: (self) => {
-            gsap.to(progress, {
-              scaleX: self.progress,
-              duration: 0.1,
-            });
+            if (progress) {
+              progress.style.transform = `scaleX(${self.progress})`;
+            }
           },
         },
       });
 
-      // Animate cards on scroll
+      // Animate cards on scroll (lightweight 2D opacity & scale, GPU accelerated)
       const cards = section.querySelectorAll('.service-card');
       cards.forEach((card) => {
         gsap.fromTo(card, 
           { 
-            opacity: 0.5, 
-            scale: 0.9,
-            rotateY: 10,
+            opacity: 0.7, 
+            scale: 0.96
           },
           {
             opacity: 1,
             scale: 1,
-            rotateY: 0,
+            ease: "power1.out",
             scrollTrigger: {
               trigger: card,
               containerAnimation: scrollTween,
-              start: "left 80%",
-              end: "left 30%",
-              scrub: 1,
+              start: "left 85%",
+              end: "left 40%",
+              scrub: 0.35,
             },
           }
         );
@@ -209,8 +208,7 @@ const HorizontalShowcase: React.FC = () => {
           return (
             <div 
               key={i}
-              className="service-card flex-shrink-0 w-full lg:w-screen lg:h-full flex items-center justify-center lg:px-8"
-              style={{ perspective: '1000px' }}
+              className="service-card flex-shrink-0 w-full lg:w-screen lg:h-full flex items-center justify-center lg:px-8 transform-gpu will-change-transform"
             >
               <div 
                 className="relative w-full max-w-4xl min-h-[420px] sm:min-h-[460px] lg:min-h-0 aspect-auto lg:aspect-[4/3] rounded-2xl lg:rounded-3xl overflow-hidden group cursor-pointer bg-[#0D1222] border border-white/10 shadow-2xl"
@@ -222,16 +220,18 @@ const HorizontalShowcase: React.FC = () => {
                   <img 
                     src={service.image} 
                     alt={service.title}
-                    className="w-full h-full object-cover opacity-30 group-hover:opacity-50 group-hover:scale-110 transition-all duration-1000"
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-full object-cover opacity-30 group-hover:opacity-50 group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0D1222] via-[#0D1222]/85 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0D1222] via-[#0D1222]/85 to-transparent pointer-events-none" />
                 </div>
                 
-                {/* Top gradient overlay for color accent */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-10 mix-blend-overlay`} />
+                {/* Top gradient overlay for color accent (optimized, no mix-blend) */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-15 pointer-events-none`} />
                 
                 {/* Border overlay */}
-                <div className="absolute inset-0 border border-white/10 rounded-3xl group-hover:border-[#60A5FA]/40 transition-colors" />
+                <div className="absolute inset-0 border border-white/10 rounded-3xl group-hover:border-[#60A5FA]/40 transition-colors pointer-events-none" />
                 
                 {/* Content */}
                 <div className="relative z-10 h-full p-6 md:p-16 flex flex-col justify-between">

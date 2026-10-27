@@ -18,7 +18,8 @@ import {
 } from 'lucide-react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { getBlogBySlug, getRelatedPosts, BlogPost } from '../data/blogData';
+import { getBlogBySlug, getRelatedPosts, BlogPost, blogPosts } from '../data/blogData';
+import { getSupabaseBlogBySlug, getDeletedSlugs } from '../services/supabaseBlogService';
 import SEO from './SEO';
 
 const BlogPostPage = () => {
@@ -27,6 +28,7 @@ const BlogPostPage = () => {
   const [post, setPost] = useState<BlogPost | null>(null);
   const [relatedPosts, setRelatedPosts] = useState<BlogPost[]>([]);
   const [copied, setCopied] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   // Scroll reading progress
   const { scrollYProgress } = useScroll();
@@ -37,16 +39,40 @@ const BlogPostPage = () => {
   });
 
   useEffect(() => {
+    let isMounted = true;
     if (slug) {
-      const foundPost = getBlogBySlug(slug);
-      if (foundPost) {
-        setPost(foundPost);
-        setRelatedPosts(getRelatedPosts(slug, 2));
-        window.scrollTo(0, 0);
-      } else {
+      const deleted = new Set(getDeletedSlugs());
+      if (deleted.has(slug)) {
         navigate('/blog');
+        return;
       }
+
+      setIsLoading(true);
+      const foundStatic = getBlogBySlug(slug);
+      if (foundStatic) {
+        setPost(foundStatic);
+        setRelatedPosts(getRelatedPosts(slug, 2));
+        setIsLoading(false);
+        window.scrollTo(0, 0);
+        return;
+      }
+
+      // Check dynamic Supabase blogs
+      getSupabaseBlogBySlug(slug).then((dynamicPost) => {
+        if (!isMounted) return;
+        if (dynamicPost) {
+          setPost(dynamicPost);
+          setRelatedPosts(blogPosts.slice(0, 2));
+          window.scrollTo(0, 0);
+        } else {
+          navigate('/blog');
+        }
+        setIsLoading(false);
+      });
     }
+    return () => {
+      isMounted = false;
+    };
   }, [slug, navigate]);
 
   const copyLink = () => {
@@ -177,8 +203,10 @@ const BlogPostPage = () => {
               <div className="mb-12 rounded-3xl overflow-hidden border border-white/10 relative aspect-[16/9] shadow-2xl bg-black/40">
                 <img 
                   src={post.image} 
-                  alt={post.title} 
-                  className="w-full h-full object-cover"
+                  alt={`${post.title} - Pavion Technologies Engineering Article`} 
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full h-full object-cover object-center"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#050508] via-transparent to-transparent opacity-60" />
               </div>
@@ -336,7 +364,9 @@ const BlogPostPage = () => {
                             <div className="relative aspect-[16/9] overflow-hidden bg-black/40">
                               <img 
                                 src={relatedPost.image} 
-                                alt={relatedPost.title} 
+                                alt={`${relatedPost.title} - Related Article`} 
+                                loading="lazy"
+                                decoding="async"
                                 className="w-full h-full object-cover opacity-80 group-hover:opacity-100"
                               />
                               <div className="absolute inset-0 bg-gradient-to-t from-[#0D1222] via-transparent to-transparent opacity-90" />

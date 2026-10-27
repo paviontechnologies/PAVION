@@ -129,7 +129,9 @@ const About: React.FC = () => {
             <div className="relative aspect-[16/9] md:aspect-[21/9]">
               <img
                 src={creativeImg}
-                alt="Creative Development"
+                alt="Creative Software Development at Pavion Technologies"
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover scale-105 hover:scale-100 transition-transform duration-[1.5s] ease-out"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
@@ -236,7 +238,9 @@ const About: React.FC = () => {
                     <div className="mx-auto sm:mx-0 w-36 h-44 md:w-48 md:h-60 overflow-hidden bg-black/40 shadow-xl rounded-2xl border border-white/15">
                       <img
                         src={m.img}
-                        alt={m.name}
+                        alt={`${m.name} - ${m.role} at Pavion Technologies`}
+                        loading="lazy"
+                        decoding="async"
                         className="h-full w-full object-cover object-center grayscale-[15%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
                       />
                     </div>

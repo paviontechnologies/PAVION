@@ -17,7 +17,8 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SEO from './SEO';
-import { blogPosts } from '../data/blogData';
+import { blogPosts, BlogPost } from '../data/blogData';
+import { getSupabaseBlogs, getDeletedSlugs } from '../services/supabaseBlogService';
 
 const categories = [
   'All Articles',
@@ -33,10 +34,31 @@ const BlogPage: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState('All Articles');
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
+  const [allPosts, setAllPosts] = useState<BlogPost[]>(() => {
+    const deleted = new Set(getDeletedSlugs());
+    return blogPosts.filter((p) => !deleted.has(p.slug));
+  });
+
+  // Load new dynamic blogs from Supabase and prepend to static blogs
+  React.useEffect(() => {
+    let isMounted = true;
+    getSupabaseBlogs().then((dynamicPosts) => {
+      if (isMounted) {
+        const deleted = new Set(getDeletedSlugs());
+        const dynamicSlugs = new Set((dynamicPosts || []).map((p) => p.slug));
+        const remainingStatic = blogPosts.filter((p) => !dynamicSlugs.has(p.slug) && !deleted.has(p.slug));
+        const validDynamic = (dynamicPosts || []).filter((p) => !deleted.has(p.slug));
+        setAllPosts([...validDynamic, ...remainingStatic]);
+      }
+    });
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   // Filtered posts based on search & category
   const filteredPosts = useMemo(() => {
-    return blogPosts.filter((post) => {
+    return allPosts.filter((post) => {
       const q = searchQuery.toLowerCase().trim();
       const matchesSearch = 
         !q ||
@@ -62,9 +84,9 @@ const BlogPage: React.FC = () => {
 
       return matchesSearch && matchesCategory;
     });
-  }, [searchQuery, selectedCategory]);
+  }, [allPosts, searchQuery, selectedCategory]);
 
-  const featuredPost = blogPosts[0];
+  const featuredPost = allPosts[0];
   const isShowingAll = selectedCategory === 'All Articles' && !searchQuery;
   const gridPosts = isShowingAll ? filteredPosts.filter(p => p.id !== featuredPost?.id) : filteredPosts;
 
@@ -239,11 +261,11 @@ const BlogPage: React.FC = () => {
                   className="group block rounded-3xl bg-[#0D1222] border border-white/10 hover:border-[#60A5FA]/40 hover:shadow-2xl transition-all duration-500 overflow-hidden flex flex-col justify-between shadow-xl"
                 >
                   <div>
-                    <div className="relative aspect-[16/10] overflow-hidden bg-black/40">
+                    <div className="relative h-52 sm:h-56 w-full overflow-hidden bg-[#0D1222]">
                       <img 
                         src={post.image} 
                         alt={post.title} 
-                        className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700 opacity-80 group-hover:opacity-100"
+                        className="w-full h-full object-cover object-center group-hover:scale-105 transition-all duration-700 opacity-85 group-hover:opacity-100"
                         loading="lazy"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-[#0D1222] via-transparent to-transparent opacity-90" />

@@ -1401,24 +1401,32 @@ const AIChatBot: React.FC = () => {
       return;
     }
 
-    // 4. For all other questions, query live OpenAI GPT-4o-mini!
-    try {
-      const aiReplyText = await fetchOpenAIResponse(messageText, updatedHistory);
-      const botReply: Message = {
-        id: (Date.now() + 1).toString(),
-        sender: 'bot',
-        type: 'text',
-        text: aiReplyText,
-        timestamp: getFormattedTime(),
-        options: getSmartOptionsForQuery(messageText)
-      };
-      setMessages((prev) => [...prev, botReply]);
-    } catch (error) {
-      console.warn('OpenAI API call notice, using local knowledge engine fallback:', error);
-      const fallbackReply = generateBotResponse(messageText, updatedHistory);
-      setMessages((prev) => [...prev, fallbackReply]);
-    } finally {
-      setIsTyping(false);
+    // 4. For all other questions, query OpenAI if key exists, otherwise use local intelligence engine
+    if (OPENAI_API_KEY && OPENAI_API_KEY.trim() !== '') {
+      try {
+        const aiReplyText = await fetchOpenAIResponse(messageText, updatedHistory);
+        const botReply: Message = {
+          id: (Date.now() + 1).toString(),
+          sender: 'bot',
+          type: 'text',
+          text: aiReplyText,
+          timestamp: getFormattedTime(),
+          options: getSmartOptionsForQuery(messageText)
+        };
+        setMessages((prev) => [...prev, botReply]);
+      } catch (error) {
+        console.warn('OpenAI API call notice, using local knowledge engine fallback:', error);
+        const fallbackReply = generateBotResponse(messageText, updatedHistory);
+        setMessages((prev) => [...prev, fallbackReply]);
+      } finally {
+        setIsTyping(false);
+      }
+    } else {
+      setTimeout(() => {
+        const fallbackReply = generateBotResponse(messageText, updatedHistory);
+        setMessages((prev) => [...prev, fallbackReply]);
+        setIsTyping(false);
+      }, 300);
     }
   };
 

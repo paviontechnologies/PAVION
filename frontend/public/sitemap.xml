@@ -148,5 +148,29 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
+  
+  <!-- Privacy Policy -->
+  <url>
+    <loc>https://paviontechnologies.com/privacy</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- IT Staffing & Dedicated Squads -->
+  <url>
+    <loc>https://paviontechnologies.com/it-staffing</loc>
+    <lastmod>2026-10-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Terms and Conditions -->
+  <url>
+    <loc>https://paviontechnologies.com/terms</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
 
 </urlset>

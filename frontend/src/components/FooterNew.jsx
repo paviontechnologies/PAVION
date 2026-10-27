@@ -53,13 +53,17 @@ const FooterNew = () => {
     { name: 'Home', href: '/' },
     { name: 'About', href: '/about' },
     { name: 'Services', href: '/services' },
+    { name: 'IT Staffing', href: '/it-staffing' },
     { name: 'Portfolio', href: '/portfolio' },
     { name: 'Blog', href: '/blog' },
     { name: 'Careers', href: '/careers' },
     { name: 'Contact', href: '/contact' },
+    { name: 'Privacy Policy', href: '/privacy' },
+    { name: 'Terms of Service', href: '/terms' },
   ];
 
   const services = [
+    'IT Staffing & Squads',
     'Web Development',
     'Mobile Apps',
     'AI Solutions',
@@ -245,7 +249,7 @@ const FooterNew = () => {
               {services.map((service) => (
                 <li key={service}>
                   <Link 
-                    to="/services" 
+                    to={service.includes('Staffing') ? '/it-staffing' : '/services'} 
                     className="text-white/80 hover:text-white transition-colors text-sm sm:text-base font-bold"
                     data-cursor-hover
                   >
@@ -332,7 +336,22 @@ const FooterNew = () => {
               <span className="hidden md:block">•</span>
               <Link to="/contact" className="hover:text-white transition-colors" data-cursor-hover>Contact Us</Link>
               <span className="hidden md:block">•</span>
+              <Link to="/it-staffing" className="hover:text-[#60A5FA] text-zinc-300 transition-colors font-bold" data-cursor-hover>IT Staffing</Link>
+              <span className="hidden md:block">•</span>
               <Link to="/careers" className="hover:text-white transition-colors" data-cursor-hover>Careers</Link>
+              <span className="hidden md:block">•</span>
+              <Link to="/privacy" className="hover:text-white transition-colors" data-cursor-hover>Privacy Policy</Link>
+              <span className="hidden md:block">•</span>
+              <Link to="/terms" className="hover:text-white transition-colors" data-cursor-hover>Terms of Service</Link>
+              <span className="hidden md:block">•</span>
+              <button 
+                type="button"
+                onClick={() => window.dispatchEvent(new CustomEvent('pavion_open_cookie_consent'))}
+                className="hover:text-[#60A5FA] transition-colors underline cursor-pointer"
+                data-cursor-hover
+              >
+                Cookie Preferences
+              </button>
             </div>
 
             <MagneticButton

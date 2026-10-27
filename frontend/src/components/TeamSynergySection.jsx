@@ -82,11 +82,11 @@ const TeamSynergySection = ({ onOpenModal }) => {
               </button>
 
               <Link
-                to="/services"
-                className="w-full sm:w-auto inline-flex items-center justify-center px-6 sm:px-7 py-3 sm:py-4 bg-white/5 hover:bg-white/10 text-white border border-white/20 rounded-full font-bold text-xs sm:text-base transition-all shadow-sm"
+                to="/it-staffing"
+                className="w-full sm:w-auto inline-flex items-center justify-center px-6 sm:px-7 py-3 sm:py-4 bg-white/5 hover:bg-white/10 text-white border border-white/20 rounded-full font-bold text-xs sm:text-base transition-all shadow-sm hover:border-[#60A5FA]"
                 data-cursor-hover
               >
-                Explore Engagement Models
+                Explore IT Staffing Models
               </Link>
             </div>
           </motion.div>
@@ -106,7 +106,7 @@ const TeamSynergySection = ({ onOpenModal }) => {
             <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-[#0D1222] group">
               <img 
                 src={teamImg} 
-                alt="Agile Team Collaboration"
+                alt="Dedicated Engineering Squad Collaboration at Pavion Technologies"
                 loading="lazy"
                 decoding="async"
                 width="800"

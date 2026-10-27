@@ -57,7 +57,6 @@ const processSteps = [
 
 const ProcessSection: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const [, setActiveStep] = useState(0);
   const progressRef = useRef<HTMLDivElement>(null);
   const stepsContainerRef = useRef<HTMLDivElement>(null);
 
@@ -65,15 +64,15 @@ const ProcessSection: React.FC = () => {
     const ctx = gsap.context(() => {
       // Animate section title
       gsap.fromTo('.process-title',
-        { opacity: 0, y: 80 },
+        { opacity: 0, y: 50 },
         {
           opacity: 1,
           y: 0,
-          duration: 1.2,
-          ease: "power4.out",
+          duration: 0.9,
+          ease: "power3.out",
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: "top 70%",
+            start: "top 75%",
           },
         }
       );
@@ -84,26 +83,25 @@ const ProcessSection: React.FC = () => {
         ease: "none",
         scrollTrigger: {
           trigger: stepsContainerRef.current,
-          start: "top 60%",
-          end: "bottom 40%",
-          scrub: 1,
+          start: "top 65%",
+          end: "bottom 45%",
+          scrub: 0.5,
         },
       });
 
-      // Animate each step
+      // Animate each step without triggering React component re-renders
       const steps = sectionRef.current?.querySelectorAll('.process-step') || [];
       steps.forEach((step, i) => {
         gsap.fromTo(step,
-          { opacity: 0, x: i % 2 === 0 ? -60 : 60 },
+          { opacity: 0, x: i % 2 === 0 ? -40 : 40 },
           {
             opacity: 1,
             x: 0,
-            duration: 1,
-            ease: "power4.out",
+            duration: 0.8,
+            ease: "power3.out",
             scrollTrigger: {
               trigger: step,
-              start: "top 75%",
-              onEnter: () => setActiveStep(i),
+              start: "top 80%",
             },
           }
         );
