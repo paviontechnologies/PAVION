@@ -16,7 +16,8 @@ export interface StoredJobApplication {
 }
 
 const LOCAL_APPLICATIONS_KEY = 'pavion_career_applications';
-const FORMSUBMIT_ENDPOINT = 'https://formsubmit.co/ajax/Contact@paviontechnologies.com';
+// FormSubmit Unique Token assigned to paviontechnologies (prevents repeated activation requests)
+const FORMSUBMIT_ENDPOINT = 'https://formsubmit.co/ajax/c844d487202642fa151c63d7813747d3';
 
 /**
  * Converts a browser File object to a Base64 Data URL
@@ -162,9 +163,13 @@ export async function dispatchCareerApplication(formData: {
   payload.append('Cover_Letter_and_Notes', formData.coverLetter.trim());
 
   if (formData.resume) {
+    payload.append('Resume_File_Name', formData.resume.name);
+    payload.append('Resume_Size', `${(formData.resume.size / 1024).toFixed(1)} KB`);
     // FormSubmit uses 'attachment' to deliver the uploaded file directly to email
     payload.append('attachment', formData.resume, formData.resume.name);
   }
+
+  payload.append('Admin_Portal_Review', 'https://paviontechnologies.com/admin/blog (PIN: pavion2026)');
 
   // 4. Send via FormSubmit AJAX endpoint
   try {
