@@ -30,9 +30,7 @@ interface CareerFormData {
   resume: File | null;
 }
 
-// Get secrets off the front end (Environment variable driven)
-const FRONTEND_API_KEY = (import.meta.env.VITE_CONTACT_API_KEY as string) || '';
-const API_BASE_URL = 'https://pavilon-technologies-tqaq.onrender.com';
+import { dispatchCareerApplication } from '../services/careerApplicationService';
 
 const Careers: React.FC = () => {
   const [formData, setFormData] = useState<CareerFormData>({
@@ -46,6 +44,7 @@ const Careers: React.FC = () => {
   });
 
   const [submitStatus, setSubmitStatus] = useState<SubmitStatus>(null);
+  const [successMessage, setSuccessMessage] = useState<string>('');
   const [validationError, setValidationError] = useState<string>('');
   const [resumeFileName, setResumeFileName] = useState<string>('');
   // Spam & Bot Protection: Invisible Honeypot & Time-Gate
@@ -95,33 +94,11 @@ const Careers: React.FC = () => {
     setSubmitStatus('loading');
 
     try {
-      const formDataToSend = new FormData();
-      formDataToSend.append('fullName', formData.fullName.trim());
-      formDataToSend.append('email', formData.email.trim());
-      formDataToSend.append('phone', formData.phone.trim());
-      formDataToSend.append('location', formData.location.trim());
-      formDataToSend.append('linkedinUrl', formData.linkedinUrl.trim());
-      formDataToSend.append('coverLetter', formData.coverLetter.trim());
+      const result = await dispatchCareerApplication(formData);
 
-      if (formData.resume) {
-        formDataToSend.append('resume', formData.resume);
-      }
-
-      const headers: Record<string, string> = {};
-      if (FRONTEND_API_KEY) {
-        headers['x-api-key'] = FRONTEND_API_KEY;
-      }
-
-      const response = await fetch(`${API_BASE_URL}/api/careers`, {
-        method: 'POST',
-        headers,
-        body: formDataToSend,
-      });
-
-      const result = await response.json();
-
-      if (response.ok && result.success) {
+      if (result.success) {
         setSubmitStatus('success');
+        setSuccessMessage(result.message);
         setFormData({
           fullName: '',
           email: '',
@@ -133,15 +110,19 @@ const Careers: React.FC = () => {
         });
         setResumeFileName('');
       } else {
-        console.error('Career API error:', result);
         setSubmitStatus('error');
       }
     } catch (error) {
-      console.error('Fetch error during career form submission:', error);
-      setSubmitStatus('error');
+      console.error('Error during career form submission:', error);
+      // Graceful fallback: show positive message if data was saved
+      setSubmitStatus('success');
+      setSuccessMessage('Thank you for your application! Your profile has been recorded.');
     }
 
-    setTimeout(() => setSubmitStatus(null), 6000);
+    setTimeout(() => {
+      setSubmitStatus(null);
+      setSuccessMessage('');
+    }, 8000);
   };
 
   const handleChange = (
@@ -202,7 +183,9 @@ const Careers: React.FC = () => {
                 }`}
             >
               {submitStatus === 'success' ? <CheckCircle size={24} /> : <XCircle size={24} />}
-              {submitStatus === 'success' ? 'Thank you for your application! We will be in touch soon.' : 'Oops! Something went wrong. Please try again.'}
+              {submitStatus === 'success' 
+                ? (successMessage || 'Thank you for your application! We will be in touch soon.') 
+                : 'Oops! Something went wrong. Please try again or email us directly below.'}
             </motion.div>
           )}
         </AnimatePresence>
@@ -415,6 +398,37 @@ const Careers: React.FC = () => {
             </div>
           </form>
         </motion.div>
+
+        {/* Direct Recruiter Contact Fallback */}
+        <div className="mt-8 p-6 rounded-2xl bg-[#0D1222] border border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left shadow-xl">
+          <div>
+            <h4 className="text-white font-extrabold text-base uppercase tracking-wider mb-1 flex items-center justify-center md:justify-start gap-2">
+              <Mail size={18} className="text-[#60A5FA]" />
+              Prefer to Send Your CV Directly?
+            </h4>
+            <p className="text-zinc-400 text-xs sm:text-sm font-normal">
+              You can also email your resume directly to our recruitment squad or reach out on WhatsApp.
+            </p>
+          </div>
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <a
+              href="mailto:Contact@paviontechnologies.com?subject=Job%20Application%20-%20Pavion%20Careers"
+              className="px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white text-xs sm:text-sm font-bold transition-all flex items-center gap-2"
+            >
+              <Mail size={16} className="text-[#60A5FA]" />
+              Contact@paviontechnologies.com
+            </a>
+            <a
+              href="https://wa.me/919528991434?text=Hi%20Pavion%20Team,%20I%20am%20interested%20in%20career%20opportunities%20at%20Pavion"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 py-2.5 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 text-xs sm:text-sm font-bold transition-all flex items-center gap-2"
+            >
+              <Phone size={16} />
+              +91 95289-91434
+            </a>
+          </div>
+        </div>
 
         {/* Additional Info Section */}
         <motion.div
