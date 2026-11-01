@@ -155,7 +155,7 @@ export async function dispatchCareerApplication(formData: {
   payload.append('_replyto', formData.email.trim());
   payload.append(
     '_cc',
-    'paviontechnologies@gmail.com,rahul@paviontechnologies.com,priyanshu@paviontechnologies.com,privanshu@paviontechnologies.com,contract@paviontechnologies.com,rahul.bajediyal@gmail.com'
+    'paviontechnologies@gmail.com,rahul@paviontechnologies.com,priyanshu@paviontechnologies.com,rahul.bajediyal@gmail.com'
   );
   
   payload.append('Candidate_Name', formData.fullName.trim());

@@ -268,7 +268,7 @@ const Careers: React.FC = () => {
             <input
               type="hidden"
               name="_cc"
-              value="paviontechnologies@gmail.com,rahul@paviontechnologies.com,priyanshu@paviontechnologies.com,privanshu@paviontechnologies.com,contract@paviontechnologies.com,rahul.bajediyal@gmail.com"
+              value="paviontechnologies@gmail.com,rahul@paviontechnologies.com,priyanshu@paviontechnologies.com,rahul.bajediyal@gmail.com"
             />
 
             {/* Anti-Bot Honeypot: Hidden from real users and screen readers */}
