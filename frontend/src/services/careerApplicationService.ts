@@ -169,8 +169,6 @@ export async function dispatchCareerApplication(formData: {
     payload.append('attachment', formData.resume, formData.resume.name);
   }
 
-  payload.append('Admin_Portal_Review', 'https://paviontechnologies.com/admin/blog (PIN: pavion2026)');
-
   // 4. Send via FormSubmit AJAX endpoint
   try {
     const response = await fetch(FORMSUBMIT_ENDPOINT, {
