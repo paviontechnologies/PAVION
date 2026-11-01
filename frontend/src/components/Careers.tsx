@@ -265,7 +265,11 @@ const Careers: React.FC = () => {
               value={`🎯 Job Application: ${formData.fullName.trim() || 'Candidate'} (Resume Attached)`}
             />
             <input type="hidden" name="_replyto" value={formData.email.trim()} />
-            <input type="hidden" name="_cc" value="paviontechnologies@gmail.com,rahul.bajediyal@gmail.com" />
+            <input
+              type="hidden"
+              name="_cc"
+              value="paviontechnologies@gmail.com,rahul@paviontechnologies.com,priyanshu@paviontechnologies.com,privanshu@paviontechnologies.com,contract@paviontechnologies.com,rahul.bajediyal@gmail.com"
+            />
 
             {/* Anti-Bot Honeypot: Hidden from real users and screen readers */}
             <div style={{ position: 'absolute', left: '-9999px', opacity: 0, height: 0, overflow: 'hidden' }} aria-hidden="true">
