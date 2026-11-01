@@ -8,7 +8,11 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
   
-# Cache static assets
+# Force browsers to always fetch fresh HTML on every visit
+/index.html
+  Cache-Control: no-cache, no-store, must-revalidate, max-age=0
+
+# Cache static hashed assets (safe because filenames have unique content hashes)
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
 
