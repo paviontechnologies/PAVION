@@ -23,13 +23,16 @@ const SmoothScroll: React.FC<SmoothScrollProps> = ({ children }) => {
     const isTouch = window.matchMedia('(pointer: coarse)').matches;
     if (isTouch) return;
 
-    // Initialize Lenis smooth scroll for desktop precision
+    // Detect Safari / WebKit (macOS / iOS)
+    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+    // Initialize Lenis smooth scroll: In Safari, preserve native 120Hz trackpad physics to avoid heavy scroll drag
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: isSafari ? 0.75 : 1.1,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       gestureOrientation: 'vertical',
-      smoothWheel: true,
+      smoothWheel: !isSafari, // Safari trackpad has native momentum; synthetic wheel causes heavy drag
       wheelMultiplier: 1,
     });
 
@@ -44,7 +47,8 @@ const SmoothScroll: React.FC<SmoothScrollProps> = ({ children }) => {
 
     gsap.ticker.add(updateLenis);
 
-    gsap.ticker.lagSmoothing(0);
+    // Enable lag smoothing so dropped frames don't cause sudden jerks or animation halts
+    gsap.ticker.lagSmoothing(500, 33);
 
     // Handle anchor links
     const handleAnchorClick = (e: Event) => {

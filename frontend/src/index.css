@@ -65,11 +65,24 @@
   body {
     @apply bg-[#050508] text-white antialiased overflow-x-hidden;
     font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #050508;
+    position: relative;
+  }
+
+  /* GPU-Accelerated fixed background without repaint thrashing in Safari WebKit */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
     background: 
       radial-gradient(ellipse 80% 50% at 50% -20%, rgba(23, 105, 255, 0.08), transparent),
       radial-gradient(ellipse 60% 40% at 100% 100%, rgba(219, 39, 119, 0.05), transparent),
       #050508;
-    background-attachment: fixed;
+    transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
+    will-change: transform;
   }
 
   #root {
@@ -100,9 +113,46 @@
     overflow-wrap: anywhere;
   }
 
-  @media (max-width: 767px) {
-    body {
-      background-attachment: scroll;
+  /* Safari / WebKit GPU optimization for glassmorphism and blurs */
+  @supports (-webkit-backdrop-filter: none) {
+    .backdrop-blur-sm,
+    .backdrop-blur-md,
+    .backdrop-blur-lg,
+    .backdrop-blur-xl,
+    .backdrop-blur-2xl,
+    .glass-panel,
+    .glass-card {
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+      will-change: transform;
+    }
+
+    /* WebKit rasterizer chokes on 24px-40px gaussian blur when scrolling; cap to smooth 14px */
+    .backdrop-blur-xl,
+    .backdrop-blur-2xl,
+    .glass-panel {
+      -webkit-backdrop-filter: blur(14px) !important;
+      backdrop-filter: blur(14px) !important;
+    }
+
+    /* Promote decorative ambient blur orbs to hardware layer with contain: paint */
+    [class*="blur-"] {
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      contain: paint;
+    }
+
+    /* Cap ultra-large 120px-180px blurs to 70px in WebKit for silky 60-120fps scrolling */
+    .blur-\[120px\],
+    .blur-\[140px\],
+    .blur-\[150px\],
+    .blur-\[160px\],
+    .blur-\[170px\],
+    .blur-\[180px\] {
+      filter: blur(70px) !important;
+      -webkit-filter: blur(70px) !important;
     }
   }
   

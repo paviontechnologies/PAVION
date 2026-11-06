@@ -7,56 +7,85 @@ const LookingShowcaseHero = ({ onOpenModal }) => {
   const containerRef = useRef(null);
   const eye1Ref = useRef(null);
   const eye2Ref = useRef(null);
+  const pupil1Ref = useRef(null);
+  const pupil2Ref = useRef(null);
 
-  const [pupil1, setPupil1] = useState({ x: 0, y: 0 });
-  const [pupil2, setPupil2] = useState({ x: 0, y: 0 });
   const [isBlinking, setIsBlinking] = useState(false);
 
-  // Geometric cursor tracking for both eyeballs
+  // High-Performance Zero-Re-render Cursor Tracking for Eyeballs (Safari & Chrome 120fps)
   useEffect(() => {
-    const handleMove = (clientX, clientY) => {
-      // Calculate gaze angle & distance for Eye 1
+    let rafId = null;
+    let eye1Center = null;
+    let eye2Center = null;
+
+    const measureCenters = () => {
       if (eye1Ref.current) {
-        const rect1 = eye1Ref.current.getBoundingClientRect();
-        const cx1 = rect1.left + rect1.width / 2;
-        const cy1 = rect1.top + rect1.height / 2;
-        const dx1 = clientX - cx1;
-        const dy1 = clientY - cy1;
+        const r1 = eye1Ref.current.getBoundingClientRect();
+        eye1Center = {
+          cx: r1.left + r1.width / 2,
+          cy: r1.top + r1.height / 2,
+          maxR: r1.width * 0.24,
+        };
+      }
+      if (eye2Ref.current) {
+        const r2 = eye2Ref.current.getBoundingClientRect();
+        eye2Center = {
+          cx: r2.left + r2.width / 2,
+          cy: r2.top + r2.height / 2,
+          maxR: r2.width * 0.24,
+        };
+      }
+    };
+
+    measureCenters();
+    window.addEventListener('resize', measureCenters, { passive: true });
+    window.addEventListener('scroll', measureCenters, { passive: true });
+
+    let latestX = 0;
+    let latestY = 0;
+
+    const updatePupils = () => {
+      rafId = null;
+      if (!eye1Center || !eye2Center) measureCenters();
+
+      if (eye1Center && pupil1Ref.current) {
+        const dx1 = latestX - eye1Center.cx;
+        const dy1 = latestY - eye1Center.cy;
         const angle1 = Math.atan2(dy1, dx1);
         const dist1 = Math.hypot(dx1, dy1);
-        const maxRadius1 = rect1.width * 0.24;
-        const travel1 = Math.min(maxRadius1, dist1 * 0.08);
-        setPupil1({
-          x: Math.cos(angle1) * travel1,
-          y: Math.sin(angle1) * travel1,
-        });
+        const travel1 = Math.min(eye1Center.maxR, dist1 * 0.08);
+        const x1 = Math.cos(angle1) * travel1;
+        const y1 = Math.sin(angle1) * travel1;
+        pupil1Ref.current.style.transform = `translate3d(${x1.toFixed(1)}px, ${y1.toFixed(1)}px, 0)`;
       }
 
-      // Calculate gaze angle & distance for Eye 2
-      if (eye2Ref.current) {
-        const rect2 = eye2Ref.current.getBoundingClientRect();
-        const cx2 = rect2.left + rect2.width / 2;
-        const cy2 = rect2.top + rect2.height / 2;
-        const dx2 = clientX - cx2;
-        const dy2 = clientY - cy2;
+      if (eye2Center && pupil2Ref.current) {
+        const dx2 = latestX - eye2Center.cx;
+        const dy2 = latestY - eye2Center.cy;
         const angle2 = Math.atan2(dy2, dx2);
         const dist2 = Math.hypot(dx2, dy2);
-        const maxRadius2 = rect2.width * 0.24;
-        const travel2 = Math.min(maxRadius2, dist2 * 0.08);
-        setPupil2({
-          x: Math.cos(angle2) * travel2,
-          y: Math.sin(angle2) * travel2,
-        });
+        const travel2 = Math.min(eye2Center.maxR, dist2 * 0.08);
+        const x2 = Math.cos(angle2) * travel2;
+        const y2 = Math.sin(angle2) * travel2;
+        pupil2Ref.current.style.transform = `translate3d(${x2.toFixed(1)}px, ${y2.toFixed(1)}px, 0)`;
       }
     };
 
     const handleMouseMove = (e) => {
-      handleMove(e.clientX, e.clientY);
+      latestX = e.clientX;
+      latestY = e.clientY;
+      if (!rafId) {
+        rafId = requestAnimationFrame(updatePupils);
+      }
     };
 
     const handleTouchMove = (e) => {
       if (e.touches && e.touches.length > 0) {
-        handleMove(e.touches[0].clientX, e.touches[0].clientY);
+        latestX = e.touches[0].clientX;
+        latestY = e.touches[0].clientY;
+        if (!rafId) {
+          rafId = requestAnimationFrame(updatePupils);
+        }
       }
     };
 
@@ -70,8 +99,11 @@ const LookingShowcaseHero = ({ onOpenModal }) => {
     }, 4500);
 
     return () => {
+      if (rafId) cancelAnimationFrame(rafId);
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('resize', measureCenters);
+      window.removeEventListener('scroll', measureCenters);
       clearInterval(blinkInterval);
     };
   }, []);
@@ -86,8 +118,8 @@ const LookingShowcaseHero = ({ onOpenModal }) => {
       {/* ================================================================= */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
         {/* Soft Dramatic Purple/Indigo Ambient Spotlight */}
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[750px] sm:w-[950px] h-[550px] bg-gradient-to-b from-purple-600/20 via-indigo-600/15 to-transparent rounded-full blur-[160px]" />
-        <div className="absolute bottom-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-[#60A5FA]/10 rounded-full blur-[140px]" />
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[750px] sm:w-[950px] h-[550px] bg-gradient-to-b from-purple-600/20 via-indigo-600/15 to-transparent rounded-full blur-[80px] transform-gpu will-change-transform pointer-events-none" />
+        <div className="absolute bottom-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-[#60A5FA]/10 rounded-full blur-[70px] transform-gpu will-change-transform pointer-events-none" />
         
         {/* Subtle Cyber Dust & Matrix Texture */}
         <div 
@@ -157,17 +189,17 @@ const LookingShowcaseHero = ({ onOpenModal }) => {
               />
 
               {/* Pupil Outer Iris */}
-              <motion.div 
-                animate={{ x: pupil1.x, y: pupil1.y }}
-                transition={{ type: "spring", stiffness: 450, damping: 25 }}
-                className="w-[60%] h-[60%] rounded-full bg-gradient-to-tr from-purple-700 via-purple-500 to-indigo-400 flex items-center justify-center shadow-md relative"
+              <div 
+                ref={pupil1Ref}
+                style={{ transform: 'translate3d(0, 0, 0)' }}
+                className="w-[60%] h-[60%] rounded-full bg-gradient-to-tr from-purple-700 via-purple-500 to-indigo-400 flex items-center justify-center shadow-md relative will-change-transform transform-gpu"
               >
                 {/* Black Pupil Core */}
                 <div className="w-[55%] h-[55%] rounded-full bg-black flex items-start justify-end p-0.5">
                   {/* White Light Catch / Glint */}
                   <div className="w-1.5 h-1.5 sm:w-2.5 sm:h-2.5 rounded-full bg-white shadow-[0_0_4px_white]" />
                 </div>
-              </motion.div>
+              </div>
             </div>
 
             {/* EYE 2 */}
@@ -188,17 +220,17 @@ const LookingShowcaseHero = ({ onOpenModal }) => {
               />
 
               {/* Pupil Outer Iris */}
-              <motion.div 
-                animate={{ x: pupil2.x, y: pupil2.y }}
-                transition={{ type: "spring", stiffness: 450, damping: 25 }}
-                className="w-[60%] h-[60%] rounded-full bg-gradient-to-tr from-purple-700 via-purple-500 to-indigo-400 flex items-center justify-center shadow-md relative"
+              <div 
+                ref={pupil2Ref}
+                style={{ transform: 'translate3d(0, 0, 0)' }}
+                className="w-[60%] h-[60%] rounded-full bg-gradient-to-tr from-purple-700 via-purple-500 to-indigo-400 flex items-center justify-center shadow-md relative will-change-transform transform-gpu"
               >
                 {/* Black Pupil Core */}
                 <div className="w-[55%] h-[55%] rounded-full bg-black flex items-start justify-end p-0.5">
                   {/* White Light Catch */}
                   <div className="w-1.5 h-1.5 sm:w-2.5 sm:h-2.5 rounded-full bg-white shadow-[0_0_4px_white]" />
                 </div>
-              </motion.div>
+              </div>
             </div>
 
             <span>K</span>
