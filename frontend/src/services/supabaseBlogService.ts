@@ -154,14 +154,50 @@ function removeLocalStoredBlog(slugOrId: string) {
   }
 }
 
+// Cloudflare KV Global Blog Endpoint (Instant edge sync across all devices & laptops worldwide)
+const CLOUDFLARE_BLOGS_API =
+  typeof window !== 'undefined' &&
+  (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+    ? 'https://paviontechnologies.com/api/blogs'
+    : '/api/blogs';
+
 /**
- * Fetch all published blogs from Supabase (with automatic LocalStorage fallback)
+ * Fetch all published blogs from Cloudflare KV & Supabase (with automatic LocalStorage fallback)
  */
 export async function getSupabaseBlogs(includeDeleted = false): Promise<BlogPost[]> {
   const localList = getLocalStoredBlogs();
+  let cloudflareList: DbBlogPost[] = [];
   let supabaseList: DbBlogPost[] = [];
   const deletedSlugs = new Set(getDeletedSlugs());
 
+  // 1. Fetch from Cloudflare KV Edge API (Synchronized globally across all devices & laptops)
+  try {
+    const res = await fetch(CLOUDFLARE_BLOGS_API);
+    if (res.ok) {
+      const json = await res.json();
+      if (json.success && Array.isArray(json.blogs)) {
+        cloudflareList = json.blogs as DbBlogPost[];
+      }
+    }
+  } catch (cfErr) {
+    console.warn('Cloudflare KV blogs fetch note:', cfErr);
+  }
+
+  // 2. Auto-sync: If user published any blogs in localStorage on this machine that are not yet in Cloudflare KV, sync them now!
+  if (localList.length > 0) {
+    const cfSlugs = new Set(cloudflareList.map((p) => p.slug));
+    for (const localPost of localList) {
+      if (!cfSlugs.has(localPost.slug) && !deletedSlugs.has(localPost.slug)) {
+        fetch(CLOUDFLARE_BLOGS_API, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(localPost),
+        }).catch((e) => console.warn('Background sync note:', e));
+      }
+    }
+  }
+
+  // 3. Fallback check to Supabase
   try {
     const { data, error } = await supabase
       .from('blogs')
@@ -173,16 +209,24 @@ export async function getSupabaseBlogs(includeDeleted = false): Promise<BlogPost
       supabaseList = data as DbBlogPost[];
     }
   } catch (err) {
-    console.warn('Supabase fetch error, fallback to local storage:', err);
+    // Supabase optional
   }
 
-  // Merge Supabase + LocalStorage (avoiding duplicates by slug)
-  const combined = [...localList];
-  const localSlugs = new Set(localList.map((p) => p.slug));
+  // Merge Cloudflare + Supabase + LocalStorage (avoiding duplicates by slug)
+  const combined = [...cloudflareList];
+  const seenSlugs = new Set(cloudflareList.map((p) => p.slug));
 
   for (const item of supabaseList) {
-    if (!localSlugs.has(item.slug)) {
+    if (!seenSlugs.has(item.slug)) {
       combined.push(item);
+      seenSlugs.add(item.slug);
+    }
+  }
+
+  for (const item of localList) {
+    if (!seenSlugs.has(item.slug)) {
+      combined.push(item);
+      seenSlugs.add(item.slug);
     }
   }
 
@@ -194,7 +238,7 @@ export async function getSupabaseBlogs(includeDeleted = false): Promise<BlogPost
 }
 
 /**
- * Fetch single blog by slug from Supabase or LocalStorage
+ * Fetch single blog by slug from Cloudflare KV, Supabase or LocalStorage
  */
 export async function getSupabaseBlogBySlug(slug: string): Promise<BlogPost | null> {
   const deletedSlugs = new Set(getDeletedSlugs());
@@ -202,14 +246,27 @@ export async function getSupabaseBlogBySlug(slug: string): Promise<BlogPost | nu
     return null;
   }
 
-  // 1. Check local storage first
+  // 1. Fetch from Cloudflare KV Edge API
+  try {
+    const res = await fetch(`${CLOUDFLARE_BLOGS_API}/${encodeURIComponent(slug)}`);
+    if (res.ok) {
+      const json = await res.json();
+      if (json.success && json.blog) {
+        return formatDbPostToBlogPost(json.blog as DbBlogPost, 9999);
+      }
+    }
+  } catch (cfErr) {
+    console.warn('Cloudflare KV slug fetch note:', cfErr);
+  }
+
+  // 2. Check local storage first
   const localList = getLocalStoredBlogs();
   const localMatch = localList.find((p) => p.slug === slug);
   if (localMatch) {
     return formatDbPostToBlogPost(localMatch, 9999);
   }
 
-  // 2. Check Supabase
+  // 3. Check Supabase
   try {
     const { data, error } = await supabase
       .from('blogs')
@@ -379,8 +436,29 @@ export async function createBlogPost(input: NewBlogPostInput): Promise<DbBlogPos
     created_at: new Date().toISOString()
   };
 
-  let createdPost: DbBlogPost;
+  let createdPost: DbBlogPost = {
+    id: 'blog_' + Date.now() + '_' + Math.random().toString(36).substring(2, 7),
+    ...newPost
+  };
 
+  // 1. Save to Cloudflare KV Global API (syncs across all devices & laptops worldwide)
+  try {
+    const res = await fetch(CLOUDFLARE_BLOGS_API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newPost)
+    });
+    if (res.ok) {
+      const resJson = await res.json();
+      if (resJson.success && resJson.blog) {
+        createdPost = resJson.blog as DbBlogPost;
+      }
+    }
+  } catch (cfErr) {
+    console.warn('Cloudflare KV post error, using local fallback:', cfErr);
+  }
+
+  // 2. Also try Supabase (optional fallback)
   try {
     const { data, error } = await supabase
       .from('blogs')
@@ -390,31 +468,35 @@ export async function createBlogPost(input: NewBlogPostInput): Promise<DbBlogPos
 
     if (!error && data) {
       createdPost = data as DbBlogPost;
-    } else {
-      console.warn('Supabase DB table not found yet, saving to local website storage:', error?.message);
-      createdPost = {
-        id: 'local_' + Date.now(),
-        ...newPost
-      };
     }
   } catch (err: any) {
-    console.warn('Supabase insert failed, saving to local website storage:', err?.message);
-    createdPost = {
-      id: 'local_' + Date.now(),
-      ...newPost
-    };
+    // Optional
   }
 
-  // Save to local storage so it renders immediately on website
+  // Save to local storage for instant zero-latency feedback on current machine
   saveLocalStoredBlog(createdPost);
   return createdPost;
 }
 
 /**
- * Delete blog post by ID or Slug
+ * Delete blog post by ID or Slug globally
  */
 export async function deleteBlogPost(slugOrId: string): Promise<boolean> {
+  markSlugAsDeleted(slugOrId);
   removeLocalStoredBlog(slugOrId);
+
+  // 1. Delete from Cloudflare KV Edge globally
+  try {
+    await fetch(CLOUDFLARE_BLOGS_API, {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ slug: slugOrId, id: slugOrId, pin: 'pavion2026' })
+    });
+  } catch (cfErr) {
+    console.warn('Cloudflare KV delete error:', cfErr);
+  }
+
+  // 2. Delete from Supabase if connected
   try {
     await supabase.from('blogs').delete().or(`id.eq.${slugOrId},slug.eq.${slugOrId}`);
   } catch (err) {
