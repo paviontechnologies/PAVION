@@ -26,6 +26,11 @@ const Navbar = () => {
     };
   }, [isOpen]);
 
+  // Close mobile menu whenever route changes
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location.pathname]);
+
   const navLinks = [
     { name: 'Home', href: '/' },
     { name: 'About', href: '/about' },
@@ -103,29 +108,32 @@ const Navbar = () => {
             </Link>
           </div>
 
-          {/* Mobile Menu Button */}
-          <motion.button
-            whileTap={{ scale: 0.95 }}
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden relative z-[120] p-2 text-white"
-            data-cursor-hover
+          {/* Mobile Menu Button - Bulletproof native button for iOS Safari */}
+          <button
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setIsOpen((prev) => !prev);
+            }}
+            className="md:hidden relative z-[120] p-2.5 rounded-xl text-white bg-white/5 border border-white/10 active:scale-95 transition-all duration-150 touch-manipulation focus:outline-none select-none"
             aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'}
             aria-expanded={isOpen}
           >
-            {isOpen ? <X size={24} strokeWidth={1.5} /> : <Menu size={24} strokeWidth={1.5} />}
-          </motion.button>
+            {isOpen ? <X size={24} strokeWidth={2} /> : <Menu size={24} strokeWidth={2} />}
+          </button>
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu - Fixed full-height drawer with pure GPU opacity/transform */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'calc(100dvh - 5rem)' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.35, ease: [0.23, 1, 0.32, 1] }}
-            className="md:hidden absolute top-full left-0 right-0 z-[100] overflow-y-auto bg-[#070A14]/98 backdrop-blur-2xl border-t border-white/10 shadow-2xl"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.25, ease: [0.23, 1, 0.32, 1] }}
+            className="md:hidden fixed inset-x-0 top-20 bottom-0 z-[100] overflow-y-auto bg-[#070A14]/98 backdrop-blur-2xl border-t border-white/10 shadow-2xl overscroll-contain"
           >
             <div className="flex min-h-full flex-col justify-between px-6 py-8">
               <div className="flex flex-col items-center justify-center gap-1 pt-4">
