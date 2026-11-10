@@ -1,23 +1,13 @@
 // src/components/TechStudioHero.tsx
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   ArrowRight, 
-  ArrowUpRight, 
-  Sparkles, 
-  Code2, 
-  Terminal, 
-  Cpu, 
-  TrendingUp, 
-  Layers, 
-  Check, 
   Mail, 
-  MessageSquare,
   Instagram,
   Linkedin,
   Github,
-  Twitter,
-  ChevronDown
+  Twitter
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import workstationImage from '../Images/3d-workstation.png';
@@ -25,32 +15,6 @@ import workstationImage from '../Images/3d-workstation.png';
 const TechStudioHero: React.FC = () => {
   const heroRef = useRef<HTMLDivElement>(null);
   const workstationRef = useRef<HTMLDivElement>(null);
-  const [typedCode, setTypedCode] = useState('');
-
-  // Real-time typing code snippet on workstation screen
-  useEffect(() => {
-    const codeSnippet = `const pavion = new AIStudio({
-  mode: "Enterprise_Autonomous",
-  security: "Zero_Trust_NDA",
-  scale: "10M_Requests_Sec",
-  status: "Deploying_Next15_AI..."
-});
-await pavion.launch();`;
-
-    let i = 0;
-    const timer = setInterval(() => {
-      if (i <= codeSnippet.length) {
-        setTypedCode(codeSnippet.slice(0, i));
-        i++;
-      } else {
-        setTimeout(() => {
-          i = 0;
-        }, 3000);
-      }
-    }, 45);
-
-    return () => clearInterval(timer);
-  }, []);
 
   // 3D Parallax on Mouse Movement
   useEffect(() => {

@@ -1,7 +1,7 @@
 // src/components/AEOFAQSection.tsx
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, Sparkles, HelpCircle, ArrowRight } from 'lucide-react';
+import { ChevronDown, HelpCircle, ArrowRight } from 'lucide-react';
 
 interface FAQItem {
   question: string;

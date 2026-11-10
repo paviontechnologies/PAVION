@@ -3,17 +3,14 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   ArrowUpRight, 
-  Layers, 
   Brain, 
   Globe, 
   ShieldCheck, 
-  Cpu, 
   Check, 
   Sparkles,
   Server,
   Smartphone
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
 
 interface SolutionItem {
   id: string;

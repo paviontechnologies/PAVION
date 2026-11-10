@@ -1,7 +1,7 @@
 // src/components/GlobalGlobeHero.tsx
 import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ArrowUpRight, Globe, Shield, Zap, Sparkles, Activity } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Globe, Shield, Zap, Activity } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const GlobalGlobeHero: React.FC = () => {

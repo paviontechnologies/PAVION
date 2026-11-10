@@ -1,7 +1,6 @@
 // src/components/InteractiveTeamShowcase.tsx
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Linkedin, Github, Twitter, ArrowUpRight, Sparkles, Award } from 'lucide-react';
+import { Linkedin, Github, Twitter } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import priyanshuImg from '../Images/team/priyanshu2.jpg';
 import rahulImg from '../Images/team/rahul1.jpg';

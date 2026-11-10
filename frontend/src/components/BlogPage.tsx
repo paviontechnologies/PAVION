@@ -1,6 +1,5 @@
 // src/components/BlogPage.tsx
 import React, { useState, useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ArrowLeft, 
   Calendar, 
@@ -12,8 +11,7 @@ import {
   CheckCircle2, 
   User, 
   BookOpen, 
-  X,
-  Tag as TagIcon
+  X
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SEO from './SEO';

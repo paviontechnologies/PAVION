@@ -1,7 +1,7 @@
 // src/services/supabaseBlogService.ts
 import { createClient } from '@supabase/supabase-js';
 import { BlogPost } from '../data/blogData';
-import { Newspaper, Sparkles, Code2, Cpu, Brain, Layers } from 'lucide-react';
+import { Newspaper, Sparkles, Code2, Cpu, Brain } from 'lucide-react';
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || 'https://aptrslrgfvcudtgqmtwi.supabase.co';
 const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY || 'sb_publishable_ppppIGJDP_9UGXAprXxEOw__sNH7Ri3';

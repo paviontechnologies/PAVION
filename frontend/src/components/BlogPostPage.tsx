@@ -28,7 +28,6 @@ const BlogPostPage = () => {
   const [post, setPost] = useState<BlogPost | null>(null);
   const [relatedPosts, setRelatedPosts] = useState<BlogPost[]>([]);
   const [copied, setCopied] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
 
   // Scroll reading progress
   const { scrollYProgress } = useScroll();
@@ -47,12 +46,10 @@ const BlogPostPage = () => {
         return;
       }
 
-      setIsLoading(true);
       const foundStatic = getBlogBySlug(slug);
       if (foundStatic) {
         setPost(foundStatic);
         setRelatedPosts(getRelatedPosts(slug, 2));
-        setIsLoading(false);
         window.scrollTo(0, 0);
         return;
       }
@@ -67,7 +64,6 @@ const BlogPostPage = () => {
         } else {
           navigate('/blog');
         }
-        setIsLoading(false);
       });
     }
     return () => {
