@@ -187,11 +187,11 @@ const FooterNew = () => {
       </div>
 
       {/* Main Footer Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-14 md:py-20">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-10 lg:gap-12">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 py-12 md:py-20">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 sm:gap-10 lg:gap-12">
 
           {/* Brand & Compact Vertical Logo */}
-          <div className="col-span-2">
+          <div className="col-span-2 sm:col-span-2 md:col-span-3 lg:col-span-2">
             <Link to="/" className="inline-block mb-4" data-cursor-hover>
               <img 
                 src={logoWhite} 
@@ -200,21 +200,21 @@ const FooterNew = () => {
                 style={{ height: '30px', width: 'auto' }}
               />
             </Link>
-            <p className="text-zinc-300 leading-relaxed mb-8 max-w-sm font-normal text-sm sm:text-base">
+            <p className="text-zinc-300 leading-relaxed mb-6 sm:mb-8 max-w-sm font-normal text-xs sm:text-base">
               Empowering businesses with innovative digital solutions that drive growth and create lasting impact.
             </p>
-            <div className="space-y-4 min-w-0">
+            <div className="space-y-3.5 sm:space-y-4 min-w-0">
               <a href="mailto:Contact@paviontechnologies.com" className="flex items-center gap-3 text-zinc-300 hover:text-[#60A5FA] transition-colors group min-w-0 font-semibold" data-cursor-hover>
-                <Mail size={18} className="text-[#60A5FA]" />
-                <span className="text-sm sm:text-base break-all">Contact@paviontechnologies.com</span>
+                <Mail size={16} className="text-[#60A5FA] flex-shrink-0" />
+                <span className="text-xs sm:text-base break-all">Contact@paviontechnologies.com</span>
               </a>
               <a href="tel:+919528991434" className="flex items-center gap-3 text-zinc-300 hover:text-[#60A5FA] transition-colors font-semibold" data-cursor-hover>
-                <Phone size={18} className="text-[#60A5FA]" />
-                <span className="text-sm sm:text-base">+91 95289 91434</span>
+                <Phone size={16} className="text-[#60A5FA] flex-shrink-0" />
+                <span className="text-xs sm:text-base">+91 95289 91434</span>
               </a>
               <a href="tel:+917455975301" className="flex items-center gap-3 text-zinc-300 hover:text-[#60A5FA] transition-colors font-semibold" data-cursor-hover>
-                <Phone size={18} className="text-[#60A5FA]" />
-                <span className="text-sm sm:text-base">+91 74559 75301</span>
+                <Phone size={16} className="text-[#60A5FA] flex-shrink-0" />
+                <span className="text-xs sm:text-base">+91 74559 75301</span>
               </a>
               <a 
                 href="https://maps.google.com/?q=Plus+Offices+Landmark+Cyberpark+Sector+67+Gurugram+Haryana+122101" 
@@ -223,23 +223,23 @@ const FooterNew = () => {
                 className="flex items-start gap-3 text-zinc-300 hover:text-[#60A5FA] transition-colors group font-semibold"
                 data-cursor-hover
               >
-                <MapPin size={18} className="mt-0.5 flex-shrink-0 text-[#60A5FA] transition-colors" />
-                <span className="text-sm sm:text-base">1st Floor, Landmark Cyberpark, Plus Offices, Sector 67, Gurugram, Haryana 122101</span>
+                <MapPin size={16} className="mt-0.5 flex-shrink-0 text-[#60A5FA] transition-colors" />
+                <span className="text-xs sm:text-base">1st Floor, Landmark Cyberpark, Plus Offices, Sector 67, Gurugram, Haryana 122101</span>
               </a>
             </div>
           </div>
 
           {/* Navigation */}
-          <div>
-            <h3 className="text-xs sm:text-sm tracking-[0.2em] uppercase text-[#60A5FA] font-extrabold mb-6">
+          <div className="col-span-1 min-w-0">
+            <h3 className="text-xs sm:text-sm tracking-[0.15em] sm:tracking-[0.2em] uppercase text-[#60A5FA] font-extrabold mb-4 sm:mb-6">
               Navigation
             </h3>
-            <ul className="space-y-3.5">
+            <ul className="space-y-2.5 sm:space-y-3.5">
               {navLinks.map((link) => (
-                <li key={link.name}>
+                <li key={link.name} className="min-w-0">
                   <Link 
                     to={link.href} 
-                    className="text-white/80 hover:text-white transition-colors text-sm sm:text-base font-bold underline-grow"
+                    className="text-white/80 hover:text-white transition-colors text-xs sm:text-sm font-semibold truncate block"
                     data-cursor-hover
                   >
                     {link.name}
@@ -250,16 +250,16 @@ const FooterNew = () => {
           </div>
 
           {/* Core Services */}
-          <div>
-            <h3 className="text-xs sm:text-sm tracking-[0.2em] uppercase text-[#DB2777] font-extrabold mb-6">
+          <div className="col-span-1 min-w-0">
+            <h3 className="text-xs sm:text-sm tracking-[0.15em] sm:tracking-[0.2em] uppercase text-[#DB2777] font-extrabold mb-4 sm:mb-6">
               Services
             </h3>
-            <ul className="space-y-3">
+            <ul className="space-y-2.5 sm:space-y-3">
               {coreServices.map((service) => (
-                <li key={service.href}>
+                <li key={service.href} className="min-w-0">
                   <Link 
                     to={service.href} 
-                    className="text-white/80 hover:text-white transition-colors text-xs sm:text-sm font-semibold"
+                    className="text-white/80 hover:text-white transition-colors text-xs sm:text-sm font-semibold truncate block"
                     data-cursor-hover
                   >
                     {service.name}
@@ -270,16 +270,16 @@ const FooterNew = () => {
           </div>
 
           {/* Industry Solutions */}
-          <div>
-            <h3 className="text-xs sm:text-sm tracking-[0.2em] uppercase text-[#60A5FA] font-extrabold mb-6">
+          <div className="col-span-2 sm:col-span-1 min-w-0 pt-2 sm:pt-0">
+            <h3 className="text-xs sm:text-sm tracking-[0.15em] sm:tracking-[0.2em] uppercase text-[#60A5FA] font-extrabold mb-4 sm:mb-6">
               Industries
             </h3>
-            <ul className="space-y-3">
+            <ul className="grid grid-cols-2 sm:grid-cols-1 gap-2.5 sm:gap-0 sm:space-y-3">
               {industrySolutions.map((sol) => (
-                <li key={sol.href}>
+                <li key={sol.href} className="min-w-0">
                   <Link 
                     to={sol.href} 
-                    className="text-white/80 hover:text-white transition-colors text-xs sm:text-sm font-semibold"
+                    className="text-white/80 hover:text-white transition-colors text-xs sm:text-sm font-semibold truncate block"
                     data-cursor-hover
                   >
                     {sol.name}
@@ -290,13 +290,13 @@ const FooterNew = () => {
           </div>
 
           {/* Social & Newsletter / Mail Box */}
-          <div className="col-span-1 sm:col-span-2 lg:col-span-1">
-            <h3 className="text-xs sm:text-sm tracking-[0.2em] uppercase text-[#60A5FA] font-extrabold mb-6">
+          <div className="col-span-2 sm:col-span-2 md:col-span-3 lg:col-span-2 min-w-0 pt-4 sm:pt-0">
+            <h3 className="text-xs sm:text-sm tracking-[0.15em] sm:tracking-[0.2em] uppercase text-[#60A5FA] font-extrabold mb-4 sm:mb-6">
               Stay Connected
             </h3>
             
             {/* Interactive Newsletter / Mail Box */}
-            <div className="mb-8 p-5 rounded-2xl bg-[#0D1222] border border-white/10 shadow-lg">
+            <div className="mb-6 sm:mb-8 p-4 sm:p-5 rounded-2xl bg-[#0D1222] border border-white/10 shadow-lg">
               <span className="text-xs font-mono uppercase tracking-wider text-[#DB2777] font-extrabold block mb-1.5 flex items-center gap-1.5">
                 <Mail size={14} />
                 <span>Newsletter Dispatch</span>
@@ -333,10 +333,10 @@ const FooterNew = () => {
             </div>
 
             {/* Social Links (WhatsApp, Twitter/X, Facebook, Instagram, LinkedIn) */}
-            <h4 className="text-xs tracking-[0.2em] uppercase text-zinc-400 font-bold mb-3.5">
+            <h4 className="text-xs tracking-[0.15em] sm:tracking-[0.2em] uppercase text-zinc-400 font-bold mb-3 sm:mb-3.5">
               Follow Us
             </h4>
-            <div className="flex flex-wrap gap-2.5">
+            <div className="flex flex-wrap gap-2 sm:gap-2.5">
               {socialLinks.map((social, i) => (
                 <a
                   key={i}
@@ -358,7 +358,7 @@ const FooterNew = () => {
 
       {/* Bottom Bar */}
       <div className="relative z-10 border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 pt-8 pb-24 sm:pb-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex flex-wrap items-center justify-center md:justify-start gap-x-4 gap-y-2 text-sm sm:text-base text-zinc-400 text-center md:text-left font-semibold">
               <span>© {currentYear} Pavion Technologies</span>

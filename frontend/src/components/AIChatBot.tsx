@@ -1509,7 +1509,7 @@ const AIChatBot: React.FC = () => {
   return (
     <>
       {/* Floating Launcher Button */}
-      <div className="fixed bottom-4 left-4 sm:bottom-6 sm:left-6 z-50">
+      <div className="fixed bottom-4 right-4 sm:bottom-6 sm:left-6 z-50">
         <motion.button
           whileHover={{ scale: 1.08 }}
           whileTap={{ scale: 0.92 }}

@@ -1165,7 +1165,7 @@ const HomePage = () => {
       {/* ================================================================= */}
       {/* 12. INSTANT FLOATING ACTION DOCK (FACEBOOK, TWITTER, LINKEDIN, INSTAGRAM) */}
       {/* ================================================================= */}
-      <div className="fixed bottom-4 right-3.5 sm:bottom-6 sm:right-5 z-50 flex flex-col items-center gap-1.5 sm:gap-2 pointer-events-none">
+      <div className="hidden sm:flex fixed bottom-6 right-5 z-50 flex-col items-center gap-2 pointer-events-none">
         
         {/* Facebook Link */}
         <a

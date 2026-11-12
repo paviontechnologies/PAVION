@@ -276,7 +276,7 @@ const Navbar = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2 }}
-            className="lg:hidden fixed inset-x-0 top-20 bottom-0 z-40 bg-[#070A14] border-t border-white/10 overflow-y-auto overscroll-contain flex flex-col justify-between px-6 py-8 shadow-2xl"
+            className="lg:hidden fixed inset-x-0 top-20 bottom-0 z-[95] bg-[#070A14] border-t border-white/10 overflow-y-auto overscroll-contain flex flex-col justify-between px-6 py-8 shadow-2xl"
           >
             <div className="flex flex-col items-center justify-center gap-1.5 pt-2 w-full max-w-sm mx-auto">
               {navLinks.map((link) => {
