@@ -87,14 +87,13 @@ const Navbar = () => {
             : 'bg-[#050508]/80 backdrop-blur-md border-b border-white/5'
         }`}
       >
-        <div className="max-w-[1560px] mx-auto px-5 sm:px-8 lg:px-12 xl:px-16">
+        <div className="max-w-[1560px] mx-auto px-4 sm:px-6 lg:px-6 xl:px-12 2xl:px-16">
           <div className="flex justify-between items-center h-20">
             {/* Logo */}
             <div className="flex-shrink-0 flex items-center">
-              <Link to="/" className="flex items-center gap-3 py-1" data-cursor-hover>
+              <Link to="/" className="flex items-center gap-3 py-1 flex-shrink-0" data-cursor-hover>
                 <img
-                  className="h-8 sm:h-9 max-h-9 w-auto object-contain"
-                  style={{ height: '34px', width: 'auto' }}
+                  className="h-7 sm:h-8 lg:h-8 xl:h-9 max-h-9 w-auto object-contain flex-shrink-0"
                   src={logoImage}
                   alt="Pavion Technologies"
                 />
@@ -102,20 +101,20 @@ const Navbar = () => {
             </div>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-1.5 lg:gap-2">
+            <div className="hidden lg:flex items-center gap-0.5 xl:gap-1.5 2xl:gap-2 flex-shrink-0">
               {navLinks.map((link) => {
                 const active = isActive(link.href);
                 if (link.name === 'Services') {
                   return (
                     <div 
                       key={link.name} 
-                      className="relative"
+                      className="relative flex-shrink-0"
                       onMouseEnter={handleDropdownEnter}
                       onMouseLeave={handleDropdownLeave}
                     >
                       <Link
                         to={link.href}
-                        className={`relative px-3.5 py-2.5 text-[15px] font-bold transition-colors duration-300 group inline-flex items-center gap-1.5 ${
+                        className={`relative px-2.5 xl:px-3.5 py-2 text-[13px] xl:text-[14px] 2xl:text-[15px] font-bold transition-colors duration-300 group inline-flex items-center gap-1 xl:gap-1.5 whitespace-nowrap flex-shrink-0 ${
                           active ? 'text-[#DB2777]' : 'text-zinc-300 hover:text-white'
                         }`}
                         data-cursor-hover
@@ -123,12 +122,12 @@ const Navbar = () => {
                         <span className="relative z-10">{link.name}</span>
                         <ChevronDown 
                           size={14} 
-                          className={`transition-transform duration-200 text-zinc-400 group-hover:text-white ${
+                          className={`transition-transform duration-200 text-zinc-400 group-hover:text-white flex-shrink-0 ${
                             servicesDropdownOpen ? 'rotate-180 text-[#60A5FA]' : ''
                           }`} 
                         />
                         <span 
-                          className={`absolute bottom-1.5 left-3.5 right-3.5 h-[2px] bg-[#DB2777] transition-transform duration-300 origin-left ${
+                          className={`absolute bottom-1.5 left-2.5 right-2.5 xl:left-3.5 xl:right-3.5 h-[2px] bg-[#DB2777] transition-transform duration-300 origin-left ${
                             active ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
                           }`} 
                         />
@@ -143,15 +142,15 @@ const Navbar = () => {
                             exit={{ opacity: 0, y: 8, scale: 0.98 }}
                             transition={{ duration: 0.18 }}
                             style={{ backgroundColor: '#070A14' }}
-                            className="absolute top-full -left-28 w-[660px] p-5 rounded-3xl border border-white/20 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.98)] z-[110] overflow-hidden"
+                            className="absolute top-full -left-20 xl:-left-28 w-[580px] xl:w-[660px] p-4 xl:p-5 rounded-3xl border border-white/20 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.98)] z-[110] overflow-hidden"
                           >
                             {/* Ambient Top Glow Line */}
                             <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#DB2777] via-purple-600 to-[#60A5FA]" />
 
-                            <div className="grid grid-cols-2 gap-4">
+                            <div className="grid grid-cols-2 gap-3 xl:gap-4">
                               {/* Core Engineering Services */}
-                              <div className="p-3.5 rounded-2xl bg-[#0D1222] border border-white/10">
-                                <div className="flex items-center gap-2 mb-2.5 pb-2 border-b border-white/10">
+                              <div className="p-3 xl:p-3.5 rounded-2xl bg-[#0D1222] border border-white/10">
+                                <div className="flex items-center gap-2 mb-2 pb-2 border-b border-white/10">
                                   <span className="w-1.5 h-1.5 rounded-full bg-[#DB2777]" />
                                   <span className="text-[11px] font-mono uppercase tracking-widest text-[#DB2777] font-black">
                                     Core Services
@@ -178,8 +177,8 @@ const Navbar = () => {
                               </div>
 
                               {/* Industry Solutions */}
-                              <div className="p-3.5 rounded-2xl bg-[#0D1222] border border-white/10">
-                                <div className="flex items-center gap-2 mb-2.5 pb-2 border-b border-white/10">
+                              <div className="p-3 xl:p-3.5 rounded-2xl bg-[#0D1222] border border-white/10">
+                                <div className="flex items-center gap-2 mb-2 pb-2 border-b border-white/10">
                                   <span className="w-1.5 h-1.5 rounded-full bg-[#60A5FA]" />
                                   <span className="text-[11px] font-mono uppercase tracking-widest text-[#60A5FA] font-black">
                                     Industry Solutions
@@ -229,14 +228,14 @@ const Navbar = () => {
                   <Link
                     key={link.name}
                     to={link.href}
-                    className={`relative px-4 py-2.5 text-[15px] font-bold transition-colors duration-300 group ${
+                    className={`relative px-2.5 xl:px-3.5 py-2 text-[13px] xl:text-[14px] 2xl:text-[15px] font-bold transition-colors duration-300 group whitespace-nowrap flex-shrink-0 ${
                       active ? 'text-[#DB2777]' : 'text-zinc-300 hover:text-white'
                     }`}
                     data-cursor-hover
                   >
                     <span className="relative z-10">{link.name}</span>
                     <span 
-                      className={`absolute bottom-1.5 left-4 right-4 h-[2px] bg-[#DB2777] transition-transform duration-300 origin-left ${
+                      className={`absolute bottom-1.5 left-2.5 right-2.5 xl:left-3.5 xl:right-3.5 h-[2px] bg-[#DB2777] transition-transform duration-300 origin-left ${
                         active ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
                       }`} 
                     />
@@ -248,7 +247,7 @@ const Navbar = () => {
               <Link
                 to="/contact"
                 data-cursor-hover
-                className="ml-4 lg:ml-6 px-6 py-2.5 text-[15px] font-extrabold rounded-full bg-[#DB2777] text-white hover:bg-[#DB2777]/90 transition-all duration-300 shadow-md shadow-[#DB2777]/20"
+                className="ml-2.5 xl:ml-5 2xl:ml-6 px-4 xl:px-6 py-2 xl:py-2.5 text-xs xl:text-sm 2xl:text-[15px] font-extrabold rounded-full bg-[#DB2777] text-white hover:bg-[#DB2777]/90 transition-all duration-300 shadow-md shadow-[#DB2777]/20 whitespace-nowrap flex-shrink-0"
               >
                 Get Started
               </Link>
@@ -258,7 +257,7 @@ const Navbar = () => {
             <button
               type="button"
               onClick={() => setIsOpen((prev) => !prev)}
-              className="md:hidden relative z-[60] p-2.5 rounded-xl text-white bg-white/5 border border-white/10 active:scale-95 transition-all duration-150 touch-manipulation focus:outline-none select-none cursor-pointer"
+              className="lg:hidden relative z-[60] p-2.5 rounded-xl text-white bg-white/5 border border-white/10 active:scale-95 transition-all duration-150 touch-manipulation focus:outline-none select-none cursor-pointer"
               aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'}
               aria-expanded={isOpen}
             >
@@ -277,7 +276,7 @@ const Navbar = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden fixed inset-x-0 top-20 bottom-0 z-40 bg-[#070A14] border-t border-white/10 overflow-y-auto overscroll-contain flex flex-col justify-between px-6 py-8 shadow-2xl"
+            className="lg:hidden fixed inset-x-0 top-20 bottom-0 z-40 bg-[#070A14] border-t border-white/10 overflow-y-auto overscroll-contain flex flex-col justify-between px-6 py-8 shadow-2xl"
           >
             <div className="flex flex-col items-center justify-center gap-1.5 pt-2 w-full max-w-sm mx-auto">
               {navLinks.map((link) => {
