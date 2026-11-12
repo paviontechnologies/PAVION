@@ -81,7 +81,7 @@ const Navbar = () => {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 w-full z-50 transition-colors duration-300 ${
+        className={`fixed top-0 left-0 right-0 w-full z-[100] transition-colors duration-300 ${
           scrolled
             ? 'bg-[#050508]/95 backdrop-blur-2xl border-b border-white/10 shadow-2xl' 
             : 'bg-[#050508]/80 backdrop-blur-md border-b border-white/5'
@@ -142,12 +142,16 @@ const Navbar = () => {
                             animate={{ opacity: 1, y: 0, scale: 1 }}
                             exit={{ opacity: 0, y: 8, scale: 0.98 }}
                             transition={{ duration: 0.18 }}
-                            className="absolute top-full -left-28 w-[640px] p-6 rounded-3xl bg-[#0D1222]/98 backdrop-blur-2xl border border-white/10 shadow-2xl z-50 overflow-hidden"
+                            style={{ backgroundColor: '#070A14' }}
+                            className="absolute top-full -left-28 w-[660px] p-5 rounded-3xl border border-white/20 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.98)] z-[110] overflow-hidden"
                           >
-                            <div className="grid grid-cols-2 gap-6">
+                            {/* Ambient Top Glow Line */}
+                            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#DB2777] via-purple-600 to-[#60A5FA]" />
+
+                            <div className="grid grid-cols-2 gap-4">
                               {/* Core Engineering Services */}
-                              <div>
-                                <div className="flex items-center gap-2 mb-3 pb-2 border-b border-white/10">
+                              <div className="p-3.5 rounded-2xl bg-[#0D1222] border border-white/10">
+                                <div className="flex items-center gap-2 mb-2.5 pb-2 border-b border-white/10">
                                   <span className="w-1.5 h-1.5 rounded-full bg-[#DB2777]" />
                                   <span className="text-[11px] font-mono uppercase tracking-widest text-[#DB2777] font-black">
                                     Core Services
@@ -159,7 +163,7 @@ const Navbar = () => {
                                       key={item.href}
                                       to={item.href}
                                       onClick={() => setServicesDropdownOpen(false)}
-                                      className="block p-2 rounded-xl hover:bg-white/5 transition-all group/item"
+                                      className="block p-2 rounded-xl hover:bg-white/10 transition-all group/item"
                                     >
                                       <div className="text-xs font-bold text-white group-hover/item:text-[#60A5FA] transition-colors flex items-center justify-between">
                                         <span>{item.name}</span>
@@ -174,8 +178,8 @@ const Navbar = () => {
                               </div>
 
                               {/* Industry Solutions */}
-                              <div>
-                                <div className="flex items-center gap-2 mb-3 pb-2 border-b border-white/10">
+                              <div className="p-3.5 rounded-2xl bg-[#0D1222] border border-white/10">
+                                <div className="flex items-center gap-2 mb-2.5 pb-2 border-b border-white/10">
                                   <span className="w-1.5 h-1.5 rounded-full bg-[#60A5FA]" />
                                   <span className="text-[11px] font-mono uppercase tracking-widest text-[#60A5FA] font-black">
                                     Industry Solutions
@@ -187,7 +191,7 @@ const Navbar = () => {
                                       key={item.href}
                                       to={item.href}
                                       onClick={() => setServicesDropdownOpen(false)}
-                                      className="block p-2 rounded-xl hover:bg-white/5 transition-all group/item"
+                                      className="block p-2 rounded-xl hover:bg-white/10 transition-all group/item"
                                     >
                                       <div className="text-xs font-bold text-white group-hover/item:text-[#DB2777] transition-colors flex items-center justify-between">
                                         <span>{item.name}</span>
@@ -203,7 +207,7 @@ const Navbar = () => {
                             </div>
 
                             {/* Mega Menu Footer Banner */}
-                            <div className="mt-4 pt-3.5 border-t border-white/10 flex items-center justify-between text-xs">
+                            <div className="mt-3.5 pt-3 border-t border-white/10 flex items-center justify-between text-xs">
                               <Link
                                 to="/services"
                                 onClick={() => setServicesDropdownOpen(false)}
