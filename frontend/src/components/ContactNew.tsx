@@ -11,7 +11,10 @@ import {
   Copy, 
   Check, 
   ExternalLink,
-  AtSign
+  AtSign,
+  MessageSquare,
+  Calendar,
+  Sparkles
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
@@ -160,6 +163,28 @@ const ContactNew: React.FC = () => {
           <p className="text-zinc-300 text-base sm:text-lg font-normal">
             Specify your requirements, pick your estimated budget, and let our engineers structure your custom solution.
           </p>
+
+          {/* Quick Direct Conversion CTAs */}
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 pt-2">
+            <a
+              href="https://wa.me/919528991434?text=Hi%20Pavion%20Technologies%2C%20I%20would%20like%20to%20discuss%20a%20custom%20software%20or%20AI%20project."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold text-xs sm:text-sm tracking-wide transition-all shadow-lg shadow-emerald-500/20 hover:scale-105"
+            >
+              <MessageSquare size={16} />
+              <span>Chat on WhatsApp</span>
+              <span className="text-[10px] bg-white/20 px-2 py-0.5 rounded-full uppercase font-black tracking-wider">Fastest</span>
+            </a>
+            <a
+              href="mailto:Contact@paviontechnologies.com?subject=Book%20a%2030-Min%20Discovery%20Call%20with%20Pavion%20Technologies&body=Hi%20Pavion%20Team%2C%0A%0AI%20would%20like%20to%20schedule%20a%2030-minute%20technical%20discovery%20call%20for%20my%20project.%0A%0ACompany%3A%0APreferred%20Time%20%2F%20Timezone%3A%0ABrief%20Project%20Overview%3A%0A%0AThank%20you!"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-extrabold text-xs sm:text-sm tracking-wide transition-all shadow-lg shadow-blue-500/20 hover:scale-105 border border-white/10"
+            >
+              <Calendar size={16} />
+              <span>Book a 30-Min Discovery Call</span>
+              <Sparkles size={14} className="text-yellow-300" />
+            </a>
+          </div>
         </div>
 
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
@@ -375,6 +400,41 @@ const ContactNew: React.FC = () => {
           {/* ========================================================= */}
           <div className="lg:col-span-5 space-y-6">
             
+            {/* VIP Fast-Track Box */}
+            <div className="p-6 rounded-3xl bg-gradient-to-br from-[#0D1222] via-[#111A33] to-[#0D1222] border border-emerald-500/30 shadow-2xl relative overflow-hidden">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="flex h-2.5 w-2.5 relative">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                </span>
+                <span className="text-xs font-mono font-bold uppercase tracking-wider text-emerald-400">
+                  Instant Response Available
+                </span>
+              </div>
+              <h4 className="text-lg font-black text-white mb-2">Need an Immediate Technical Consultation?</h4>
+              <p className="text-xs text-zinc-300 mb-4 leading-relaxed font-normal">
+                Connect directly with our engineering directors on WhatsApp for real-time project scoping, architecture advice, and NDA dispatch within 15 minutes.
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                <a
+                  href="https://wa.me/919528991434?text=Hi%20Pavion%20Technologies%2C%20I%20would%20like%20to%20discuss%20a%20custom%20software%20or%20AI%20project."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold text-xs transition-all shadow-md shadow-emerald-500/20"
+                >
+                  <MessageSquare size={14} />
+                  <span>WhatsApp Chat</span>
+                </a>
+                <a
+                  href="mailto:Contact@paviontechnologies.com?subject=Book%20a%2030-Min%20Discovery%20Call%20with%20Pavion%20Technologies"
+                  className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-extrabold text-xs transition-all"
+                >
+                  <Calendar size={14} />
+                  <span>Discovery Call</span>
+                </a>
+              </div>
+            </div>
+
             {/* Contact Details Card */}
             <div className="p-6 sm:p-8 rounded-3xl bg-[#0D1222] border border-white/10 shadow-2xl">
               <h3 className="text-xl font-black text-white mb-6 flex items-center justify-between">

@@ -1,5 +1,5 @@
 // src/components/TextReveal.tsx
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -25,9 +25,10 @@ export const TextRevealByChar: React.FC<TextRevealProps> = ({
     if (!container) return;
 
     const chars = container.querySelectorAll('.char');
+    let stInstance: ScrollTrigger | null = null;
 
     if (scrub) {
-      gsap.fromTo(chars, 
+      const anim = gsap.fromTo(chars, 
         { opacity: 0.1 },
         {
           opacity: 1,
@@ -40,8 +41,9 @@ export const TextRevealByChar: React.FC<TextRevealProps> = ({
           },
         }
       );
+      stInstance = anim.scrollTrigger || null;
     } else {
-      ScrollTrigger.create({
+      stInstance = ScrollTrigger.create({
         trigger: container,
         start: "top 80%",
         onEnter: () => {
@@ -60,7 +62,7 @@ export const TextRevealByChar: React.FC<TextRevealProps> = ({
     }
 
     return () => {
-      ScrollTrigger.getAll().forEach(t => t.kill());
+      if (stInstance) stInstance.kill();
     };
   }, [scrub, children]);
 
@@ -92,10 +94,9 @@ export const TextRevealByWord: React.FC<TextRevealProps> = ({
     if (!container) return;
 
     const words = container.querySelectorAll('.word');
-
     gsap.set(words, { y: '100%', opacity: 0 });
 
-    ScrollTrigger.create({
+    const trigger = ScrollTrigger.create({
       trigger: container,
       start: "top 85%",
       onEnter: () => {
@@ -111,7 +112,7 @@ export const TextRevealByWord: React.FC<TextRevealProps> = ({
     });
 
     return () => {
-      ScrollTrigger.getAll().forEach(t => t.kill());
+      trigger.kill();
     };
   }, [delay, children]);
 
@@ -139,10 +140,9 @@ export const TextRevealByLine: React.FC<TextRevealProps & { lines: string[] }> =
     if (!container) return;
 
     const lineElements = container.querySelectorAll('.line');
-
     gsap.set(lineElements, { y: '120%', rotate: 3 });
 
-    ScrollTrigger.create({
+    const trigger = ScrollTrigger.create({
       trigger: container,
       start: "top 80%",
       onEnter: () => {
@@ -158,7 +158,7 @@ export const TextRevealByLine: React.FC<TextRevealProps & { lines: string[] }> =
     });
 
     return () => {
-      ScrollTrigger.getAll().forEach(t => t.kill());
+      trigger.kill();
     };
   }, [delay, lines]);
 
@@ -173,7 +173,7 @@ export const TextRevealByLine: React.FC<TextRevealProps & { lines: string[] }> =
   );
 };
 
-// Counter animation
+// Counter animation - Fail-proof progressive counter that never gets stuck at 0
 interface CounterProps {
   end: number;
   duration?: number;
@@ -190,39 +190,66 @@ export const AnimatedCounter: React.FC<CounterProps> = ({
   className = '',
 }) => {
   const counterRef = useRef<HTMLSpanElement>(null);
-  const hasAnimated = useRef(false);
+  const [displayValue, setDisplayValue] = useState<number>(0);
 
   useEffect(() => {
     const element = counterRef.current;
     if (!element) return;
 
-    ScrollTrigger.create({
-      trigger: element,
-      start: "top 85%",
-      onEnter: () => {
-        if (hasAnimated.current) return;
-        hasAnimated.current = true;
+    let tween: gsap.core.Tween | null = null;
+    let hasRun = false;
 
-        const counter = { value: 0 };
-        gsap.to(counter, {
-          value: end,
-          duration,
-          ease: "power2.out",
-          onUpdate: () => {
-            element.textContent = `${prefix}${Math.round(counter.value)}${suffix}`;
-          },
-        });
-      },
+    const startCounting = () => {
+      if (hasRun) return;
+      hasRun = true;
+      const counter = { value: 0 };
+      tween = gsap.to(counter, {
+        value: end,
+        duration,
+        ease: "power2.out",
+        onUpdate: () => {
+          setDisplayValue(Math.round(counter.value));
+        },
+      });
+    };
+
+    const trigger = ScrollTrigger.create({
+      trigger: element,
+      start: "top 90%",
+      once: true,
+      onEnter: startCounting,
     });
 
+    // IntersectionObserver fallback for maximum reliability across Safari/Mobile
+    let observer: IntersectionObserver | null = null;
+    if (typeof IntersectionObserver !== 'undefined') {
+      observer = new IntersectionObserver((entries) => {
+        if (entries[0]?.isIntersecting) {
+          startCounting();
+          if (observer) observer.disconnect();
+        }
+      }, { threshold: 0.1 });
+      observer.observe(element);
+    }
+
+    // Safety timeout: ensure actual value is always displayed if triggers didn't fire
+    const safetyTimeout = setTimeout(() => {
+      if (!hasRun) {
+        setDisplayValue(end);
+      }
+    }, 1500);
+
     return () => {
-      ScrollTrigger.getAll().forEach(t => t.kill());
+      clearTimeout(safetyTimeout);
+      if (observer) observer.disconnect();
+      if (tween) tween.kill();
+      trigger.kill();
     };
-  }, [end, duration, suffix, prefix]);
+  }, [end, duration]);
 
   return (
     <span ref={counterRef} className={className}>
-      {prefix}0{suffix}
+      {prefix}{displayValue || end}{suffix}
     </span>
   );
 };

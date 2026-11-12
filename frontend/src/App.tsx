@@ -26,6 +26,7 @@ const TermsPage = lazy(() => import('./pages/TermsPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 const ITStaffingPage = lazy(() => import('./pages/ITStaffingPage'));
 const BlogAdminPage = lazy(() => import('./pages/BlogAdminPage'));
+const SEOLandingPage = lazy(() => import('./pages/SEOLandingPage'));
 
 import CookieConsent from './components/CookieConsent';
 import { initAnalytics, trackPageView } from './utils/analytics';
@@ -169,6 +170,28 @@ function AppContent() {
               {/* Enterprise IT Staffing & Dedicated Squads */}
               <Route path="/it-staffing" element={<ITStaffingPage />} />
               <Route path="/staffing" element={<ITStaffingPage />} />
+              <Route path="/it-staffing-services" element={<ITStaffingPage />} />
+
+              {/* High-Intent SEO Landing Pages: Services */}
+              <Route path="/ai-development-company" element={<SEOLandingPage pageSlug="ai-development-company" />} />
+              <Route path="/custom-software-development" element={<SEOLandingPage pageSlug="custom-software-development" />} />
+              <Route path="/web-development-company" element={<SEOLandingPage pageSlug="web-development-company" />} />
+              <Route path="/crm-development" element={<SEOLandingPage pageSlug="crm-development" />} />
+              <Route path="/ats-software-development" element={<SEOLandingPage pageSlug="ats-software-development" />} />
+              <Route path="/erp-software-development" element={<SEOLandingPage pageSlug="erp-software-development" />} />
+              <Route path="/devops-cloud-services" element={<SEOLandingPage pageSlug="devops-cloud-services" />} />
+
+              {/* High-Intent SEO Landing Pages: Industries */}
+              <Route path="/healthcare-software-development" element={<SEOLandingPage pageSlug="healthcare-software-development" />} />
+              <Route path="/real-estate-software" element={<SEOLandingPage pageSlug="real-estate-software" />} />
+              <Route path="/logistics-software" element={<SEOLandingPage pageSlug="logistics-software" />} />
+              <Route path="/startup-mvp-development" element={<SEOLandingPage pageSlug="startup-mvp-development" />} />
+              <Route path="/us-staffing-software" element={<SEOLandingPage pageSlug="us-staffing-software" />} />
+              <Route path="/restaurant-management-software" element={<SEOLandingPage pageSlug="restaurant-management-software" />} />
+
+              {/* Dynamic Service & Industry Fallback Routes */}
+              <Route path="/services/:slug" element={<SEOLandingPage />} />
+              <Route path="/industry/:slug" element={<SEOLandingPage />} />
 
               {/* Legal: Privacy Policy */}
               <Route path="/privacy" element={<PrivacyPolicyPage />} />

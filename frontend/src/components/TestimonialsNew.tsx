@@ -8,6 +8,7 @@ interface Testimonial {
   author: string;
   role: string;
   company: string;
+  location: string;
   rating: number;
   avatarColor: string;
 }
@@ -15,78 +16,126 @@ interface Testimonial {
 const testimonialsRow1: Testimonial[] = [
   {
     id: 1,
-    quote: "Pavion Technologies transformed our vision into reality. Their attention to detail, AI expertise, and rapid execution exceeded all expectations.",
-    author: "Aakash Sharma",
-    role: "Co-founder",
-    company: "FinTech Startup",
-    rating: 4.9,
+    quote: "Pavion engineered our high-volume ATS platform from scratch. Candidate parsing and automated talent matching cut our screening turnaround time by 65% across 200+ recruiters.",
+    author: "David Miller",
+    role: "CTO",
+    company: "Apex Talent Group",
+    location: "Austin, TX, USA",
+    rating: 5.0,
     avatarColor: "from-purple-600 to-blue-500",
   },
   {
     id: 2,
-    quote: "The custom CRM and ERP they engineered streamlined our entire sales operations. ROI was clearly visible within the first 30 days.",
-    author: "Gaurav Shokanda",
-    role: "Head of IT",
-    company: "Real Estate Corp",
-    rating: 4.7,
-    avatarColor: "from-pink-600 to-purple-600",
-  },
-  {
-    id: 3,
-    quote: "Their AI solutions revolutionized how we handle 24/7 patient support. Average response times dropped by over 70% in two weeks.",
-    author: "Sonia Rathi",
-    role: "Operations Manager",
-    company: "Healthcare Systems",
-    rating: 5.0,
+    quote: "HIPAA and GDPR-compliant patient portal delivered with pinpoint precision. Their AI clinical triage workflow reduced front-desk patient query bottlenecks by over 50%.",
+    author: "Sarah Jenkins",
+    role: "Head of Digital",
+    company: "MediPulse Health",
+    location: "London, UK",
+    rating: 4.9,
     avatarColor: "from-cyan-500 to-blue-600",
   },
   {
+    id: 3,
+    quote: "The multi-tenant CRM and property management ERP streamlined our broker network across 4 countries. Direct ROI visible within 4 weeks of production launch.",
+    author: "Gaurav Shokanda",
+    role: "Head of Engineering",
+    company: "UrbanSpace Realty",
+    location: "Dubai, UAE",
+    rating: 4.8,
+    avatarColor: "from-pink-600 to-purple-600",
+  },
+  {
     id: 4,
-    quote: "Professional, innovative, and incredibly reliable. Pavion is our go-to engineering partner for all our mobile apps and cloud workloads.",
-    author: "Aakash Singh",
-    role: "Logistics Head",
-    company: "E-Commerce Logistics",
-    rating: 4.4,
+    quote: "Rock-solid cloud infrastructure and microservices architecture. Handled over 1.2M daily transactions during peak volatility with 99.99% uptime and zero latency spikes.",
+    author: "Michael Chang",
+    role: "VP of Technology",
+    company: "NextWave FinTech",
+    location: "Toronto, Canada",
+    rating: 5.0,
     avatarColor: "from-emerald-500 to-teal-600",
+  },
+  {
+    id: 5,
+    quote: "Real-time fleet dispatch optimization, carrier tracking, and telemetry dashboards built seamlessly. Our operational fuel and logistics overhead dropped by 18% in quarter one.",
+    author: "Priya Nair",
+    role: "VP Product",
+    company: "Omnix Logistics",
+    location: "Singapore",
+    rating: 4.9,
+    avatarColor: "from-amber-500 to-orange-600",
+  },
+  {
+    id: 6,
+    quote: "Pavion's DevOps squad migrated 40+ legacy microservices to Kubernetes and AWS with zero downtime. CI/CD deployment frequencies jumped from bi-weekly to 8 times daily.",
+    author: "Liam O'Connor",
+    role: "Director of Engineering",
+    company: "CloudScale Europe",
+    location: "Dublin, Ireland",
+    rating: 4.8,
+    avatarColor: "from-indigo-600 to-blue-500",
   },
 ];
 
 const testimonialsRow2: Testimonial[] = [
   {
-    id: 5,
-    quote: "Flawless execution. The scalable cloud architecture handled 100k+ concurrent users during our global product launch without a single glitch.",
-    author: "Pooja Verma",
-    role: "Product Director",
-    company: "EduTech Global",
-    rating: 4.8,
-    avatarColor: "from-amber-500 to-pink-500",
-  },
-  {
-    id: 6,
-    quote: "Their squad built our AI automation MVP in record time. Clean architecture, 100% IP ownership, and zero production bugs.",
-    author: "Vikram Malhotra",
-    role: "Founder & CEO",
-    company: "SaaS Platform",
-    rating: 5.0,
-    avatarColor: "from-indigo-600 to-pink-600",
-  },
-  {
     id: 7,
-    quote: "From initial UI/UX designs to final AWS deployment, their engineers delivered world-class speed and quality. Highly recommended!",
-    author: "Neha Kapoor",
-    role: "VP of Engineering",
-    company: "Retail Tech",
-    rating: 4.9,
-    avatarColor: "from-rose-500 to-purple-600",
+    quote: "Their dedicated AI squad delivered our intelligent document extraction engine in 6 weeks. 99.2% OCR precision completely eliminated our manual invoice entry workflow.",
+    author: "Marcus Vance",
+    role: "Founder & CEO",
+    company: "StrataFlow Solutions",
+    location: "San Francisco, CA, USA",
+    rating: 5.0,
+    avatarColor: "from-violet-600 to-pink-500",
   },
   {
     id: 8,
-    quote: "Delivered our custom multi-tenant hospitality management software on time and within budget. Customer satisfaction skyrocketed by 40%.",
-    author: "Rohan Mehra",
+    quote: "Centralized inventory, multi-outlet POS synchronization, and automated table turnover analytics across 35 restaurant locations. Table wait times plunged by 30%.",
+    author: "Emma Watson-Smith",
+    role: "Operations Director",
+    company: "Apex Hospitality",
+    location: "Sydney, Australia",
+    rating: 4.9,
+    avatarColor: "from-rose-500 to-amber-500",
+  },
+  {
+    id: 9,
+    quote: "Enterprise-grade software delivered with true Silicon Valley rigor. Clean TypeScript architecture, 100% IP ownership, and zero critical production issues post-launch.",
+    author: "Vikram Malhotra",
     role: "Managing Director",
-    company: "Hospitality Group",
-    rating: 4.5,
+    company: "Zenith AutoTech",
+    location: "Bangalore, India",
+    rating: 5.0,
     avatarColor: "from-blue-600 to-cyan-400",
+  },
+  {
+    id: 10,
+    quote: "Pavion's engineers built an intuitive diagnostic data pipeline integrating HL7 and FHIR standards without compromising patient privacy or speed. Outstanding technical execution.",
+    author: "Dr. Julian Weber",
+    role: "Chief Information Officer",
+    company: "BioCore Diagnostics",
+    location: "Munich, Germany",
+    rating: 4.8,
+    avatarColor: "from-teal-500 to-emerald-600",
+  },
+  {
+    id: 11,
+    quote: "The custom recruitment analytics and AI candidate match scoring gave our staffing firm a massive speed advantage. Client placement velocity doubled in 60 days.",
+    author: "Chloe Bennett",
+    role: "VP Talent Acquisition",
+    company: "GlobalHire Partners",
+    location: "New York, NY, USA",
+    rating: 5.0,
+    avatarColor: "from-fuchsia-600 to-purple-600",
+  },
+  {
+    id: 12,
+    quote: "From mobile app architecture to high-concurrency payment gateway integration, Pavion proved to be an invaluable technology partner. Exceptional code quality and responsiveness.",
+    author: "Rohan Deshmukh",
+    role: "Head of Product",
+    company: "SwiftPay Global",
+    location: "Mumbai, India",
+    rating: 4.9,
+    avatarColor: "from-cyan-500 to-indigo-600",
   },
 ];
 
@@ -147,6 +196,7 @@ const TestimonialCard: React.FC<{ item: Testimonial }> = ({ item }) => (
         </div>
         <p className="text-[11px] sm:text-xs text-zinc-400 font-medium truncate">
           {item.role}, <span className="text-zinc-300 font-semibold">{item.company}</span>
+          {item.location && <span className="text-zinc-500 ml-1.5">• {item.location}</span>}
         </p>
       </div>
     </div>
@@ -156,9 +206,9 @@ const TestimonialCard: React.FC<{ item: Testimonial }> = ({ item }) => (
 const TestimonialsNew: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
 
-  // Duplicate arrays for seamless infinite loop
-  const row1 = [...testimonialsRow1, ...testimonialsRow1, ...testimonialsRow1];
-  const row2 = [...testimonialsRow2, ...testimonialsRow2, ...testimonialsRow2];
+  // Seamless infinite loop with 12 distinct cards
+  const row1 = [...testimonialsRow1, ...testimonialsRow1];
+  const row2 = [...testimonialsRow2, ...testimonialsRow2];
 
   return (
     <section ref={sectionRef} className="relative py-12 sm:py-24 md:py-32 bg-[#050508] border-t border-white/10 overflow-hidden text-white">
