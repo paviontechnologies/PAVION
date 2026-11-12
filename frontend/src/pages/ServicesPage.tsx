@@ -8,6 +8,7 @@ import HorizontalShowcase from '../components/HorizontalShowcase';
 import AISection from '../components/AISection';
 import ProcessSection from '../components/ProcessSection';
 import Features from '../components/Features';
+import ContactNew from '../components/ContactNew';
 
 const serviceCategories = [
   {
@@ -316,26 +317,8 @@ const ServicesPage: React.FC = () => {
       {/* Features / Why Choose Us */}
       <Features />
 
-      {/* Conversion CTA */}
-      <section className="relative py-28 bg-[#050508] border-t border-white/10 overflow-hidden text-center text-white">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(219,39,119,0.06),transparent_70%)] pointer-events-none" />
-        <div className="max-w-4xl mx-auto px-6 sm:px-8 relative z-10 space-y-6">
-          <h2 className="text-3xl sm:text-5xl font-black text-white uppercase tracking-tight">
-            Let's build your next digital advantage
-          </h2>
-          <p className="text-zinc-300 text-sm sm:text-lg font-normal max-w-2xl mx-auto leading-relaxed">
-            Reach out to our architects and engineers to discuss your project requirements and technical architecture.
-          </p>
-          <Link
-            to="/contact"
-            className="inline-flex items-center gap-3 px-10 py-5 bg-[#DB2777] hover:bg-[#DB2777]/90 text-white font-black rounded-full hover:scale-105 transition-all duration-300 group shadow-lg shadow-pink-600/20"
-            data-cursor-hover
-          >
-            <span>Start a Project</span>
-            <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-          </Link>
-        </div>
-      </section>
+      {/* Main Services Interactive Proposal / Contact Form */}
+      <ContactNew />
     </>
   );
 };
