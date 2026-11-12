@@ -11,6 +11,55 @@ import Features from '../components/Features';
 
 const serviceCategories = [
   {
+    icon: Sparkles,
+    title: 'AI Development Company',
+    desc: 'Automate high-friction operations and extract high-value insights with customized AI models and autonomous agent pipelines.',
+    features: ['Custom LLM Fine-Tuning', 'Agentic Workflows & RAG', 'Predictive Analytics', 'Computer Vision & OCR'],
+    link: '/ai-development-company'
+  },
+  {
+    icon: Code2,
+    title: 'Custom Software Development',
+    desc: 'High-performance backends, microservices, and enterprise architectures designed for mission-critical reliability.',
+    features: ['Microservices & APIs', 'Scalable Cloud Architecture', 'Database Optimization', 'Legacy Modernization'],
+    link: '/custom-software-development'
+  },
+  {
+    icon: Cpu,
+    title: 'Web Development Company',
+    desc: 'Modern web applications built on Next.js, React, and serverless compute engineered for speed and search ranking.',
+    features: ['Modern Next.js & React', 'Edge Compute & SSR', 'Core Web Vitals SEO', 'Client Portals & SaaS'],
+    link: '/web-development-company'
+  },
+  {
+    icon: TrendingUp,
+    title: 'Custom CRM Development',
+    desc: 'Bespoke customer relationship management systems with visual pipelines, WhatsApp sync, and commission trackers.',
+    features: ['Multi-Stage Deal Boards', 'Omnichannel WhatsApp Sync', 'AI Lead Scoring', 'Executive BI Reports'],
+    link: '/crm-development'
+  },
+  {
+    icon: Users,
+    title: 'ATS Software Development',
+    desc: 'High-volume applicant tracking systems with AI resume parsing, candidate matching, and automated submittal packets.',
+    features: ['AI Resume Parsing', 'Vector Semantic Search', 'Blinded Submittal PDF', 'Job Board Multiposting'],
+    link: '/ats-software-development'
+  },
+  {
+    icon: ShieldCheck,
+    title: 'ERP Software Development',
+    desc: 'Unified enterprise resource planning across multi-warehouse inventory, double-entry finance, procurement, and HR.',
+    features: ['Multi-Warehouse Tracking', 'Double-Entry Accounting', 'Automated Procurement', 'Payroll & Compliance'],
+    link: '/erp-software-development'
+  },
+  {
+    icon: Cloud,
+    title: 'DevOps & Cloud Services',
+    desc: 'Automate deployments, multi-region failovers, and rigorous cloud cost optimization across AWS, GCP, and Kubernetes.',
+    features: ['AWS, GCP & Azure', 'Docker & Kubernetes', 'Infrastructure as Code', '24/7 Uptime & Monitoring'],
+    link: '/devops-cloud-services'
+  },
+  {
     icon: Users,
     title: 'IT Staffing & Dedicated Squads',
     desc: 'Deploy pre-vetted senior software engineers and autonomous squads within 48 to 72 hours with 100% IP ownership.',
@@ -18,52 +67,57 @@ const serviceCategories = [
     link: '/it-staffing'
   },
   {
-    icon: Code2,
-    title: 'Custom Software Development',
-    desc: 'High-performance backends, microservices, and enterprise architectures designed for mission-critical reliability.',
-    features: ['Microservices & APIs', 'Scalable Cloud Architecture', 'Database Optimization', 'Legacy Modernization']
-  },
-  {
-    icon: Sparkles,
-    title: 'AI & Machine Learning Solutions',
-    desc: 'Automate high-friction operations and extract high-value insights with customized AI models and LLM agent pipelines.',
-    features: ['Custom LLM Fine-Tuning', 'Agentic Workflows & RAG', 'Predictive Analytics', 'Computer Vision & OCR']
-  },
-  {
-    icon: TrendingUp,
-    title: 'Digital Marketing & Growth',
-    desc: 'Data-driven SEO, Google Ads, targeted Meta campaigns, and high-converting marketing funnels engineered to scale acquisition.',
-    features: ['SEO & Organic Search Ranking', 'Performance PPC (Google & Meta)', 'Conversion Rate Optimization (CRO)', 'Social Media & Content Strategy']
-  },
-  {
     icon: Smartphone,
     title: 'Mobile App Engineering',
     desc: 'Native iOS & Android apps and performant cross-platform solutions that deliver 60fps fluid user experiences.',
-    features: ['React Native & Flutter', 'iOS & Android Native', 'Offline First Architecture', 'Store Optimization']
+    features: ['React Native & Flutter', 'iOS & Android Native', 'Offline First Architecture', 'Store Optimization'],
+    link: '/custom-software-development'
   },
   {
     icon: Palette,
     title: 'Product Design & UI/UX',
     desc: 'Human-centric user research, intuitive design systems, and rapid interactive prototyping that convert visitors into loyal users.',
-    features: ['Wireframing & Prototyping', 'Design Systems & Tokens', 'Conversion Optimization', 'Micro-Interactions']
+    features: ['Wireframing & Prototyping', 'Design Systems & Tokens', 'Conversion Optimization', 'Micro-Interactions'],
+    link: '/web-development-company'
+  }
+];
+
+const industrySolutionsList = [
+  {
+    title: 'Healthcare Software Development',
+    desc: 'HIPAA and HITECH-compliant telehealth platforms, EHR/EMR integrations (HL7 & FHIR), and clinical triage automation.',
+    tag: 'Digital Health',
+    link: '/healthcare-software-development'
   },
   {
-    icon: Cloud,
-    title: 'Cloud & DevOps Engineering',
-    desc: 'Robust CI/CD pipelines, automated deployments, multi-region failovers, and rigorous cloud cost optimization.',
-    features: ['AWS, GCP & Azure', 'Docker & Kubernetes', 'Infrastructure as Code', '24/7 Uptime & Monitoring']
+    title: 'Real Estate Software (PropTech)',
+    desc: 'MLS/IDX property listing portals, commercial leasing CRMs, property management ERP, and virtual tour systems.',
+    tag: 'PropTech',
+    link: '/real-estate-software'
   },
   {
-    icon: Cpu,
-    title: 'Web Platforms & SaaS',
-    desc: 'Modern web applications built on Next.js, React, and serverless compute engineered for speed and conversion.',
-    features: ['Modern Next.js & React', 'Edge Compute & SSR', 'Payment & Billing Engines', 'SEO & Core Web Vitals']
+    title: 'Logistics & Supply Chain Software',
+    desc: 'Transportation management (TMS), warehouse management (WMS), IoT fleet GPS telematics, and dynamic route optimization.',
+    tag: 'Freight Tech',
+    link: '/logistics-software'
   },
   {
-    icon: ShieldCheck,
-    title: 'Cybersecurity & Compliance',
-    desc: 'Zero-trust architecture, automated threat intelligence, rigorous penetration audits, and SOC-2 / GDPR compliance governance.',
-    features: ['Zero-Trust Architecture', 'Penetration Testing & Audits', 'Data Encryption & KMS', 'Compliance (SOC-2 & GDPR)']
+    title: 'Startup MVP Development Services',
+    desc: 'Turn ideas into high-converting production platforms in 6 to 8 weeks with scalable stacks and investor-ready UI.',
+    tag: 'Startup Pods',
+    link: '/startup-mvp-development'
+  },
+  {
+    title: 'US Staffing Software Development',
+    desc: 'VMS portals, high-velocity applicant pipelines, blinded resume submittal generators, and W-2/1099 compliance tracking.',
+    tag: 'Staffing Tech',
+    link: '/us-staffing-software'
+  },
+  {
+    title: 'Restaurant Management Software',
+    desc: 'Touchscreen Cloud POS, Kitchen Display Systems (KDS), recipe ingredient decrementing, and QR contactless table ordering.',
+    tag: 'Hospitality Tech',
+    link: '/restaurant-management-software'
   }
 ];
 
@@ -177,7 +231,7 @@ const ServicesPage: React.FC = () => {
                         to={srv.link}
                         className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-[#60A5FA] hover:text-[#DB2777] transition-colors uppercase tracking-wider"
                       >
-                        <span>Explore Dedicated Squads</span>
+                        <span>{srv.title.includes('Staffing') ? 'Explore Squads' : 'Explore Service'}</span>
                         <ArrowRight size={14} />
                       </Link>
                     ) : (
@@ -193,6 +247,59 @@ const ServicesPage: React.FC = () => {
                 </motion.div>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      {/* Dedicated Industry Solutions Grid */}
+      <section className="py-20 md:py-28 bg-[#080B14] border-t border-white/10 text-white">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+          <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+            <span className="text-xs tracking-[0.25em] uppercase text-[#DB2777] font-extrabold block">
+              Domain Specialization
+            </span>
+            <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight uppercase leading-tight">
+              Bespoke <span className="text-[#60A5FA]">Industry Solutions</span>
+            </h2>
+            <p className="text-zinc-300 text-sm sm:text-base font-normal">
+              Tailored software architectures designed around specific regulatory frameworks, operational workflows, and commercial models.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {industrySolutionsList.map((ind, idx) => (
+              <motion.div
+                key={ind.link}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.08, duration: 0.4 }}
+                className="p-6 sm:p-8 rounded-3xl bg-[#0D1222] border border-white/10 hover:border-[#60A5FA]/40 hover:bg-[#111A33] transition-all flex flex-col justify-between group shadow-lg"
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-[11px] font-mono px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-[#60A5FA] font-bold">
+                      {ind.tag}
+                    </span>
+                    <ArrowRight size={16} className="text-zinc-500 group-hover:text-white group-hover:translate-x-1 transition-all" />
+                  </div>
+                  <h3 className="text-lg sm:text-xl font-black text-white mb-2.5 group-hover:text-[#60A5FA] transition-colors">
+                    {ind.title}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-zinc-400 font-normal leading-relaxed mb-6">
+                    {ind.desc}
+                  </p>
+                </div>
+
+                <Link
+                  to={ind.link}
+                  className="inline-flex items-center gap-2 text-xs font-mono font-bold text-[#DB2777] group-hover:text-white transition-colors uppercase tracking-wider pt-4 border-t border-white/5"
+                >
+                  <span>Explore Industry Solution</span>
+                  <ArrowRight size={13} />
+                </Link>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>

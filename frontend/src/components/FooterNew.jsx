@@ -62,15 +62,24 @@ const FooterNew = () => {
     { name: 'Terms of Service', href: '/terms' },
   ];
 
-  const services = [
-    'IT Staffing & Squads',
-    'Web Development',
-    'Mobile Apps',
-    'AI Solutions',
-    'Digital Marketing',
-    'Cloud Services',
-    'UI/UX Design',
-    'DevOps',
+  const coreServices = [
+    { name: 'AI Development', href: '/ai-development-company' },
+    { name: 'Custom Software', href: '/custom-software-development' },
+    { name: 'Web Development', href: '/web-development-company' },
+    { name: 'CRM Development', href: '/crm-development' },
+    { name: 'ATS Software', href: '/ats-software-development' },
+    { name: 'ERP Software', href: '/erp-software-development' },
+    { name: 'DevOps & Cloud', href: '/devops-cloud-services' },
+    { name: 'IT Staffing Squads', href: '/it-staffing' },
+  ];
+
+  const industrySolutions = [
+    { name: 'Healthcare Software', href: '/healthcare-software-development' },
+    { name: 'Real Estate Software', href: '/real-estate-software' },
+    { name: 'Logistics Software', href: '/logistics-software' },
+    { name: 'Startup MVP (6-8 Wks)', href: '/startup-mvp-development' },
+    { name: 'US Staffing Tech', href: '/us-staffing-software' },
+    { name: 'Restaurant Management', href: '/restaurant-management-software' },
   ];
 
   const socialLinks = [
@@ -240,20 +249,40 @@ const FooterNew = () => {
             </ul>
           </div>
 
-          {/* Services */}
+          {/* Core Services */}
           <div>
-            <h3 className="text-xs sm:text-sm tracking-[0.2em] uppercase text-[#60A5FA] font-extrabold mb-6">
+            <h3 className="text-xs sm:text-sm tracking-[0.2em] uppercase text-[#DB2777] font-extrabold mb-6">
               Services
             </h3>
-            <ul className="space-y-3.5">
-              {services.map((service) => (
-                <li key={service}>
+            <ul className="space-y-3">
+              {coreServices.map((service) => (
+                <li key={service.href}>
                   <Link 
-                    to={service.includes('Staffing') ? '/it-staffing' : '/services'} 
-                    className="text-white/80 hover:text-white transition-colors text-sm sm:text-base font-bold"
+                    to={service.href} 
+                    className="text-white/80 hover:text-white transition-colors text-xs sm:text-sm font-semibold"
                     data-cursor-hover
                   >
-                    {service}
+                    {service.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Industry Solutions */}
+          <div>
+            <h3 className="text-xs sm:text-sm tracking-[0.2em] uppercase text-[#60A5FA] font-extrabold mb-6">
+              Industries
+            </h3>
+            <ul className="space-y-3">
+              {industrySolutions.map((sol) => (
+                <li key={sol.href}>
+                  <Link 
+                    to={sol.href} 
+                    className="text-white/80 hover:text-white transition-colors text-xs sm:text-sm font-semibold"
+                    data-cursor-hover
+                  >
+                    {sol.name}
                   </Link>
                 </li>
               ))}
@@ -261,7 +290,7 @@ const FooterNew = () => {
           </div>
 
           {/* Social & Newsletter / Mail Box */}
-          <div className="col-span-2">
+          <div className="col-span-1 sm:col-span-2 lg:col-span-1">
             <h3 className="text-xs sm:text-sm tracking-[0.2em] uppercase text-[#60A5FA] font-extrabold mb-6">
               Stay Connected
             </h3>
