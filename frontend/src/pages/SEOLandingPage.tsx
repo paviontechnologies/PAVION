@@ -12,7 +12,6 @@ import {
   Code2, 
   Zap, 
   ChevronRight,
-  Globe2,
   Clock
 } from 'lucide-react';
 import SEO from '../components/SEO';
@@ -121,7 +120,7 @@ const SEOLandingPage: React.FC<SEOLandingPageProps> = ({ pageSlug: explicitSlug 
         {/* ========================================================= */}
         {/* HERO SECTION                                              */}
         {/* ========================================================= */}
-        <section className="relative pt-24 pb-10 sm:pt-36 sm:pb-20 border-b border-white/10 overflow-hidden">
+        <section className="relative pt-24 pb-12 sm:pt-36 sm:pb-20 border-b border-white/10 overflow-hidden">
           {/* Ambient Cyber Accents */}
           <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[500px] bg-gradient-to-tr from-[#60A5FA]/10 via-[#DB2777]/10 to-indigo-600/10 rounded-full blur-[150px] pointer-events-none" />
 
@@ -153,25 +152,20 @@ const SEOLandingPage: React.FC<SEOLandingPageProps> = ({ pageSlug: explicitSlug 
               </ol>
             </nav>
 
-            {/* Badge & Target Market Pill */}
-            <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#DB2777]/10 border border-[#DB2777]/20 text-[#DB2777] text-[10px] sm:text-xs font-black uppercase tracking-wider">
+            {/* Badge */}
+            <div className="flex items-center gap-2 mb-4 sm:mb-6">
+              <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#DB2777]/10 border border-[#DB2777]/25 text-[#DB2777] text-xs font-bold tracking-wide">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#DB2777] animate-pulse" />
                 {data.badge}
               </span>
-
-              <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-[#60A5FA] text-[10px] sm:text-xs font-semibold">
-                <Globe2 size={12} />
-                <span>Target: {data.targetMarkets}</span>
-              </span>
             </div>
 
-            {/* Hero Main Headline */}
+            {/* Hero Main Headline (Title Case, Clean Typography) */}
             <motion.h1 
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white uppercase tracking-tight leading-[1.15] max-w-5xl mb-4 sm:mb-6"
+              className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.18] max-w-5xl mb-4 sm:mb-6"
             >
               {data.heroHeadline}
             </motion.h1>
@@ -186,16 +180,16 @@ const SEOLandingPage: React.FC<SEOLandingPageProps> = ({ pageSlug: explicitSlug 
               {data.heroSubheadline}
             </motion.p>
 
-            {/* Conversion CTA Bar */}
+            {/* Conversion CTA Bar (Clean Responsive Pill Buttons) */}
             <motion.div 
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="flex flex-col sm:flex-row sm:items-center gap-2.5 sm:gap-3.5 mb-8 sm:mb-12"
+              className="flex flex-col sm:flex-row sm:items-center gap-3 mb-8 sm:mb-12"
             >
               <Link
                 to="/contact"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-[#DB2777] to-pink-600 hover:from-[#DB2777]/90 hover:to-pink-500 text-white font-extrabold text-xs sm:text-sm uppercase tracking-wider shadow-lg shadow-pink-600/25 transition-all hover:scale-105"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-gradient-to-r from-[#DB2777] to-pink-600 hover:from-[#DB2777]/90 hover:to-pink-500 text-white font-extrabold text-xs sm:text-sm tracking-wide shadow-lg shadow-pink-600/25 transition-all hover:scale-105"
               >
                 <span>Request Project Proposal</span>
                 <ArrowRight size={15} />
@@ -205,18 +199,17 @@ const SEOLandingPage: React.FC<SEOLandingPageProps> = ({ pageSlug: explicitSlug 
                 href={`https://wa.me/919528991434?text=Hi%20Pavion%20Technologies%2C%20I%20would%20like%20to%20discuss%20a%20project%20for%20${encodeURIComponent(data.title)}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs sm:text-sm tracking-wide transition-all shadow-md shadow-emerald-500/20 hover:scale-105"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs sm:text-sm tracking-wide transition-all shadow-md shadow-emerald-500/20 hover:scale-105"
               >
-                <MessageSquare size={15} />
+                <MessageSquare size={16} />
                 <span>Chat on WhatsApp</span>
-                <span className="text-[9px] bg-white/20 px-1.5 py-0.5 rounded-full font-black uppercase">Fastest</span>
               </a>
 
               <a
                 href={`mailto:Contact@paviontechnologies.com?subject=Book%20a%2030-Min%20Discovery%20Call%20-%20${encodeURIComponent(data.title)}`}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-zinc-200 font-semibold text-xs sm:text-sm transition-all"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-zinc-200 font-semibold text-xs sm:text-sm transition-all"
               >
-                <Calendar size={14} className="text-[#60A5FA]" />
+                <Calendar size={15} className="text-[#60A5FA]" />
                 <span>Book 30-Min Call</span>
               </a>
             </motion.div>
@@ -224,11 +217,11 @@ const SEOLandingPage: React.FC<SEOLandingPageProps> = ({ pageSlug: explicitSlug 
             {/* Metrics Bar */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 pt-5 sm:pt-6 border-t border-white/10">
               {data.statMetrics.map((stat, idx) => (
-                <div key={idx} className="p-3 sm:p-5 rounded-xl sm:rounded-2xl bg-[#0D1222]/80 border border-white/10">
+                <div key={idx} className="p-3.5 sm:p-5 rounded-xl sm:rounded-2xl bg-[#0D1222]/80 border border-white/10 hover:border-white/20 transition-all">
                   <div className="text-xl sm:text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-zinc-100 to-[#60A5FA]">
                     {stat.metric}
                   </div>
-                  <div className="text-[11px] sm:text-xs text-zinc-400 font-medium mt-0.5 sm:mt-1">
+                  <div className="text-[11px] sm:text-xs text-zinc-400 font-medium mt-1 leading-snug">
                     {stat.label}
                   </div>
                 </div>
@@ -245,10 +238,10 @@ const SEOLandingPage: React.FC<SEOLandingPageProps> = ({ pageSlug: explicitSlug 
           <div className="grid lg:grid-cols-12 gap-6 lg:gap-12 items-start">
             
             <div className="lg:col-span-7 space-y-4 sm:space-y-6">
-              <span className="text-[11px] sm:text-xs font-black uppercase tracking-widest text-[#DB2777]">
+              <span className="text-xs font-black uppercase tracking-widest text-[#DB2777]">
                 Executive Overview
               </span>
-              <h2 className="text-xl sm:text-3xl md:text-4xl font-black text-white uppercase tracking-tight leading-tight">
+              <h2 className="text-xl sm:text-3xl md:text-4xl font-black text-white tracking-tight leading-tight">
                 Engineering Designed to Drive <span className="text-[#60A5FA]">Measurable Business ROI</span>
               </h2>
               {data.overviewText.map((p, idx) => (
@@ -256,22 +249,6 @@ const SEOLandingPage: React.FC<SEOLandingPageProps> = ({ pageSlug: explicitSlug 
                   {p}
                 </p>
               ))}
-
-              <div className="pt-2">
-                <span className="text-[10px] sm:text-xs font-mono uppercase text-zinc-400 font-bold tracking-wider block mb-2 sm:mb-3">
-                  Core Keywords & Search Coverage
-                </span>
-                <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                  <span className="px-2.5 py-1 rounded-lg bg-[#DB2777]/10 border border-[#DB2777]/30 text-[#DB2777] text-[11px] sm:text-xs font-bold">
-                    #{data.primaryKeyword}
-                  </span>
-                  {data.secondaryKeywords.map((kw, idx) => (
-                    <span key={idx} className="px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 text-zinc-300 text-[11px] sm:text-xs font-medium">
-                      #{kw}
-                    </span>
-                  ))}
-                </div>
-              </div>
             </div>
 
             <div className="lg:col-span-5">
@@ -306,10 +283,10 @@ const SEOLandingPage: React.FC<SEOLandingPageProps> = ({ pageSlug: explicitSlug 
           <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12">
             
             <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12 space-y-2.5">
-              <span className="text-[11px] sm:text-xs font-black uppercase tracking-widest text-[#DB2777]">
+              <span className="text-xs font-black uppercase tracking-widest text-[#DB2777]">
                 Technical Capabilities
               </span>
-              <h2 className="text-xl sm:text-3xl md:text-4xl font-black text-white uppercase tracking-tight">
+              <h2 className="text-xl sm:text-3xl md:text-4xl font-black text-white tracking-tight">
                 {data.featuresHeadline}
               </h2>
               <p className="text-zinc-400 text-xs sm:text-sm font-normal">
@@ -354,10 +331,10 @@ const SEOLandingPage: React.FC<SEOLandingPageProps> = ({ pageSlug: explicitSlug 
         {/* ========================================================= */}
         <section className="py-10 sm:py-20 max-w-7xl mx-auto px-4 sm:px-8 lg:px-12">
           <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12 space-y-2.5">
-            <span className="text-[11px] sm:text-xs font-black uppercase tracking-widest text-[#DB2777]">
+            <span className="text-xs font-black uppercase tracking-widest text-[#DB2777]">
               Technology Stack
             </span>
-            <h2 className="text-xl sm:text-3xl md:text-4xl font-black text-white uppercase tracking-tight">
+            <h2 className="text-xl sm:text-3xl md:text-4xl font-black text-white tracking-tight">
               Enterprise Tools & Proven Frameworks
             </h2>
             <p className="text-zinc-400 text-xs sm:text-sm font-normal">
@@ -396,10 +373,10 @@ const SEOLandingPage: React.FC<SEOLandingPageProps> = ({ pageSlug: explicitSlug 
           <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12">
             
             <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12 space-y-2.5">
-              <span className="text-[11px] sm:text-xs font-black uppercase tracking-widest text-[#DB2777]">
+              <span className="text-xs font-black uppercase tracking-widest text-[#DB2777]">
                 Delivery Roadmap
               </span>
-              <h2 className="text-xl sm:text-3xl md:text-4xl font-black text-white uppercase tracking-tight">
+              <h2 className="text-xl sm:text-3xl md:text-4xl font-black text-white tracking-tight">
                 From Specification to Production Launch
               </h2>
               <p className="text-zinc-400 text-xs sm:text-sm font-normal">
@@ -435,10 +412,10 @@ const SEOLandingPage: React.FC<SEOLandingPageProps> = ({ pageSlug: explicitSlug 
         {/* ========================================================= */}
         <section className="py-10 sm:py-20 max-w-5xl mx-auto px-4 sm:px-8">
           <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12 space-y-2.5">
-            <span className="text-[11px] sm:text-xs font-black uppercase tracking-widest text-[#DB2777]">
+            <span className="text-xs font-black uppercase tracking-widest text-[#DB2777]">
               Frequently Asked Questions
             </span>
-            <h2 className="text-xl sm:text-3xl font-black text-white uppercase tracking-tight">
+            <h2 className="text-xl sm:text-3xl font-black text-white tracking-tight">
               Everything You Need to Know
             </h2>
             <p className="text-zinc-400 text-xs sm:text-sm font-normal">
@@ -495,10 +472,10 @@ const SEOLandingPage: React.FC<SEOLandingPageProps> = ({ pageSlug: explicitSlug 
             <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 sm:mb-8">
                 <div>
-                  <span className="text-[11px] sm:text-xs font-black uppercase tracking-widest text-[#DB2777]">
+                  <span className="text-xs font-black uppercase tracking-widest text-[#DB2777]">
                     Explore Ecosystem
                   </span>
-                  <h3 className="text-lg sm:text-2xl font-black text-white uppercase">
+                  <h3 className="text-lg sm:text-2xl font-black text-white">
                     Related Engineering Solutions
                   </h3>
                 </div>
@@ -541,12 +518,12 @@ const SEOLandingPage: React.FC<SEOLandingPageProps> = ({ pageSlug: explicitSlug 
         {/* ========================================================= */}
         {/* FAST ACTION CALL-TO-ACTION STRIP                          */}
         {/* ========================================================= */}
-        <section className="py-12 sm:py-16 bg-[#050508] border-t border-white/10 text-center text-white">
+        <section className="py-12 sm:py-16 pb-20 sm:pb-24 bg-[#050508] border-t border-white/10 text-center text-white">
           <div className="max-w-3xl mx-auto px-4 sm:px-8 space-y-3.5">
-            <span className="text-[11px] sm:text-xs font-mono uppercase tracking-widest text-[#DB2777] font-bold">
+            <span className="text-xs font-mono uppercase tracking-widest text-[#DB2777] font-bold">
               Ready To Get Started?
             </span>
-            <h2 className="text-xl sm:text-3xl font-black uppercase tracking-tight">
+            <h2 className="text-xl sm:text-3xl font-black tracking-tight">
               Launch Your {data.title} Project
             </h2>
             <p className="text-xs sm:text-sm text-zinc-400 font-normal max-w-xl mx-auto leading-relaxed">
@@ -555,7 +532,7 @@ const SEOLandingPage: React.FC<SEOLandingPageProps> = ({ pageSlug: explicitSlug 
             <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
               <Link
                 to="/contact"
-                className="px-6 py-3 rounded-full bg-[#DB2777] hover:bg-[#DB2777]/90 text-white font-extrabold text-xs sm:text-sm shadow-md transition-all hover:scale-105"
+                className="px-6 py-3.5 rounded-full bg-[#DB2777] hover:bg-[#DB2777]/90 text-white font-extrabold text-xs sm:text-sm shadow-md transition-all hover:scale-105"
               >
                 Book a Free Consultation
               </Link>
@@ -563,7 +540,7 @@ const SEOLandingPage: React.FC<SEOLandingPageProps> = ({ pageSlug: explicitSlug 
                 href={`https://wa.me/919528991434?text=Hi%20Pavion%20Technologies%2C%20I%20want%20to%20discuss%20a%20project%20for%20${encodeURIComponent(data.title)}.`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-5 py-3 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs sm:text-sm shadow-md transition-all inline-flex items-center gap-1.5"
+                className="px-5 py-3.5 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs sm:text-sm shadow-md transition-all inline-flex items-center gap-1.5"
               >
                 <MessageSquare size={14} />
                 <span>WhatsApp</span>

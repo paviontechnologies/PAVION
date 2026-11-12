@@ -4,8 +4,6 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Code2, Cpu, Cloud, Palette, Smartphone, Sparkles, TrendingUp, CheckCircle2, ShieldCheck, Users } from 'lucide-react';
 import SEO from '../components/SEO';
-import HorizontalShowcase from '../components/HorizontalShowcase';
-import AISection from '../components/AISection';
 import ProcessSection from '../components/ProcessSection';
 import Features from '../components/Features';
 import ContactNew from '../components/ContactNew';
@@ -304,12 +302,6 @@ const ServicesPage: React.FC = () => {
           </div>
         </div>
       </section>
-
-      {/* Horizontal Interactive Showcase */}
-      <HorizontalShowcase />
-
-      {/* AI Solutions Deep Dive */}
-      <AISection />
 
       {/* Process Section */}
       <ProcessSection />

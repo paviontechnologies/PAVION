@@ -1517,25 +1517,25 @@ const AIChatBot: React.FC = () => {
             setIsOpen(!isOpen);
             setIsMinimized(false);
           }}
-          className={`relative flex items-center gap-2.5 px-4.5 py-3 sm:px-5 sm:py-3.5 rounded-full font-black text-sm shadow-2xl transition-all duration-300 ${
+          className={`relative flex items-center justify-center rounded-full font-black text-sm shadow-2xl transition-all duration-300 ${
             isOpen 
-              ? 'bg-[#0D1222] text-white border border-white/20 shadow-black/50' 
-              : 'bg-gradient-to-r from-[#DB2777] via-[#F59E0B] to-[#60A5FA] text-white shadow-pink-600/30 hover:shadow-pink-600/50'
+              ? 'w-11 h-11 sm:w-auto sm:h-auto sm:px-5 sm:py-3.5 bg-[#0D1222] text-white border border-white/20 shadow-black/50' 
+              : 'w-11 h-11 sm:w-auto sm:h-auto sm:px-5 sm:py-3.5 bg-gradient-to-r from-[#DB2777] via-[#F59E0B] to-[#60A5FA] text-white shadow-pink-600/30 hover:shadow-pink-600/50'
           }`}
           aria-label={isOpen ? 'Close AI Assistant' : 'Open Riva AI Assistant'}
         >
           {isOpen ? (
             <>
-              <X size={20} className="text-zinc-300" />
-              <span className="hidden sm:inline font-bold">Close</span>
+              <X size={18} className="text-zinc-300" />
+              <span className="hidden sm:inline font-bold ml-1.5">Close</span>
             </>
           ) : (
             <>
               <div className="relative">
-                <Bot size={22} className="text-white" />
+                <Bot size={20} className="text-white" />
                 <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-emerald-400 border-2 border-[#050508] rounded-full animate-pulse" />
               </div>
-              <span className="font-extrabold tracking-wide">Ask Riva</span>
+              <span className="hidden sm:inline font-extrabold tracking-wide ml-2">Ask Riva</span>
               
               {/* Unread Ping */}
               {hasUnread && (
