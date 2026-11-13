@@ -21,83 +21,82 @@ import {
 } from 'lucide-react';
 import SEO from '../components/SEO';
 
-// Engagement Models
+// 3 Clear Engagement Models
 const engagementModels = [
   {
+    title: 'Fixed-Scope MVP Sprints',
+    target: 'Best for Startups & Founders',
+    tag: '4 to 6 Weeks Guaranteed Delivery',
+    desc: 'Turnkey engineering for defined MVPs, custom business platforms, and digital products with locked sprint milestones and guaranteed timeline.',
+    features: [
+      'Fixed milestone contracts with zero unexpected hourly billing',
+      'End-to-end architecture, UI/UX, and automated QA test suite',
+      '100% intellectual property & source code transfer from day one',
+      'Weekly working staging demos & dedicated Project Lead',
+    ],
+    highlight: false,
+  },
+  {
     title: 'Dedicated Engineering Squads',
-    tag: 'Most Popular for Scaling',
-    desc: 'Autonomous, cross-functional squads engineered to take complete ownership of your product roadmap, sprints, and production velocity.',
+    target: 'Best for Scaling Tech Companies',
+    tag: 'Most Popular for Velocity',
+    desc: 'Autonomous, cross-functional squads engineered to take complete ownership of your product roadmap, sprint velocity, and continuous releases.',
     features: [
-      'Tech Lead + Senior Developers + QA + DevOps',
-      'Direct integration with Jira, GitHub & Slack',
-      'Weekly sprint demos & velocity reports',
-      'Scalable squad capacity as requirements evolve'
+      'Tech Lead + Senior Developers + QA + DevOps specialists',
+      'Direct integration with Jira/Linear, GitHub, and Slack',
+      'Bi-weekly live production demos & daily async standups',
+      'Scalable squad capacity with 14-day scaling flexibility',
     ],
-    highlight: true
+    highlight: true,
   },
   {
-    title: 'Staff Augmentation',
-    tag: 'Quick Team Expansion',
-    desc: 'Inject pre-vetted senior developers directly into your in-house engineering team to bridge critical skill gaps and accelerate deliveries.',
+    title: 'Enterprise Staff Augmentation',
+    target: 'Best for Enterprise IT & CTOs',
+    tag: '48-Hour Onboarding & Zero-Cost Trial',
+    desc: 'Inject pre-vetted senior individual contributors directly into your in-house engineering team to bridge critical skill gaps and hit sprint deadlines.',
     features: [
-      'Top 1% vetted individual contributors',
-      'Your existing tech lead manages day-to-day tasks',
-      'Overlapping timezone coverage (US, UK, UAE, India)',
-      'Flexible month-to-month contracts'
+      'Senior developers (4+ to 8+ yrs experience) ready in 48-72 hours',
+      '14-Day Zero-Cost Replacement Guarantee if not a 100% fit',
+      'Overlapping timezone coverage (US EST/PST, UK GMT, India IST)',
+      'Flexible month-to-month contracts with zero recruiter bounties',
     ],
-    highlight: false
+    highlight: false,
   },
-  {
-    title: 'Contract-to-Hire',
-    tag: 'Zero-Risk Transition',
-    desc: 'Evaluate top engineers in production for 3 to 6 months before making permanent headcount offers with zero conversion friction.',
-    features: [
-      'Evaluate live code quality & team culture fit',
-      'Seamless payroll & compliance management by Pavion',
-      'No recruitment bounty or upfront agency fee',
-      'Guaranteed smooth knowledge transfer'
-    ],
-    highlight: false
-  },
-  {
-    title: 'Project-Based Sprints',
-    tag: 'Fixed-Price Milestones',
-    desc: 'Turnkey engineering for defined MVPs, architectural refactors, AI model integrations, or enterprise migrations.',
-    features: [
-      'Guaranteed milestone deliverables & timeline',
-      'Strict fixed-scope sprint pricing',
-      'End-to-end architecture & automated QA tests',
-      '100% intellectual property transfer upon launch'
-    ],
-    highlight: false
-  }
 ];
 
-// Tech Stacks & Talent Roles
+// Tech Stacks & Talent Roles with Experience Brackets & Tech Depth
 const talentStacks = [
   {
-    category: 'Full-Stack & Web',
+    category: 'Senior Full-Stack & Cloud Engineers',
+    experience: '4 – 8 Years Experience',
+    techDepth: 'React, Next.js 15, TypeScript, Node.js, Python (FastAPI/Django), PostgreSQL, AWS ECS',
     icon: Code2,
-    skills: ['React', 'Next.js 15', 'TypeScript', 'Node.js', 'Python (FastAPI/Django)', 'Go', 'GraphQL', 'Tailwind CSS']
+    skills: ['Next.js 15', 'TypeScript', 'Node.js', 'FastAPI', 'PostgreSQL', 'AWS ECS', 'Docker', 'GraphQL']
   },
   {
-    category: 'AI & Machine Learning',
+    category: 'AI & Autonomous Systems Engineers',
+    experience: '3 – 6 Years Experience',
+    techDepth: 'PyTorch, OpenAI GPT-4o, Claude Tool-Use, LangChain, pgvector, Enterprise RAG, Private Inference',
     icon: Sparkles,
-    skills: ['PyTorch', 'OpenAI API', 'LangChain', 'RAG Pipelines', 'Vector Databases (Pinecone/Milvus)', 'HuggingFace', 'Llama 3']
+    skills: ['Enterprise RAG', 'LangChain', 'pgvector', 'PyTorch', 'Vector DBs', 'Private LLMs', 'Milvus', 'HuggingFace']
   },
   {
-    category: 'Mobile Applications',
+    category: 'Mobile Systems Engineers (iOS & Android)',
+    experience: '4 – 7 Years Experience',
+    techDepth: 'React Native, Flutter, Swift, Kotlin, Offline-First SQLite Sync, Native Bridges, App Store CI/CD',
     icon: Smartphone,
-    skills: ['React Native', 'Flutter', 'Swift (iOS)', 'Kotlin (Android)', 'Offline Sync', 'App Store Deployment']
+    skills: ['React Native', 'Flutter', 'Swift (iOS)', 'Kotlin (Android)', 'Offline Sync', 'Native Bridges', 'Fastlane', 'App Store CI']
   },
   {
-    category: 'Cloud, DevOps & Data',
+    category: 'Cloud Infrastructure & DevOps Architects',
+    experience: '5 – 10 Years Experience',
+    techDepth: 'AWS / GCP Architecture, Kubernetes (EKS), Terraform IaC, GitHub Actions CI/CD, SOC-2 & Zero-Trust IAM',
     icon: Cloud,
-    skills: ['AWS (ECS, Lambda, S3)', 'Docker & Kubernetes', 'Terraform (IaC)', 'CI/CD Pipelines', 'PostgreSQL', 'Redis', 'MongoDB']
+    skills: ['AWS / GCP', 'Kubernetes', 'Terraform IaC', 'CI/CD Pipelines', 'Docker', 'SOC-2 Compliance', 'Redis', 'Monitoring']
   }
 ];
 
-// Vetting Stages
+// Vetting Stages (Top 3% Acceptance Rate)
 const vettingStages = [
   {
     step: '01',
@@ -504,7 +503,7 @@ const ITStaffingPage: React.FC = () => {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
               {engagementModels.map((model, idx) => (
                 <motion.div
                   key={idx}
@@ -512,7 +511,7 @@ const ITStaffingPage: React.FC = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.1, duration: 0.5 }}
-                  className={`p-8 rounded-3xl border transition-all duration-300 relative flex flex-col justify-between ${
+                  className={`p-6 sm:p-8 rounded-3xl border transition-all duration-300 relative flex flex-col justify-between ${
                     model.highlight
                       ? 'bg-[#0D1222] border-[#60A5FA]/40 shadow-2xl shadow-blue-900/20'
                       : 'bg-[#0D1222]/60 border-white/10 hover:border-white/20'
@@ -525,17 +524,20 @@ const ITStaffingPage: React.FC = () => {
                   )}
 
                   <div>
-                    <span className="text-xs font-mono font-bold text-[#DB2777] uppercase tracking-wider block mb-2">
+                    <span className="text-[11px] font-mono font-bold text-[#DB2777] uppercase tracking-wider block mb-1">
+                      {model.target}
+                    </span>
+                    <span className="text-xs font-mono text-zinc-400 block mb-3 font-semibold">
                       {model.tag}
                     </span>
-                    <h3 className="text-2xl font-black text-white mb-3">
+                    <h3 className="text-xl sm:text-2xl font-black text-white mb-3">
                       {model.title}
                     </h3>
-                    <p className="text-zinc-300 text-sm sm:text-base leading-relaxed mb-6 font-normal">
+                    <p className="text-zinc-300 text-xs sm:text-sm leading-relaxed mb-6 font-normal">
                       {model.desc}
                     </p>
 
-                    <ul className="space-y-3 mb-8">
+                    <ul className="space-y-2.5 mb-8">
                       {model.features.map((feat, fIdx) => (
                         <li key={fIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-zinc-300">
                           <CheckCircle2 size={16} className="text-[#60A5FA] flex-shrink-0 mt-0.5" />
@@ -567,31 +569,45 @@ const ITStaffingPage: React.FC = () => {
             
             <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
               <span className="text-xs tracking-[0.3em] uppercase text-[#DB2777] font-extrabold block">
-                Technical Capabilities
+                Vetted Senior Talent
               </span>
               <h2 className="text-3xl sm:text-5xl font-black text-white uppercase tracking-tight">
                 Engineers Mastered in Modern Stacks
               </h2>
               <p className="text-zinc-300 text-sm sm:text-base font-normal">
-                Our talent pool consists of senior developers with 5+ years of verified production experience across high-scale stacks.
+                Pre-vetted senior engineers with minimum 4+ years of hands-on production experience, active architectural depth, and zero-risk 14-day evaluation.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
               {talentStacks.map((stk, idx) => {
                 const Icon = stk.icon;
                 return (
                   <div
                     key={idx}
-                    className="p-6 sm:p-8 rounded-3xl bg-[#0D1222] border border-white/10 hover:border-[#60A5FA]/40 transition-all shadow-xl group"
+                    className="p-6 sm:p-8 rounded-3xl bg-[#0D1222] border border-white/10 hover:border-[#60A5FA]/40 transition-all shadow-xl group space-y-4"
                   >
-                    <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-[#60A5FA] mb-6 group-hover:scale-110 transition-transform">
-                      <Icon size={24} />
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="flex items-center gap-3">
+                        <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-[#60A5FA] group-hover:scale-110 transition-transform flex-shrink-0">
+                          <Icon size={24} />
+                        </div>
+                        <div>
+                          <h3 className="text-lg sm:text-xl font-black text-white leading-snug">
+                            {stk.category}
+                          </h3>
+                          <span className="text-xs font-mono text-emerald-400 font-bold block mt-0.5">
+                            {stk.experience}
+                          </span>
+                        </div>
+                      </div>
                     </div>
-                    <h3 className="text-xl font-black text-white mb-4">
-                      {stk.category}
-                    </h3>
-                    <div className="flex flex-wrap gap-2">
+
+                    <p className="text-xs text-zinc-400 font-normal leading-relaxed border-l-2 border-[#60A5FA]/30 pl-3">
+                      <strong className="text-zinc-200">Production Depth:</strong> {stk.techDepth}
+                    </p>
+
+                    <div className="flex flex-wrap gap-1.5 pt-1">
                       {stk.skills.map((skill, sIdx) => (
                         <span
                           key={sIdx}

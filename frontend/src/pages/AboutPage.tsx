@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 import About from '../components/About';
 import StatsSection from '../components/StatsSection';
+import SecurityComplianceSection from '../components/SecurityComplianceSection';
 
 const values = [
   {
@@ -114,6 +115,9 @@ const AboutPage: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* Security, IP Protection & Certifications */}
+      <SecurityComplianceSection />
 
       {/* Stats Section */}
       <StatsSection />

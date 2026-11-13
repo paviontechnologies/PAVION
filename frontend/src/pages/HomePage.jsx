@@ -36,6 +36,7 @@ import EnterprisePartnershipSection from '../components/EnterprisePartnershipSec
 import ArchitectureComparisonTable from '../components/ArchitectureComparisonTable';
 import AEOFAQSection from '../components/AEOFAQSection';
 import FoundersSection from '../components/FoundersSection';
+import HowWeWorkSection from '../components/HowWeWorkSection';
 
 // Product showroom category data for overlay
 const showroomCategories = {
@@ -374,6 +375,11 @@ const HomePage = () => {
       {/* 2.5 AGILE SQUAD & TEAM COLLABORATION SECTION                      */}
       {/* ================================================================= */}
       <TeamSynergySection onOpenModal={openEnquiryModal} />
+
+      {/* ================================================================= */}
+      {/* 2.8 HOW WE WORK & 7-DAY DELIVERY ROADMAP                          */}
+      {/* ================================================================= */}
+      <HowWeWorkSection onOpenModal={openEnquiryModal} />
 
       {/* ================================================================= */}
       {/* 3. DESCRIBE YOUR PROBLEM SECTION                                 */}

@@ -215,7 +215,7 @@ const FooterNew = () => {
               />
             </Link>
             <p className="text-zinc-300 leading-relaxed mb-6 sm:mb-8 max-w-sm font-normal text-xs sm:text-base">
-              Empowering businesses with innovative digital solutions that drive growth and create lasting impact.
+              Custom software engineering, automated ERP/CRM platforms, and dedicated tech squads built for enterprise reliability and speed.
             </p>
             <div className="space-y-3.5 sm:space-y-4 min-w-0">
               <a href="mailto:contact@paviontechnologies.com" className="flex items-center gap-3 text-zinc-300 hover:text-[#60A5FA] transition-colors group min-w-0 font-semibold" data-cursor-hover>

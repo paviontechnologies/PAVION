@@ -27,38 +27,38 @@ const ProcessView: React.FC<{ onBack?: () => void }> = ({ onBack }) => {
   const processes: ProcessStep[] = [
     {
       id: 1,
-      title: 'Requirement Analysis',
-      description: 'We begin by deep-diving into your business goals, user needs, and technical requirements to build a solid foundation.',
+      title: 'Day 01–02: Discovery & Architecture Blueprint',
+      description: 'Mutual bilateral NDA executed, deep-dive technical audit with our System Architect, database ERD mapping, and fixed milestone freeze within 24 hours.',
       icon: <Search size={24} />,
-      color: 'text-[#1769FF]'
+      color: 'text-[#60A5FA]'
     },
     {
       id: 2,
-      title: 'System Architecture Design',
-      description: 'Architecting scalable, secure, and high-performance systems using modern patterns like Microservices or Serverless.',
+      title: 'Day 03–04: Private Repo & Automated CI/CD',
+      description: 'Private GitHub/GitLab repositories provisioned with branch protection, Dockerized staging environments, and shared Slack/Jira team workspace integration.',
       icon: <LayoutTemplate size={24} />,
-      color: 'text-[#1769FF]'
+      color: 'text-[#60A5FA]'
     },
     {
       id: 3,
-      title: 'Agile Development Iterations',
-      description: 'Writing clean, maintainable code in 2-week sprints, ensuring rapid delivery and continuous feedback integration.',
+      title: 'Day 05–07: First Live Staging Commit',
+      description: 'Sprint #1 in-flight with prioritized user stories. First functional feature reviewed, tested, and deployed to your live staging URL within 72 hours.',
       icon: <Code2 size={24} />,
-      color: 'text-[#1769FF]'
+      color: 'text-[#60A5FA]'
     },
     {
       id: 4,
-      title: 'Rigorous QA & Testing',
-      description: 'Automated and manual testing protocols to ensure 99.9% crash-free sessions and robust security compliance.',
+      title: 'Ongoing: Bi-Weekly Demos & Automated QA',
+      description: 'Working software demonstrated to stakeholders every 14 days. Automated unit, integration, and security regression testing running on every PR.',
       icon: <ShieldCheck size={24} />,
-      color: 'text-[#1769FF]'
+      color: 'text-[#60A5FA]'
     },
     {
       id: 5,
-      title: 'Deployment & Support',
-      description: 'Seamless CI/CD deployment to cloud infrastructure followed by 24/7 monitoring and optimization.',
+      title: 'Milestone Handover: 100% IP & Source Code Transfer',
+      description: 'Zero vendor lock-in. Full intellectual property, repository ownership, architectural runbooks, and cloud credentials assigned to your company.',
       icon: <Rocket size={24} />,
-      color: 'text-[#1769FF]'
+      color: 'text-[#60A5FA]'
     }
   ];
 
@@ -103,7 +103,7 @@ const ProcessView: React.FC<{ onBack?: () => void }> = ({ onBack }) => {
           transition={{ delay: 0.1 }}
           className="text-4xl sm:text-6xl font-black text-white mb-6 uppercase tracking-tight"
         >
-          Engineering <span className="text-[#60A5FA]">Excellence</span>
+          Delivery <span className="text-[#60A5FA]">Roadmap & Process</span>
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -112,7 +112,7 @@ const ProcessView: React.FC<{ onBack?: () => void }> = ({ onBack }) => {
           transition={{ delay: 0.2 }}
           className="text-sm sm:text-lg text-zinc-300 max-w-2xl mx-auto font-normal leading-relaxed"
         >
-          Our systematic approach transforms complex requirements into robust, scalable software solutions.
+          From day-one architecture alignment to bi-weekly production demos, explore how our engineering squads collaborate transparently with your team.
         </motion.p>
       </div>
 

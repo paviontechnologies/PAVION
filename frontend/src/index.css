@@ -113,6 +113,15 @@
     overflow-wrap: anywhere;
   }
 
+  /* Authoritative Enterprise Typography Hierarchy */
+  h1, h2, h3 {
+    letter-spacing: -0.025em;
+  }
+
+  p {
+    line-height: 1.65;
+  }
+
   /* Safari / WebKit GPU optimization for glassmorphism and blurs */
   @supports (-webkit-backdrop-filter: none) {
     .backdrop-blur-sm,
