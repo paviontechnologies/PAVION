@@ -6,7 +6,7 @@ import { ArrowRight, Code2, Cpu, Cloud, Palette, Smartphone, Sparkles, TrendingU
 import SEO from '../components/SEO';
 import ProcessSection from '../components/ProcessSection';
 import Features from '../components/Features';
-import ContactNew from '../components/ContactNew';
+import HorizontalShowcase from '../components/HorizontalShowcase';
 
 const serviceCategories = [
   {
@@ -303,14 +303,14 @@ const ServicesPage: React.FC = () => {
         </div>
       </section>
 
+      {/* Horizontal Interactive Showcase */}
+      <HorizontalShowcase />
+
       {/* Process Section */}
       <ProcessSection />
 
       {/* Features / Why Choose Us */}
       <Features />
-
-      {/* Main Services Interactive Proposal / Contact Form */}
-      <ContactNew />
     </>
   );
 };

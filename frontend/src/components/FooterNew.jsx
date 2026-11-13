@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Link } from 'react-router-dom';
-import { ArrowUp, ArrowUpRight, Mail, Phone, MapPin, CheckCircle2 } from 'lucide-react';
+import { ArrowUp, Mail, Phone, MapPin, CheckCircle2 } from 'lucide-react';
 import logoWhite from '../Images/logo-white.png';
 import MagneticButton from './MagneticButton';
 
@@ -146,34 +146,6 @@ const FooterNew = () => {
         </div>
       </div>
 
-      {/* CTA Section */}
-      <div className="relative z-10 border-b border-white/10">
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-16 md:py-24">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <span className="text-sm tracking-[0.3em] uppercase text-[#60A5FA] font-extrabold block mb-6">
-                Let's Create Together
-              </span>
-              <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-white leading-tight mb-6 uppercase">
-                Have a project in mind?
-              </h2>
-              <p className="text-base sm:text-lg md:text-xl text-zinc-300 font-normal">
-                We'd love to hear about it. Get in touch and let's make something amazing.
-              </p>
-            </div>
-            <div className="lg:text-right">
-              <Link
-                to="/contact"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-4 px-10 py-6 bg-[#DB2777] hover:bg-[#DB2777]/90 text-white rounded-full text-base sm:text-lg font-black transition-all duration-500 group shadow-lg"
-                data-cursor-hover
-              >
-                <span>Start a Project</span>
-                <ArrowUpRight size={24} className="group-hover:rotate-45 transition-transform duration-500" />
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
 
       {/* Engineering Credibility Bar */}
       <div className="py-5 sm:py-6 border-b border-white/10 bg-gradient-to-r from-transparent via-white/[0.03] to-transparent">

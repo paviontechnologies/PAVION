@@ -35,8 +35,6 @@ import TeamSynergySection from '../components/TeamSynergySection';
 import EnterprisePartnershipSection from '../components/EnterprisePartnershipSection';
 import ArchitectureComparisonTable from '../components/ArchitectureComparisonTable';
 import AEOFAQSection from '../components/AEOFAQSection';
-import FoundersSection from '../components/FoundersSection';
-import HowWeWorkSection from '../components/HowWeWorkSection';
 
 // Product showroom category data for overlay
 const showroomCategories = {
@@ -375,11 +373,6 @@ const HomePage = () => {
       {/* 2.5 AGILE SQUAD & TEAM COLLABORATION SECTION                      */}
       {/* ================================================================= */}
       <TeamSynergySection onOpenModal={openEnquiryModal} />
-
-      {/* ================================================================= */}
-      {/* 2.8 HOW WE WORK & 7-DAY DELIVERY ROADMAP                          */}
-      {/* ================================================================= */}
-      <HowWeWorkSection onOpenModal={openEnquiryModal} />
 
       {/* ================================================================= */}
       {/* 3. DESCRIBE YOUR PROBLEM SECTION                                 */}
@@ -968,11 +961,6 @@ const HomePage = () => {
       {/* Stats and Testimonials */}
       <StatsSection />
       <TestimonialsNew />
-
-      {/* ================================================================= */}
-      {/* 9.8 LEADERSHIP & FOUNDERS SECTION (AUTHENTIC B2B CREDIBILITY)     */}
-      {/* ================================================================= */}
-      <FoundersSection onOpenModal={openEnquiryModal} />
 
       {/* ================================================================= */}
       {/* 10. AEO & GEO OBJECTIVE COMPARISON DATA TABLE                     */}
