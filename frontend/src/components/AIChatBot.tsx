@@ -142,7 +142,7 @@ About Pavion Technologies:
 - Company: Pavion Technologies is a premier AI and Digital Systems Engineering Agency.
 - Global HQ: 1st Floor, Landmark Cyberpark, Plus Offices, Sector 67, Gurugram, Haryana 122101, India.
 - Founders: Rahul Bajediyal (CEO & System Architect) and Priyanshu Gupta (Co-Founder & Product Lead). Team of 20+ specialized engineers.
-- Direct Contact: Phone & WhatsApp: +91 95289-91434 / +91 74559-75301. Email: Contact@paviontechnologies.com.
+- Direct Contact: Phone & WhatsApp: +91 95289-91434 / +91 74559-75301. Email: contact@paviontechnologies.com.
 - Office Hours: Monday to Saturday, 9:30 AM to 7:00 PM IST.
 
 Core Capabilities:
@@ -1137,7 +1137,7 @@ const AIChatBot: React.FC = () => {
         id: Date.now().toString(),
         sender: 'bot',
         type: 'text',
-        text: "📍 **Pavion Technologies Global HQ & Contact:**\n\n🏢 **Address**: 1st Floor, Landmark Cyberpark, Plus Offices, Sector 67, Gurugram, Haryana 122101, India\n\n⏰ **Office Hours**: Monday – Saturday, 9:30 AM to 7:00 PM IST\n📞 **Phone & WhatsApp**: [+91 95289-91434](tel:+919528991434) / [+91 74559-75301](tel:+917455975301)\n✉️ **Email**: [Contact@paviontechnologies.com](mailto:Contact@paviontechnologies.com)\n\nYou are welcome to visit our offices in Gurugram or schedule an online video consultation!",
+        text: "📍 **Pavion Technologies Global HQ & Contact:**\n\n🏢 **Address**: 1st Floor, Landmark Cyberpark, Plus Offices, Sector 67, Gurugram, Haryana 122101, India\n\n⏰ **Office Hours**: Monday – Saturday, 9:30 AM to 7:00 PM IST\n📞 **Phone & WhatsApp**: [+91 95289-91434](tel:+919528991434) / [+91 74559-75301](tel:+917455975301)\n✉️ **Email**: [contact@paviontechnologies.com](mailto:contact@paviontechnologies.com)\n\nYou are welcome to visit our offices in Gurugram or schedule an online video consultation!",
         timestamp: time,
         link: { 
           text: 'Open Landmark Cyberpark on Google Maps', 
@@ -1440,9 +1440,9 @@ const AIChatBot: React.FC = () => {
       topic: bookingFormData.topic
     };
 
-    // Real Live HTTP Email Dispatch to Contact@paviontechnologies.com
+    // Real Live HTTP Email Dispatch to contact@paviontechnologies.com
     try {
-      await fetch('https://formsubmit.co/ajax/Contact@paviontechnologies.com', {
+      await fetch('https://formsubmit.co/ajax/contact@paviontechnologies.com', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -1472,7 +1472,7 @@ const AIChatBot: React.FC = () => {
         id: Date.now().toString(),
         sender: 'bot',
         type: 'meeting_confirmation',
-        text: `🎉 **Consultation Successfully Scheduled!**\n\nMeeting Reference: **#${meetingId}**\n\n• **Client**: ${meetingObj.name}\n• **Scheduled Slot**: ${meetingObj.date} at ${meetingObj.timeSlot}\n• **Discussion**: ${meetingObj.topic}\n\n📧 **Email Confirmation**: \`${meetingObj.email}\`\n📱 **WhatsApp / SMS**: \`${meetingObj.phone}\`\n\nOur engineering director has received your booking details at \`Contact@paviontechnologies.com\`. We look forward to meeting you!`,
+        text: `🎉 **Consultation Successfully Scheduled!**\n\nMeeting Reference: **#${meetingId}**\n\n• **Client**: ${meetingObj.name}\n• **Scheduled Slot**: ${meetingObj.date} at ${meetingObj.timeSlot}\n• **Discussion**: ${meetingObj.topic}\n\n📧 **Email Confirmation**: \`${meetingObj.email}\`\n📱 **WhatsApp / SMS**: \`${meetingObj.phone}\`\n\nOur engineering director has received your booking details at \`contact@paviontechnologies.com\`. We look forward to meeting you!`,
         timestamp: time,
         meetingData: meetingObj,
         options: [

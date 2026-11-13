@@ -71,7 +71,7 @@ export const CookieConsent: React.FC = () => {
                     Privacy & Cookie Choices
                   </h3>
                   <span className="text-[11px] font-mono text-zinc-400">
-                    Zero Ad-Trackers • GDPR & CCPA Compliant
+                    Strict Privacy Controls • No Third-Party Trackers
                   </span>
                 </div>
               </div>
@@ -88,14 +88,14 @@ export const CookieConsent: React.FC = () => {
 
             {/* Description */}
             <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed font-normal">
-              We use essential cookies to maintain system security and anonymized speed telemetry to deliver a lightning-fast experience. We never sell your data or train public AI models on client repositories.
+              We use essential cookies to maintain site security and anonymous performance telemetry. We do not sell your personal information or deploy third-party advertising cookies.
             </p>
 
             {/* Privacy Link */}
             <div className="flex items-center gap-1.5 text-xs text-[#60A5FA]">
               <ShieldCheck size={14} className="text-[#60A5FA]" />
               <Link to="/privacy" className="hover:underline font-semibold flex items-center gap-1">
-                <span>Read our Privacy Policy & NDA Guarantee</span>
+                <span>Read our Privacy Policy</span>
                 <ArrowRight size={12} />
               </Link>
             </div>

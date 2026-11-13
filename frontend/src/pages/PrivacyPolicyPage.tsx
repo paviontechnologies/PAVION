@@ -56,7 +56,7 @@ const PrivacyPolicyPage: React.FC = () => {
       content: (
         <>
           <p className="mb-3 text-zinc-300 leading-relaxed">
-            Enterprise trust is our core foundation:
+            We safeguard client interests through binding legal agreements and strict intellectual property policies:
           </p>
           <ul className="space-y-2 text-zinc-300 list-disc pl-5">
             <li><strong className="text-white">Strict Bilateral NDAs:</strong> All project discussions, codebases, architectural schemas, and trade secrets are protected under binding Non-Disclosure Agreements prior to sprint kickoffs.</li>
@@ -162,7 +162,7 @@ const PrivacyPolicyPage: React.FC = () => {
             <div className="mt-6 flex flex-wrap items-center gap-4 text-xs font-mono text-zinc-400">
               <span>Last Updated: <strong className="text-zinc-200">{lastUpdated}</strong></span>
               <span>•</span>
-              <span>Entity: <strong className="text-zinc-200">Pavion Technologies LLP</strong></span>
+              <span>Entity: <strong className="text-zinc-200">Pavion Technologies Private Limited</strong></span>
             </div>
           </header>
 
@@ -216,7 +216,7 @@ const PrivacyPolicyPage: React.FC = () => {
                 For questions regarding this policy, exercising your GDPR/CCPA data rights, or custom NDA verification, contact our legal counsel:
               </p>
               <div className="p-4 rounded-2xl bg-black/40 border border-white/10 inline-block font-mono text-sm text-zinc-200">
-                Email: <a href="mailto:Contact@paviontechnologies.com" className="text-[#60A5FA] hover:underline font-bold">Contact@paviontechnologies.com</a>
+                Email: <a href="mailto:contact@paviontechnologies.com" className="text-[#60A5FA] hover:underline font-bold">contact@paviontechnologies.com</a>
                 <br />
                 Address: 1st Floor, Landmark Cyberpark, Plus Offices, Sector 67, Gurugram, Haryana 122101
               </div>

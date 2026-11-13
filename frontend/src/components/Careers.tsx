@@ -205,8 +205,8 @@ const Careers: React.FC = () => {
             Build Your Career <span className="text-[#60A5FA]">With Us</span>
           </h1>
           <p className="text-zinc-300 text-sm sm:text-lg font-normal max-w-3xl mx-auto">
-            We're always looking for talented individuals who are passionate about technology and innovation.
-            Submit your application and let's create the future together.
+            We are always looking for sharp engineers, systems designers, and practical builders.
+            Submit your profile to connect directly with our engineering leadership.
           </p>
         </motion.div>
 
@@ -242,8 +242,7 @@ const Careers: React.FC = () => {
           <div className="mb-10 relative z-10">
             <h2 className="text-2xl sm:text-3xl font-black text-white mb-4 uppercase">Application Form</h2>
             <p className="text-zinc-300 leading-relaxed max-w-2xl font-normal text-sm sm:text-base">
-              Fill out the form below to submit your application. We're excited to learn more about you
-              and explore how you can contribute to our innovative team.
+              Fill out the form below with your background, code repositories, or resume. Our engineering leads review each application to evaluate technical fit.
             </p>
           </div>
 

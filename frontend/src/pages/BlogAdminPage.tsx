@@ -126,7 +126,7 @@ export const BlogAdminPage: React.FC = () => {
 
   const handleDownloadResume = (app: StoredJobApplication) => {
     if (!app.resumeDataUrl) {
-      alert(`Resume file "${app.resumeFileName}" content was not stored locally due to size limits. Please check the notification email sent to Contact@paviontechnologies.com.`);
+      alert(`Resume file "${app.resumeFileName}" content was not stored locally due to size limits. Please check the notification email sent to contact@paviontechnologies.com.`);
       return;
     }
     const link = document.createElement('a');

@@ -14,61 +14,61 @@ interface FAQItem {
 const faqs: FAQItem[] = [
   {
     question: 'How much does custom software development cost at Pavion Technologies?',
-    directAnswer: 'Custom software projects at Pavion Technologies typically range between $3,500 to $15,000 for MVPs and targeted web/mobile applications, while comprehensive enterprise ERP, multi-branch CRM, and custom AI systems range from $15,000 to $50,000+. We deliver fixed-price milestone contracts within 24 hours so you never pay for unexpected hourly scope creep.',
+    directAnswer: 'Custom software engagements typically range from $3,500 to $15,000 for focused MVPs and web or mobile applications, while enterprise ERP, multi-branch CRM, and custom AI systems range between $15,000 and $50,000+. We provide fixed-price milestone contracts within 24 hours of discovery, eliminating unexpected hourly scope creep.',
     details: [
-      'MVP Sprints (4 to 6 weeks): Best for founders and product launches requiring fast market validation.',
-      'Custom ERP & CRM Systems: Multi-branch inventory, zero-trust billing, automated payroll, and accounting engines.',
-      'Dedicated Engineering Retainers: Full-time senior developers billed on transparent monthly cycles with 48-hour onboarding.',
+      'Early-stage MVP sprints run 4 to 6 weeks for founders needing fast validation in the hands of real users.',
+      'Full ERP & CRM builds include inventory synchronization across branches, automated invoicing, and role-based permissions.',
+      'Dedicated engineering retainers provide full-time senior developers billed monthly with 48-hour onboarding.',
     ],
     category: 'Pricing & Contracts',
   },
   {
     question: 'How quickly can Pavion Technologies deploy a dedicated engineering squad?',
-    directAnswer: 'Pavion Technologies deploys senior full-stack, AI, and mobile engineering squads within 48 to 72 hours of project scope confirmation. Every engineer is pre-vetted across modern stacks (Next.js 15, Python, Node.js, React Native, AWS) and integrates directly into your Slack, Jira, and GitHub repositories.',
+    directAnswer: 'We deploy dedicated engineering squads within 48 to 72 hours of project scope confirmation. Every engineer is pre-vetted across modern stacks (Next.js, Python, Node.js, React Native, AWS) and integrates directly into your existing Slack, Jira, and GitHub workflows.',
     numberedSteps: [
-      'Day 1: Technical discovery call and architecture requirements alignment.',
-      'Day 2: Developer profile review and direct technical interview with your team.',
-      'Day 3: Repository access granted, NDA signed, and first git commit pushed to staging.',
-      'Weekly Cadence: Daily standups, production sprint demos, and automated CI/CD pipeline deployments.',
+      'Technical discovery and architecture requirements alignment with our engineering lead.',
+      'Review developer profiles and conduct direct technical interviews with your team.',
+      'Sign mutual NDA, grant repository access, and push the initial commit to staging.',
+      'Establish daily standups, weekly demos, and automated CI/CD pipeline deployments.',
     ],
     details: [
       'Zero recruiter fees or lengthy hiring cycles.',
-      'Seamless scaling: Expand or reduce team size with 14 days notice.',
-      '100% intellectual property (IP) assigned to your organization on day one.',
+      'Scale team size up or down with straightforward 14-day notice.',
+      'Full intellectual property and source code assigned to your company from day one.',
     ],
     category: 'Engineering Teams',
   },
   {
     question: 'What is the difference between off-the-shelf SaaS and custom ERP/CRM software?',
-    directAnswer: 'Off-the-shelf SaaS solutions charge steep per-seat monthly recurring subscription fees and force your company into rigid, generic workflows with zero proprietary data ownership. Custom ERP and CRM systems engineered by Pavion give you 100% source code ownership, zero recurring user fees, and custom business logic tailored precisely to your operational workflow.',
+    directAnswer: 'Off-the-shelf software charges recurring monthly per-seat fees that escalate as you grow, while locking your data inside vendor-controlled systems. Custom software built by Pavion gives your company 100% source code ownership, zero recurring seat licenses, and workflows designed specifically for how your team operates.',
     details: [
-      'Eliminate Subscription Bloat: Stop paying $50 to $200 per user every month to third-party vendors.',
-      'Complete Data Sovereignty: Your records reside in your private PostgreSQL / AWS cloud database, never shared with third-party aggregators.',
-      'Custom API Integrations: Direct syncing with your legacy inventory, banks, WhatsApp business APIs, and payment gateways.',
+      'Avoid escalating subscription fees ($50–$200/seat/month) that penalize business growth.',
+      'Maintain full data sovereignty with all records stored in your private cloud or dedicated database.',
+      'Integrate directly with your proprietary hardware, existing warehouse tools, banks, or WhatsApp APIs.',
     ],
     category: 'ERP & CRM Architecture',
   },
   {
     question: 'How does Pavion Technologies ensure data privacy and security for custom AI implementations?',
-    directAnswer: 'Pavion Technologies enforces zero-data-retention private LLM deployments, tenant-isolated vector databases, and AES-256 encrypted database pipelines so your confidential business records are never used to train public AI models. All architectures adhere to SOC-2, HIPAA, and GDPR compliance standards.',
+    directAnswer: 'We enforce zero-data-retention private LLM deployments, tenant-isolated vector databases, and AES-256 encrypted pipelines so your proprietary business records are never exposed to public training sets. All systems are architected following SOC-2, HIPAA, and GDPR data governance standards.',
     numberedSteps: [
-      'Private Inference Endpoints: Dedicated self-hosted or private cloud endpoints (AWS Bedrock / Azure OpenAI) isolated from public training sets.',
-      'Role-Based Access Control (RBAC): Strict cryptographic access controls preventing unauthorized internal data leakage.',
-      'Audit Logging: Immutable query and ingestion logs verifying exactly which model accessed what data and when.',
+      'Deploy dedicated private inference endpoints (AWS Bedrock or Azure OpenAI) strictly isolated from public datasets.',
+      'Implement granular role-based access control (RBAC) to ensure employees only view authorized records.',
+      'Maintain immutable audit logs tracking every query and document retrieval action.',
     ],
     details: [
-      'Enterprise-grade Retrieval-Augmented Generation (RAG) with milvus/pgvector embeddings.',
-      'Automated document intelligence: PII sanitization before processing client invoices or contracts.',
+      'Secure enterprise Retrieval-Augmented Generation (RAG) using pgvector and isolated embeddings.',
+      'Automated PII scrubbing and token sanitization before processing sensitive customer invoices or contracts.',
     ],
     category: 'AI & Security',
   },
   {
     question: 'What technology stack does Pavion use for scalable web and mobile platforms?',
-    directAnswer: 'Our core technology stack is built on modern, battle-tested technologies: Next.js 15, React, TypeScript, and Tailwind CSS for frontend performance; Python (FastAPI/Django) and Node.js (NestJS/Express) for backend microservices; PostgreSQL and Redis for low-latency persistence; and AWS, GCP, and Docker for automated cloud deployments.',
+    directAnswer: 'We build on modern, production-hardened technologies: Next.js, React, TypeScript, and Tailwind CSS for frontend performance; Python (FastAPI/Django) and Node.js (NestJS/Express) for backend microservices; PostgreSQL and Redis for persistence; and AWS or GCP with Docker for automated deployments.',
     details: [
-      'Web Platforms: Sub-second Server-Side Rendered (SSR) Next.js web applications with 99+ Google Lighthouse performance scores.',
-      'Mobile Applications: Cross-platform React Native apps with native iOS Swift and Android Kotlin performance and shared business logic.',
-      'DevOps & Cloud: Terraform Infrastructure-as-Code, Kubernetes clusters, and automated GitHub Actions CI/CD pipelines.',
+      'Fast, server-rendered web applications optimized for Core Web Vitals and search crawler indexing.',
+      'Cross-platform mobile apps on React Native delivering 60fps performance on iOS and Android.',
+      'Containerized infrastructure configured with Terraform and automated GitHub Actions CI/CD.',
     ],
     category: 'Tech Stack',
   },
@@ -180,7 +180,7 @@ const AEOFAQSection: React.FC<AEOFAQSectionProps> = ({ onOpenModal }) => {
                         {faq.numberedSteps && (
                           <div className="space-y-1.5 sm:space-y-2 pt-1 sm:pt-2">
                             <span className="font-bold text-[11px] sm:text-xs font-mono uppercase tracking-wider text-[#60A5FA] block">
-                              Execution Roadmap:
+                              Typical Deployment Timeline:
                             </span>
                             <ol className="space-y-1.5 sm:space-y-2 pl-4 list-decimal marker:text-[#60A5FA] marker:font-bold">
                               {faq.numberedSteps.map((step, sIdx) => (
@@ -196,7 +196,7 @@ const AEOFAQSection: React.FC<AEOFAQSectionProps> = ({ onOpenModal }) => {
                         {faq.details && (
                           <div className="space-y-1.5 sm:space-y-2 pt-1 sm:pt-2">
                             <span className="font-bold text-[11px] sm:text-xs font-mono uppercase tracking-wider text-zinc-400 block">
-                              Key Specifications:
+                              Key Highlights:
                             </span>
                             <ul className="space-y-1 sm:space-y-1.5">
                               {faq.details.map((detail, dIdx) => (

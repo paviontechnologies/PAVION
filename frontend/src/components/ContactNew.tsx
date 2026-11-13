@@ -69,7 +69,7 @@ const ContactNew: React.FC = () => {
     setIsSubmitting(true);
     
     try {
-      const response = await fetch('https://formsubmit.co/ajax/Contact@paviontechnologies.com', {
+      const response = await fetch('https://formsubmit.co/ajax/contact@paviontechnologies.com', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -102,7 +102,7 @@ const ContactNew: React.FC = () => {
   };
 
   const copyEmailToClipboard = () => {
-    navigator.clipboard.writeText('Contact@paviontechnologies.com');
+    navigator.clipboard.writeText('contact@paviontechnologies.com');
     setCopiedEmail(true);
     setTimeout(() => setCopiedEmail(false), 2500);
   };
@@ -111,8 +111,8 @@ const ContactNew: React.FC = () => {
     {
       icon: Mail,
       label: 'Official Email',
-      value: 'Contact@paviontechnologies.com',
-      href: 'mailto:Contact@paviontechnologies.com',
+      value: 'contact@paviontechnologies.com',
+      href: 'mailto:contact@paviontechnologies.com',
       action: 'copy',
     },
     {
@@ -177,7 +177,7 @@ const ContactNew: React.FC = () => {
               <span className="text-[10px] bg-white/20 px-2 py-0.5 rounded-full uppercase font-black tracking-wider">Fastest</span>
             </a>
             <a
-              href="mailto:Contact@paviontechnologies.com?subject=Book%20a%2030-Min%20Discovery%20Call%20with%20Pavion%20Technologies&body=Hi%20Pavion%20Team%2C%0A%0AI%20would%20like%20to%20schedule%20a%2030-minute%20technical%20discovery%20call%20for%20my%20project.%0A%0ACompany%3A%0APreferred%20Time%20%2F%20Timezone%3A%0ABrief%20Project%20Overview%3A%0A%0AThank%20you!"
+              href="mailto:contact@paviontechnologies.com?subject=Book%20a%2030-Min%20Discovery%20Call%20with%20Pavion%20Technologies&body=Hi%20Pavion%20Team%2C%0A%0AI%20would%20like%20to%20schedule%20a%2030-minute%20technical%20discovery%20call%20for%20my%20project.%0A%0ACompany%3A%0APreferred%20Time%20%2F%20Timezone%3A%0ABrief%20Project%20Overview%3A%0A%0AThank%20you!"
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-extrabold text-xs sm:text-sm tracking-wide transition-all shadow-lg shadow-blue-500/20 hover:scale-105 border border-white/10"
             >
               <Calendar size={16} />
@@ -426,7 +426,7 @@ const ContactNew: React.FC = () => {
                   <span>WhatsApp Chat</span>
                 </a>
                 <a
-                  href="mailto:Contact@paviontechnologies.com?subject=Book%20a%2030-Min%20Discovery%20Call%20with%20Pavion%20Technologies"
+                  href="mailto:contact@paviontechnologies.com?subject=Book%20a%2030-Min%20Discovery%20Call%20with%20Pavion%20Technologies"
                   className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-extrabold text-xs transition-all"
                 >
                   <Calendar size={14} />

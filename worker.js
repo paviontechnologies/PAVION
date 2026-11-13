@@ -16,6 +16,101 @@ function jsonResponse(data, status = 200) {
   });
 }
 
+const ROUTE_METADATA = {
+  '/': {
+    title: 'Pavion Technologies - Custom Software, ERP/CRM & Dedicated Engineering Squads',
+    desc: 'Pavion Technologies builds enterprise custom software, automated ERP/CRM systems, and scalable web & mobile platforms. Deploy senior engineering squads in 48 hours with 100% IP ownership.',
+  },
+  '/about': {
+    title: 'About Us & Engineering Leadership | Pavion Technologies',
+    desc: 'Learn about Pavion Technologies, our Gurugram engineering headquarters, and our leadership team dedicated to building custom enterprise software and scalable AI systems.',
+  },
+  '/services': {
+    title: 'Software Engineering & AI Services | Pavion Technologies',
+    desc: 'Explore Pavion Technologies end-to-end services: custom enterprise software, automated ERP/CRM platforms, dedicated engineering squads, AI systems, and cloud architecture.',
+  },
+  '/portfolio': {
+    title: 'Client Work & Engineering Case Studies | Pavion Technologies',
+    desc: 'Explore production systems, ERP software, and web applications delivered by Pavion Technologies for startups, SMEs, and global enterprises.',
+  },
+  '/contact': {
+    title: 'Contact Engineering & Gurugram HQ | Pavion Technologies',
+    desc: 'Get in touch with Pavion Technologies. Visit our Landmark Cyberpark offices in Gurugram or schedule a direct engineering discovery call within 24 hours.',
+  },
+  '/careers': {
+    title: 'Engineering Careers & Open Roles | Pavion Technologies',
+    desc: 'Join Pavion Technologies in Gurugram or remote. We are hiring full-stack engineers, AI developers, and cloud architects to build high-velocity systems.',
+  },
+  '/blog': {
+    title: 'Engineering & AI Insights Blog | Pavion Technologies',
+    desc: 'Read in-depth guides and case studies on custom ERP systems, AI automation, software architecture, and modern web performance by Pavion Technologies engineers.',
+  },
+  '/it-staffing': {
+    title: 'Enterprise IT Staffing & Dedicated Engineering Squads | Pavion Technologies',
+    desc: 'Deploy pre-vetted senior developers and agile engineering squads in 48 hours. Zero recruiter fees, full code ownership, and seamless Slack/Jira integration.',
+  },
+  '/privacy': {
+    title: 'Privacy Policy & Data Security | Pavion Technologies',
+    desc: 'Pavion Technologies privacy policy, data security standards, and strict client confidentiality guarantees under Indian and international regulations.',
+  },
+  '/terms': {
+    title: 'Terms of Service | Pavion Technologies',
+    desc: 'Terms and conditions governing custom software engineering, milestone contracts, and dedicated development squads with Pavion Technologies Private Limited.',
+  },
+  '/ai-development-company': {
+    title: 'Custom AI Development & Autonomous Agent Engineering | Pavion Technologies',
+    desc: 'Deploy production AI systems, LLM agents, and enterprise RAG pipelines with private data isolation and SOC-2/HIPAA compliance.',
+  },
+  '/custom-software-development': {
+    title: 'Custom Software Development & System Architecture | Pavion Technologies',
+    desc: 'Bespoke enterprise software systems engineered for scale. Zero vendor lock-in, 100% intellectual property ownership, and high-performance microservices.',
+  },
+  '/web-development-company': {
+    title: 'Enterprise Web Platform & SaaS Development | Pavion Technologies',
+    desc: 'Sub-second Server-Side Rendered (SSR) web applications built with Next.js, React, and TypeScript. Optimized for speed and Core Web Vitals.',
+  },
+  '/crm-development': {
+    title: 'Custom CRM Development & Workflow Automation | Pavion Technologies',
+    desc: 'Custom CRM platforms tailored to your sales process. Multi-channel lead tracking, pipeline automation, and zero recurring per-seat subscription fees.',
+  },
+  '/ats-software-development': {
+    title: 'Custom ATS Software & Recruitment Automation | Pavion Technologies',
+    desc: 'AI-assisted applicant tracking systems (ATS) with automated resume parsing, candidate scoring, and seamless interview pipeline workflows.',
+  },
+  '/erp-software-development': {
+    title: 'Custom ERP Software & Multi-Branch Resource Planning | Pavion Technologies',
+    desc: 'Enterprise ERP systems featuring multi-branch inventory tracking, automated accounting, vendor billing, and role-based permissions with zero per-user fees.',
+  },
+  '/devops-cloud-services': {
+    title: 'DevOps & Cloud Infrastructure Engineering | Pavion Technologies',
+    desc: 'Automated CI/CD pipelines, Docker containerization, Kubernetes orchestration, and AWS/GCP cloud architectures built with Terraform Infrastructure-as-Code.',
+  },
+  '/healthcare-software-development': {
+    title: 'Healthcare Software Development (HIPAA Compliant) | Pavion Technologies',
+    desc: 'Custom EHR/EMR platforms, telemedicine solutions, and patient portals engineered to strict HIPAA and data encryption standards.',
+  },
+  '/real-estate-software': {
+    title: 'Real Estate Software & PropTech Platforms | Pavion Technologies',
+    desc: 'Custom MLS search portals, property management ERPs, tenant onboarding systems, and automated lease workflow applications.',
+  },
+  '/logistics-software': {
+    title: 'Logistics, Fleet & Supply Chain Management Software | Pavion Technologies',
+    desc: 'Real-time GPS fleet tracking, automated warehouse inventory (WMS), and TMS dispatch software tailored for transportation companies.',
+  },
+  '/startup-mvp-development': {
+    title: 'Rapid Startup MVP Development (4 to 6 Weeks) | Pavion Technologies',
+    desc: 'Turn product ideas into production-grade MVPs in 4-6 weeks with fixed milestone pricing, clean architecture, and complete source code ownership.',
+  },
+  '/us-staffing-software': {
+    title: 'US Staffing Software (VMS & Blinded Packets) | Pavion Technologies',
+    desc: 'Vendor Management Systems (VMS), blinded submittal packet generators, and US recruitment compliance portals engineered for staffing agencies.',
+  },
+  '/restaurant-management-software': {
+    title: 'Restaurant Management & POS Software Systems | Pavion Technologies',
+    desc: 'Multi-outlet restaurant POS, kitchen display systems (KDS), online ordering integrations, and real-time food recipe inventory management.',
+  },
+};
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -143,7 +238,91 @@ export default {
       }
     }
 
-    // 4. Default: delegate to Cloudflare static assets (React Single Page App)
-    return env.ASSETS.fetch(request);
+    // 4. Static assets & HTML rewrite for Dynamic Crawlers / Canonical SEO
+    const response = await env.ASSETS.fetch(request);
+    const contentType = response.headers.get('content-type') || '';
+
+    if (contentType.includes('text/html')) {
+      const cleanPath = url.pathname === '/' ? '/' : url.pathname.replace(/\/$/, '');
+      const canonicalUrl = `https://paviontechnologies.com${cleanPath === '/' ? '/' : cleanPath}`;
+      
+      let meta = ROUTE_METADATA[cleanPath];
+
+      // Handle /blog/:slug dynamically
+      if (!meta && cleanPath.startsWith('/blog/')) {
+        const blogSlug = cleanPath.replace('/blog/', '');
+        const post = await env.PAVION_BLOGS.get('post_' + blogSlug, { type: 'json' });
+        if (post && post.title) {
+          meta = {
+            title: `${post.meta_title || post.title} | Pavion Technologies`,
+            desc: post.meta_description || post.excerpt || post.title,
+          };
+        } else {
+          const titleFromSlug = blogSlug.split('-').map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+          meta = {
+            title: `${titleFromSlug} | Pavion Technologies`,
+            desc: `Read our in-depth engineering analysis on ${titleFromSlug} at Pavion Technologies.`,
+          };
+        }
+      }
+
+      const pageTitle = meta ? meta.title : 'Pavion Technologies - Custom Software, ERP/CRM & Dedicated Engineering Squads';
+      const pageDesc = meta ? meta.desc : 'Pavion Technologies builds enterprise custom software, automated ERP/CRM systems, and scalable web & mobile platforms.';
+
+      return new HTMLRewriter()
+        .on('title', {
+          element(e) {
+            e.setInnerContent(pageTitle);
+          },
+        })
+        .on('meta[name="title"]', {
+          element(e) {
+            e.setAttribute('content', pageTitle);
+          },
+        })
+        .on('meta[name="description"]', {
+          element(e) {
+            e.setAttribute('content', pageDesc);
+          },
+        })
+        .on('link[rel="canonical"]', {
+          element(e) {
+            e.setAttribute('href', canonicalUrl);
+          },
+        })
+        .on('meta[property="og:url"]', {
+          element(e) {
+            e.setAttribute('content', canonicalUrl);
+          },
+        })
+        .on('meta[property="og:title"]', {
+          element(e) {
+            e.setAttribute('content', pageTitle);
+          },
+        })
+        .on('meta[property="og:description"]', {
+          element(e) {
+            e.setAttribute('content', pageDesc);
+          },
+        })
+        .on('meta[name="twitter:url"]', {
+          element(e) {
+            e.setAttribute('content', canonicalUrl);
+          },
+        })
+        .on('meta[name="twitter:title"]', {
+          element(e) {
+            e.setAttribute('content', pageTitle);
+          },
+        })
+        .on('meta[name="twitter:description"]', {
+          element(e) {
+            e.setAttribute('content', pageDesc);
+          },
+        })
+        .transform(response);
+    }
+
+    return response;
   },
 };

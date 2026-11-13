@@ -206,7 +206,7 @@ const SEOLandingPage: React.FC<SEOLandingPageProps> = ({ pageSlug: explicitSlug 
               </a>
 
               <a
-                href={`mailto:Contact@paviontechnologies.com?subject=Book%20a%2030-Min%20Discovery%20Call%20-%20${encodeURIComponent(data.title)}`}
+                href={`mailto:contact@paviontechnologies.com?subject=Book%20a%2030-Min%20Discovery%20Call%20-%20${encodeURIComponent(data.title)}`}
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-zinc-200 font-semibold text-xs sm:text-sm transition-all"
               >
                 <Calendar size={15} className="text-[#60A5FA]" />

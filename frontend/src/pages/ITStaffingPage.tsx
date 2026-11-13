@@ -228,7 +228,7 @@ const ITStaffingPage: React.FC = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch('https://formsubmit.co/ajax/Contact@paviontechnologies.com', {
+      const response = await fetch('https://formsubmit.co/ajax/contact@paviontechnologies.com', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

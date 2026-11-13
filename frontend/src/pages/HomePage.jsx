@@ -35,6 +35,7 @@ import TeamSynergySection from '../components/TeamSynergySection';
 import EnterprisePartnershipSection from '../components/EnterprisePartnershipSection';
 import ArchitectureComparisonTable from '../components/ArchitectureComparisonTable';
 import AEOFAQSection from '../components/AEOFAQSection';
+import FoundersSection from '../components/FoundersSection';
 
 // Product showroom category data for overlay
 const showroomCategories = {
@@ -225,7 +226,7 @@ const HomePage = () => {
     setIsSubmitting(true);
     
     try {
-      const response = await fetch('https://formsubmit.co/ajax/Contact@paviontechnologies.com', {
+      const response = await fetch('https://formsubmit.co/ajax/contact@paviontechnologies.com', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -961,6 +962,11 @@ const HomePage = () => {
       {/* Stats and Testimonials */}
       <StatsSection />
       <TestimonialsNew />
+
+      {/* ================================================================= */}
+      {/* 9.8 LEADERSHIP & FOUNDERS SECTION (AUTHENTIC B2B CREDIBILITY)     */}
+      {/* ================================================================= */}
+      <FoundersSection onOpenModal={openEnquiryModal} />
 
       {/* ================================================================= */}
       {/* 10. AEO & GEO OBJECTIVE COMPARISON DATA TABLE                     */}

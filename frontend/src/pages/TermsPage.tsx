@@ -144,7 +144,7 @@ const TermsPage: React.FC = () => {
             <div className="mt-6 flex flex-wrap items-center gap-4 text-xs font-mono text-zinc-400">
               <span>Last Updated: <strong className="text-zinc-200">{lastUpdated}</strong></span>
               <span>•</span>
-              <span>Entity: <strong className="text-zinc-200">Pavion Technologies LLP</strong></span>
+              <span>Entity: <strong className="text-zinc-200">Pavion Technologies Private Limited</strong></span>
             </div>
           </header>
 

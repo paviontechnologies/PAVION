@@ -246,7 +246,7 @@ const LookingShowcaseHero = ({ onOpenModal }) => {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="text-sm sm:text-xl md:text-2xl lg:text-[1.65rem] text-zinc-200 font-semibold tracking-wide max-w-3xl mx-auto leading-snug px-2"
           >
-            For a Professional Web Design, Custom Software or AI Landing Page?
+            For Enterprise Software Platforms, Custom ERP/CRM Systems & Scalable Web Applications?
           </motion.h2>
 
           {/* CTA Button: "Contact us Today" */}

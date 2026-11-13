@@ -19,13 +19,17 @@ const SEO: React.FC<SEOProps> = ({
   description = 'Pavion Technologies builds enterprise custom software, automated ERP/CRM systems, and AI-powered web platforms. Senior engineers deployed in 48 hours with 100% IP ownership.',
   keywords = 'custom software development, AI automation, enterprise ERP solutions, CRM development, dedicated engineering squad, Next.js developer, Gurugram software company',
   ogImage = 'https://paviontechnologies.com/og-image.png',
-  ogUrl = 'https://paviontechnologies.com/',
+  ogUrl,
   ogType = 'website',
-  canonical = 'https://paviontechnologies.com/',
+  canonical,
   author,
   publishedTime,
   schema
 }) => {
+  const currentPath = typeof window !== 'undefined' ? window.location.pathname : '/';
+  const effectiveCanonical = canonical || `https://paviontechnologies.com${currentPath === '/' ? '/' : currentPath.replace(/\/$/, '')}`;
+  const effectiveOgUrl = ogUrl || effectiveCanonical;
+
   return (
     <Helmet>
       {/* Primary Meta Tags */}
@@ -36,11 +40,11 @@ const SEO: React.FC<SEOProps> = ({
       {author && <meta name="author" content={author} />}
       
       {/* Canonical URL */}
-      <link rel="canonical" href={canonical} />
+      <link rel="canonical" href={effectiveCanonical} />
       
       {/* Open Graph / Facebook */}
       <meta property="og:type" content={ogType} />
-      <meta property="og:url" content={ogUrl} />
+      <meta property="og:url" content={effectiveOgUrl} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={ogImage} />
@@ -56,7 +60,7 @@ const SEO: React.FC<SEOProps> = ({
       
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:url" content={ogUrl} />
+      <meta name="twitter:url" content={effectiveOgUrl} />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={ogImage} />

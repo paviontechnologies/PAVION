@@ -80,9 +80,9 @@ const Footer = () => {
               Empowering businesses with innovative digital solutions that drive growth and create lasting impact.
             </p>
             <div className="space-y-4">
-              <a href="mailto:Contact@paviontechnologies.com" className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors duration-500 text-sm" data-cursor-hover>
+              <a href="mailto:contact@paviontechnologies.com" className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors duration-500 text-sm" data-cursor-hover>
                 <Mail size={14} className="text-indigo-400" />
-                <span>Contact@paviontechnologies.com</span>
+                <span>contact@paviontechnologies.com</span>
               </a>
               <a href="tel:+917455975301" className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors duration-500 text-sm" data-cursor-hover>
                 <Phone size={14} className="text-indigo-400" />

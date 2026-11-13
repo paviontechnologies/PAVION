@@ -5,7 +5,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Link } from 'react-router-dom';
 import { ArrowUp, ArrowUpRight, Mail, Phone, MapPin, CheckCircle2 } from 'lucide-react';
 import logoWhite from '../Images/logo-white.png';
-import Marquee from './Marquee';
 import MagneticButton from './MagneticButton';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -176,14 +175,29 @@ const FooterNew = () => {
         </div>
       </div>
 
-      {/* Marquee */}
-      <div className="py-8 border-b border-white/10 bg-white/[0.02]">
-        <Marquee 
-          items={['React', 'Next.js', 'TypeScript', 'Node.js', 'Python', 'AWS', 'AI/ML', 'Tailwind']}
-          speed={30}
-          className="text-sm font-bold text-zinc-300"
-          separator={<span className="mx-6 text-[#60A5FA]/20">◆</span>}
-        />
+      {/* Engineering Credibility Bar */}
+      <div className="py-5 sm:py-6 border-b border-white/10 bg-gradient-to-r from-transparent via-white/[0.03] to-transparent">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-xs sm:text-sm font-mono text-zinc-300">
+          <span className="flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+            100% IP & Source Code Transfer
+          </span>
+          <span className="text-zinc-600 hidden sm:inline">•</span>
+          <span className="flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#60A5FA]" />
+            Strict Bilateral NDAs
+          </span>
+          <span className="text-zinc-600 hidden sm:inline">•</span>
+          <span className="flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#DB2777]" />
+            Dedicated Engineering Squads (48h Launch)
+          </span>
+          <span className="text-zinc-600 hidden sm:inline">•</span>
+          <span className="flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-purple-400" />
+            Gurugram HQ & Global Delivery
+          </span>
+        </div>
       </div>
 
       {/* Main Footer Content */}
@@ -204,9 +218,9 @@ const FooterNew = () => {
               Empowering businesses with innovative digital solutions that drive growth and create lasting impact.
             </p>
             <div className="space-y-3.5 sm:space-y-4 min-w-0">
-              <a href="mailto:Contact@paviontechnologies.com" className="flex items-center gap-3 text-zinc-300 hover:text-[#60A5FA] transition-colors group min-w-0 font-semibold" data-cursor-hover>
+              <a href="mailto:contact@paviontechnologies.com" className="flex items-center gap-3 text-zinc-300 hover:text-[#60A5FA] transition-colors group min-w-0 font-semibold" data-cursor-hover>
                 <Mail size={16} className="text-[#60A5FA] flex-shrink-0" />
-                <span className="text-xs sm:text-base break-all">Contact@paviontechnologies.com</span>
+                <span className="text-xs sm:text-base break-all">contact@paviontechnologies.com</span>
               </a>
               <a href="tel:+919528991434" className="flex items-center gap-3 text-zinc-300 hover:text-[#60A5FA] transition-colors font-semibold" data-cursor-hover>
                 <Phone size={16} className="text-[#60A5FA] flex-shrink-0" />
