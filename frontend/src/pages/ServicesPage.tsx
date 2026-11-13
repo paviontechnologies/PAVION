@@ -81,45 +81,6 @@ const serviceCategories = [
   }
 ];
 
-const industrySolutionsList = [
-  {
-    title: 'Healthcare Software Development',
-    desc: 'HIPAA and HITECH-compliant telehealth platforms, EHR/EMR integrations (HL7 & FHIR), and clinical triage automation.',
-    tag: 'Digital Health',
-    link: '/healthcare-software-development'
-  },
-  {
-    title: 'Real Estate Software (PropTech)',
-    desc: 'MLS/IDX property listing portals, commercial leasing CRMs, property management ERP, and virtual tour systems.',
-    tag: 'PropTech',
-    link: '/real-estate-software'
-  },
-  {
-    title: 'Logistics & Supply Chain Software',
-    desc: 'Transportation management (TMS), warehouse management (WMS), IoT fleet GPS telematics, and dynamic route optimization.',
-    tag: 'Freight Tech',
-    link: '/logistics-software'
-  },
-  {
-    title: 'Startup MVP Development Services',
-    desc: 'Turn ideas into high-converting production platforms in 6 to 8 weeks with scalable stacks and investor-ready UI.',
-    tag: 'Startup Pods',
-    link: '/startup-mvp-development'
-  },
-  {
-    title: 'US Staffing Software Development',
-    desc: 'VMS portals, high-velocity applicant pipelines, blinded resume submittal generators, and W-2/1099 compliance tracking.',
-    tag: 'Staffing Tech',
-    link: '/us-staffing-software'
-  },
-  {
-    title: 'Restaurant Management Software',
-    desc: 'Touchscreen Cloud POS, Kitchen Display Systems (KDS), recipe ingredient decrementing, and QR contactless table ordering.',
-    tag: 'Hospitality Tech',
-    link: '/restaurant-management-software'
-  }
-];
-
 const ServicesPage: React.FC = () => {
   return (
     <>
@@ -246,59 +207,6 @@ const ServicesPage: React.FC = () => {
                 </motion.div>
               );
             })}
-          </div>
-        </div>
-      </section>
-
-      {/* Dedicated Industry Solutions Grid */}
-      <section className="py-20 md:py-28 bg-[#080B14] border-t border-white/10 text-white">
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-          <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-            <span className="text-xs tracking-[0.25em] uppercase text-[#DB2777] font-extrabold block">
-              Domain Specialization
-            </span>
-            <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight uppercase leading-tight">
-              Bespoke <span className="text-[#60A5FA]">Industry Solutions</span>
-            </h2>
-            <p className="text-zinc-300 text-sm sm:text-base font-normal">
-              Tailored software architectures designed around specific regulatory frameworks, operational workflows, and commercial models.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {industrySolutionsList.map((ind, idx) => (
-              <motion.div
-                key={ind.link}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.08, duration: 0.4 }}
-                className="p-6 sm:p-8 rounded-3xl bg-[#0D1222] border border-white/10 hover:border-[#60A5FA]/40 hover:bg-[#111A33] transition-all flex flex-col justify-between group shadow-lg"
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-[11px] font-mono px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-[#60A5FA] font-bold">
-                      {ind.tag}
-                    </span>
-                    <ArrowRight size={16} className="text-zinc-500 group-hover:text-white group-hover:translate-x-1 transition-all" />
-                  </div>
-                  <h3 className="text-lg sm:text-xl font-black text-white mb-2.5 group-hover:text-[#60A5FA] transition-colors">
-                    {ind.title}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-zinc-400 font-normal leading-relaxed mb-6">
-                    {ind.desc}
-                  </p>
-                </div>
-
-                <Link
-                  to={ind.link}
-                  className="inline-flex items-center gap-2 text-xs font-mono font-bold text-[#DB2777] group-hover:text-white transition-colors uppercase tracking-wider pt-4 border-t border-white/5"
-                >
-                  <span>Explore Industry Solution</span>
-                  <ArrowRight size={13} />
-                </Link>
-              </motion.div>
-            ))}
           </div>
         </div>
       </section>
